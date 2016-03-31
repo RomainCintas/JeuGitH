@@ -23,9 +23,9 @@ public class Main {
 		//char couleur1 = grillage [0][0];
 		//char couleur2 = grillage [13][13];
 
-		char couleur1 = get_couleur_joueur(0,0);
+		char couleur1 = generation_grillage.get_couleur_joueur(0,0);
 
-		char couleur2;
+		char couleur2 = generation_grillage.get_couleur_joueur(13, 13);
 		
 		Joueur joueur1 = new Joueur(nom1, couleur1);
 		Joueur joueur2 = new Joueur(nom2,couleur2);
@@ -48,7 +48,7 @@ public class Main {
 						//On met en majuscule
 					//}
 				//}
-			}//
+			//}
 			//joueur1.tour = 0;
 			//joueur2.tour = 1;
 		//}
