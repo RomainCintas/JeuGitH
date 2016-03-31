@@ -17,20 +17,15 @@ public class Main {
 		
 		Plateau generation_grillage = new Plateau();
 		
-		//char couleur1='grillage [0][0]';
-		//System.out.println(couleur2);
-		
-		//char couleur1 = grillage [0][0];
-		//char couleur2 = grillage [13][13];
 
 		char couleur1 = generation_grillage.get_couleur_joueur(0,0);
-
-		char couleur2 = generation_grillage.get_couleur_joueur(13, 13);
+		char couleur2 = generation_grillage.get_couleur_joueur(12, 12);
 		
 		Joueur joueur1 = new Joueur(nom1, couleur1);
 		Joueur joueur2 = new Joueur(nom2,couleur2);
-		//System.out.println(joueur1.nom);
 		
+		//System.out.println(joueur1.nom);
+		//System.out.println(joueur2.couleur);
 		
 		
 	
