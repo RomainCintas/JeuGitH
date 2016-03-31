@@ -26,7 +26,7 @@ public class Plateau extends Main{
 		//char couleur2 = grillage [13][13];
 	}
 	
-	public char couleur_joueur(int i, int j){//Couleur des joueurs
+	public char get_couleur_joueur(int i, int j){//Couleur des joueurs
 		return grillage [i][j];
 	}
 	

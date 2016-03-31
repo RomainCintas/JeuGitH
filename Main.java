@@ -23,6 +23,9 @@ public class Main {
 		//char couleur1 = grillage [0][0];
 		//char couleur2 = grillage [13][13];
 
+		char couleur1 = get_couleur_joueur(0,0);
+
+		char couleur2;
 		
 		Joueur joueur1 = new Joueur(nom1, couleur1);
 		Joueur joueur2 = new Joueur(nom2,couleur2);
@@ -31,25 +34,27 @@ public class Main {
 		
 		
 	
-		System.out.println("C'est à " + nom1 + " de commencer, veuillez choisir une couleur.");
-		char i = scan.nextLine();
-		joueur1.couleur = i ;
+		//System.out.println("C'est à " + nom1 + " de commencer, veuillez choisir une couleur.");
+		//char i = scan.nextLine();
+		//joueur1.couleur = i ;
 		
-		if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
-			for (int l=0 ; l<13 ; l+=1){
-				for(int c=0; c<13 ; c+=1){
-					if (joueur1.couleur == grillage[l][c+1]){//Vérification à droite
+		//if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
+			//for (int l=0 ; l<13 ; l+=1){
+				//for(int c=0; c<13 ; c+=1){
+					//if (joueur1.couleur == grillage[l][c+1]){//Vérification à droite
 						//On met en majuscule
-					}
-					if (joueur1.couleur == grillage[l+1][c]){//Vérification à gauche
+					//}
+					//if (joueur1.couleur == grillage[l+1][c]){//Vérification à gauche
 						//On met en majuscule
-					}
-				}
-			}
-			joueur1.tour = 0;
-			joueur2.tour = 1;
-		}
-		
+					//}
+				//}
+			}//
+			//joueur1.tour = 0;
+			//joueur2.tour = 1;
+		//}
+	
+	
+	
 		//boolean continuer=true;
 		//while(continuer){
 			//joueur1.couleur != joueur2.couleur;
@@ -60,5 +65,5 @@ public class Main {
 		
 	}
 
-
 }
+
