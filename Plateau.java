@@ -41,7 +41,8 @@ public class Plateau{
 	public int Alea (int min, int max){//Génération de nombre aléatoire entre min et max
 		Random rand = new Random();
 		int Alea = rand.nextInt(max - min + 1) + min;
-		return Alea;	
+		return Alea;
+		
 	}
 	
 	
