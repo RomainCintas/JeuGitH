@@ -2,14 +2,14 @@
 public class Joueur{
 	
 	String nom;
-	char couleur;
+	String couleur;
 	int tour;
 	
 	
 	public static void main(String[] args) {
 	}
 
-	public Joueur (String nom, char couleur){//Nom, couleur et tour
+	public Joueur (String nom, String couleur){//Nom, couleur et tour
 		this.nom = nom;
 		this.couleur = couleur;
 	}

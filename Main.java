@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 	
@@ -17,8 +18,8 @@ public class Main {
 		
 		Plateau generation_grillage = new Plateau();
 
-		char couleur1 = generation_grillage.get_couleur_joueur(0,0);
-		char couleur2 = generation_grillage.get_couleur_joueur(12, 12);
+		String couleur1 = generation_grillage.get_couleur_joueur(0,0);
+		String couleur2 = generation_grillage.get_couleur_joueur(12, 12);
 
 
 		
@@ -31,7 +32,7 @@ public class Main {
 		if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
 			
 			System.out.println("C'est à " + joueur1.nom + " de commencer, veuillez choisir une couleur.");
-			char i = scan.next().charAt(0); //Methode scan avec un char
+			String i = scan.toString(); //Methode scan avec un string
 			joueur1.couleur = i ;
 			
 			
@@ -59,22 +60,30 @@ public class Main {
 			
 			int c = 0;
 			int l = 0;
+			String couleur = couleur1;
 			Case case1 = new Case(c,l,couleur1);
-			
-			if (joueur1.couleur == generation_grillage.grillage[l][c+1]){//Vérification à droite
+			ArrayList <Case> caseverif= new ArrayList<Case>();
+
+			if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
 				//On met en majuscule + changement de couleur
 				generation_grillage.grillage[l][c+1]=joueur1.couleur;
-				
+				caseverif.add(new Case(c+1,l,couleur));
 				//Case case2 = new Case(c+1,l,couleur1);
 			}
 			if (joueur1.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
 				//On met en majuscule + changement de couleur
+				generation_grillage.grillage[l+1][c]=joueur1.couleur;
+				caseverif.add(new Case(c,l+1,couleur));
 			}
 			if (joueur1.couleur == generation_grillage.grillage[l-1][c]){//Vérification en haut
 				//On met en majuscule + changement de couleur
+				generation_grillage.grillage[l-1][c]=joueur1.couleur;
+				caseverif.add(new Case(c,l-1,couleur));
 			}
 			if (joueur1.couleur == generation_grillage.grillage[l][c-1]){//Vérification à gauche
 				//On met en majuscule + changement de couleur
+				generation_grillage.grillage[l][c-1]=joueur1.couleur;
+				caseverif.add(new Case(c-1,l,couleur));
 			}
 			
 		}
@@ -82,7 +91,7 @@ public class Main {
 			
 		else if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
 				System.out.println("C'est à " + joueur2.nom + " de commencer, veuillez choisir une couleur.");
-				char i = scan.next().charAt(0); //Methode scan avec un char
+				String i = scan.toString(); //Methode scan avec un char
 				joueur2.couleur = i ;
 				
 				for (int l=0 ; l<13 ; l+=1){

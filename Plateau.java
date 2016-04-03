@@ -4,9 +4,9 @@ public class Plateau{
 	
 	//public static void main(String[] args){
 	  //}       
-	public char couleur1;
-	public char couleur2;
-	char grillage [][] = new char [13][13];
+	public String couleur1;
+	public String couleur2;
+	String grillage [][] = new String [13][13];
 	public int i;
 	public int j;
 	
@@ -28,13 +28,13 @@ public class Plateau{
 		//char couleur2 = grillage [13][13];
 	}
 	
-	public char get_couleur_joueur(int i, int j){//Couleur des joueurs
+	public String get_couleur_joueur(int i, int j){//Couleur des joueurs
 		return grillage [i][j];
 	}
 	
 	
-	public char Random_letter(){//Génération d'une lettre aléatoire r,o,y,g,b,p
-		char alphabet[] = {'r','o','j','v','b','i'};
+	public String Random_letter(){//Génération d'une lettre aléatoire r,o,y,g,b,p
+		String alphabet[] = {"r","o","j","v","b","i"};
 		return alphabet[Alea(0,5)];
 	}
 	
