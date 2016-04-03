@@ -1,12 +1,14 @@
 import java.util.Random;
 
-public class Plateau extends Main{ 
+public class Plateau{ 
 	
 	//public static void main(String[] args){
 	  //}       
 	public char couleur1;
 	public char couleur2;
 	char grillage [][] = new char [13][13];
+	public int i;
+	public int j;
 	
 	public Plateau(){	
 		for (int l=0;l<13;l++){ //Génération grillage
@@ -30,6 +32,7 @@ public class Plateau extends Main{
 		return grillage [i][j];
 	}
 	
+	
 	public char Random_letter(){//Génération d'une lettre aléatoire r,o,y,g,b,p
 		char alphabet[] = {'r','o','j','v','b','i'};
 		return alphabet[Alea(0,5)];
@@ -41,6 +44,16 @@ public class Plateau extends Main{
 		return Alea;
 		
 	}
+	
+	
+	public static char toChar(int codeASCII) { //code ASCII d'une lettres
+		return (char)codeASCII; 
+	} 
+
+	public static int toASCII(char lettre) { //lettre correspondant à un code ASCII
+		return (int)lettre; 
+	} 
+	
 	
 	
 		  
