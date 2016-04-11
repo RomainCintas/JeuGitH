@@ -63,9 +63,8 @@ public class Main {
 			String couleur = couleur1;
 			Case case1 = new Case(c,l,couleur1);
 			
-			//if{}
-			ArrayList <Case> caseverif= new ArrayList<Case>();
-			for (int i1 = 0; i1<caseverif.size(); i1++ ){
+			ArrayList <Case> caseverif= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+			for (int i1 = 0; i1<caseverif.size(); i1++ ){//d�filement des cases adjacentes
 			
 
 				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
@@ -95,27 +94,38 @@ public class Main {
 					String i2 = scan.toString(); //Methode scan avec un char
 					joueur2.couleur = i2 ;
 				
-					for (int l=0 ; l<13 ; l+=1){
-						for(int c=0; c<13 ; c+=1){
-							if (joueur2.couleur == generation_grillage.grillage[l][c+1]){//Vérification à droite
-								//On met en majuscule + changement de couleur
-							}
-							if (joueur2.couleur == generation_grillage.grillage[l+1][c]){//Vérification à gauche
-								//On met en majuscule + changement de couleur
-							}
-							if (joueur2.couleur == generation_grillage.grillage[l-1][c]){//Vérification à droite
-								//On met en majuscule + changement de couleur
-							}
-							if (joueur2.couleur == generation_grillage.grillage[l][c-1]){//Vérification à droite
-								//On met en majuscule + changement de couleur
-							}
+					ArrayList <Case> caseverif2= new ArrayList<Case>(); //liste qui stocke les cases adjacentes
+					for (int i3 = 0; i3<caseverif2.size(); i3++ ){//d�filement des cases adjacentes
+					
+						if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
+							//On met en majuscule + changement de couleur
+							generation_grillage.grillage[l][c+1]=joueur1.couleur;
+							caseverif2.add(new Case(c+1,l,couleur));
+							//Case case2 = new Case(c+1,l,couleur1);
 						}
-						joueur1.tour = 1;
-						joueur2.tour = 0;
+						if (joueur1.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
+							//On met en majuscule + changement de couleur
+							generation_grillage.grillage[l+1][c]=joueur1.couleur;
+							caseverif2.add(new Case(c,l+1,couleur));
+						}
+						if (joueur1.couleur == generation_grillage.grillage[l-1][c]){//Vérification en haut
+							//On met en majuscule + changement de couleur
+							generation_grillage.grillage[l-1][c]=joueur1.couleur;
+							caseverif2.add(new Case(c,l-1,couleur));
+						}
+						if (joueur1.couleur == generation_grillage.grillage[l][c-1]){//Vérification à gauche
+							//On met en majuscule + changement de couleur
+							generation_grillage.grillage[l][c-1]=joueur1.couleur;
+							caseverif2.add(new Case(c-1,l,couleur));
+						}
 					}
 				}
 			}
 		}
+	}
+}
+
+
 	
 	
 	
