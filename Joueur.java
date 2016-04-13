@@ -17,6 +17,7 @@ public class Joueur{
 	public void Choix(){
 		
 	}
+	// Définir caseverif ici
 	
 	
 	

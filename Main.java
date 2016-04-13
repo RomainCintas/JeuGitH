@@ -46,9 +46,12 @@ public class Main {
 			Case case1 = new Case(c,l,couleur1);
 			
 			ArrayList <Case> caseverif= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-
+			
 			for (int i1 = 0; i1<caseverif.size(); i1++ ){//défilement des cases adjacentes
 
+				joueur1.couleur = joueur1.couleur.toUpperCase();
+				generation_grillage.grillage[l][c]=joueur1.couleur;
+				
 				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
 					//On met en majuscule + changement de couleur
 					generation_grillage.grillage[l][c+1]=joueur1.couleur;
@@ -85,9 +88,12 @@ public class Main {
 					
 					ArrayList <Case> caseverif2= new ArrayList<Case>(); //liste qui stocke les cases adjacentes
 
-					for (int i1 = 0; i1<caseverif2.size(); i1++ ){//défilement des cases adjacentes
+					for (int i1 = 0; i1<1 + caseverif2.size(); i1++ ){//défilement des cases adjacentes
 
+						joueur2.couleur = joueur2.couleur.toUpperCase();
+						generation_grillage.grillage[l][c]=joueur2.couleur;
 					
+
 						if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
 							//On met en majuscule + changement de couleur
 							generation_grillage.grillage[l][c+1]=joueur1.couleur;
