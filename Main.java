@@ -38,30 +38,6 @@ public class Main {
 			String i = scan.toString(); //Methode scan avec un string
 			joueur1.couleur = i ;
 			
-			
-
-			
-			/*for (int l=0 ; l<13 ; l+=1){
-				for(int c=0; c<13 ; c+=1){
-					if (joueur1.couleur == generation_grillage.grillage[l][c+1]){//Vérification à droite
-						//On met en majuscule + changement de couleur
-					}
-					if (joueur1.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
-						//On met en majuscule + changement de couleur
-					}
-					if (joueur1.couleur == generation_grillage.grillage[l-1][c]){//Vérification en haut
-						//On met en majuscule + changement de couleur
-					}
-					if (joueur1.couleur == generation_grillage.grillage[l][c-1]){//Vérification à gauche
-						//On met en majuscule + changement de couleur
-					}
-					
-					
-				}
-				joueur1.tour = 0;
-				joueur2.tour = 1;
-			}*/
-			
 
 			String couleur = couleur1;
 			Case case1 = new Case(c,l,couleur1);
