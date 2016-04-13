@@ -39,7 +39,7 @@ public class Main {
 			joueur1.couleur = i ;
 			
 			
-<<<<<<< HEAD
+
 			
 			/*for (int l=0 ; l<13 ; l+=1){
 				for(int c=0; c<13 ; c+=1){
@@ -62,19 +62,14 @@ public class Main {
 				joueur2.tour = 1;
 			}*/
 			
-=======
-			int c = 0;
-			int l = 0;
->>>>>>> origin/Cintas
+
 			String couleur = couleur1;
 			Case case1 = new Case(c,l,couleur1);
 			
 			ArrayList <Case> caseverif= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-<<<<<<< HEAD
-			for (int i1 = 0; i1<caseverif.size(); i1++ ){//d�filement des cases adjacentes
-=======
+
 			for (int i1 = 0; i1<caseverif.size(); i1++ ){//défilement des cases adjacentes
->>>>>>> origin/Cintas
+
 			
 
 				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
@@ -110,11 +105,9 @@ public class Main {
 					Case case1 = new Case(c,l,couleur2);
 					
 					ArrayList <Case> caseverif2= new ArrayList<Case>(); //liste qui stocke les cases adjacentes
-<<<<<<< HEAD
-					for (int i3 = 0; i3<caseverif2.size(); i3++ ){//d�filement des cases adjacentes
-=======
+
 					for (int i3 = 0; i3<caseverif2.size(); i3++ ){//défilement des cases adjacentes
->>>>>>> origin/Cintas
+
 					
 						if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
 							//On met en majuscule + changement de couleur
