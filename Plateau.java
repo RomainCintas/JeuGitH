@@ -53,11 +53,6 @@ public class Plateau{
 	public static int toASCII(char lettre) { //lettre correspondant à un code ASCII
 		return (int)lettre; 
 	} 
-	
-	
-	
-		  
-
 }
 
 
