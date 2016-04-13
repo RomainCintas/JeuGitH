@@ -26,6 +26,9 @@ public class Main {
 		Joueur joueur1 = new Joueur(nom1, couleur1);
 		Joueur joueur2 = new Joueur(nom2,couleur2);
 		
+		joueur1.tour = 1;
+		joueur2.tour = 0;
+		
 		//System.out.println(joueur1.nom);
 		//System.out.println(joueur2.couleur);
 		
