@@ -38,7 +38,7 @@ public class Main {
 		if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
 			
 			System.out.println("C'est à " + joueur1.nom + " de commencer, veuillez choisir une couleur.");
-			String i = scan.toString(); //Methode scan avec un string
+			String i = scan.nextLine(); //Methode scan avec un string
 			joueur1.couleur = i ;
 			
 
@@ -77,15 +77,15 @@ public class Main {
 			
 			else if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
 					System.out.println("C'est à " + joueur2.nom + " de commencer, veuillez choisir une couleur.");
-					String i2 = scan.toString(); //Methode scan avec un char
-					joueur2.couleur = i2 ;
+					String i = scan.nextLine(); //Methode scan avec un char
+					joueur2.couleur = i ;
 					
 					String couleur = couleur2;
 					Case case1 = new Case(c,l,couleur2);
 					
 					ArrayList <Case> caseverif2= new ArrayList<Case>(); //liste qui stocke les cases adjacentes
 
-					for (int i3 = 0; i3<caseverif2.size(); i3++ ){//défilement des cases adjacentes
+					for (int i1 = 0; i1<caseverif2.size(); i1++ ){//défilement des cases adjacentes
 
 					
 						if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
