@@ -36,14 +36,12 @@ public class Main {
 		int l = 0;
 		
 		if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
-			
-			System.out.println("C'est à " + joueur1.nom + " de commencer, veuillez choisir une couleur.");
-			String i = scan.nextLine(); //Methode scan avec un string
+			System.out.println("C'est à " + joueur1.nom + " de jouer, veuillez choisir une couleur.");
+			String i = scan.nextLine(); 
 			joueur1.couleur = i ;
 			
-
-			String couleur = couleur1;
-			Case case1 = new Case(c,l,couleur1);
+			String couleur = couleur1; //???
+			Case case1 = new Case(c,l,couleur1);//Première case que le joueur possède
 			
 			ArrayList <Case> caseverif= new ArrayList<Case>();//liste qui stocke les cases adjacentes
 			
@@ -79,8 +77,8 @@ public class Main {
 		}
 			
 			else if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
-					System.out.println("C'est à " + joueur2.nom + " de commencer, veuillez choisir une couleur.");
-					String i = scan.nextLine(); //Methode scan avec un char
+					System.out.println("C'est à " + joueur2.nom + " de jouer, veuillez choisir une couleur.");
+					String i = scan.nextLine(); 
 					joueur2.couleur = i ;
 					
 					String couleur = couleur2;

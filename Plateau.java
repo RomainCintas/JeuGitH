@@ -1,9 +1,7 @@
 import java.util.Random;
 
 public class Plateau{ 
-	
-	//public static void main(String[] args){
-	  //}       
+	     
 	public String couleur1;
 	public String couleur2;
 	String grillage [][] = new String [13][13];
