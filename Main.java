@@ -90,8 +90,7 @@ public class Main {
 					System.out.println("quatre");
 				}
 
-				joueur.couleur = joueur.couleur.toUpperCase();
-				generation_grillage.grillage[l][c]=joueur.couleur;
+				generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
 				
 				System.out.print("\n");
 				for (int l2=1;l2<14;l2++){ //Affichage du nouveau grillage
@@ -112,7 +111,7 @@ public class Main {
 		joueur2.tour = 1;
 		System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur.");
 		String i = scan.nextLine(); 
-		joueur.couleur = i ;
+		joueur.couleur = i;
 
 			
 			/*if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
