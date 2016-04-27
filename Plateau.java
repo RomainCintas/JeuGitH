@@ -4,19 +4,19 @@ public class Plateau{
 	     
 	public String couleur1;
 	public String couleur2;
-	String grillage [][] = new String [13][13];
+	String grillage [][] = new String [15][15];
 	public int i;
 	public int j;
 	
 	public Plateau(){	
-		for (int l=0;l<13;l++){ //Génération grillage
-			for (int c=0;c<13;c++){
+		for (int l=1;l<14;l++){ //Génération grillage
+			for (int c=1;c<14;c++){
 				grillage[l][c]= Random_letter() ; 
 			}		
 		}
 
-		for (int l=0;l<13;l++){ //Affichage du grillage
-			for (int c=0;c<13;c++){
+		for (int l=1;l<14;l++){ //Affichage du grillage
+			for (int c=1;c<14;c++){
 				System.out.print("	|	" + grillage[l][c]);
 			}
 		System.out.print("\n");

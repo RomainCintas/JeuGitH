@@ -7,6 +7,7 @@ public class Main {
 		 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bonjour");
+		String nom = null;
 		System.out.println("Joueur 1 veuillez entrer votre pseudo s'il vous plaît.");
 		String nom1 = scan.nextLine();
 		System.out.println("Joueur 2 veuillez entrer votre pseudo s'il vous plaît.");
@@ -18,69 +19,103 @@ public class Main {
 		
 		Plateau generation_grillage = new Plateau();
 		
+		String couleur = null;
 		String couleur1;
 		String couleur2;
 		
 		do{
-		couleur1 = generation_grillage.get_couleur_joueur(0,0);
-		couleur2 = generation_grillage.get_couleur_joueur(12, 12);
+		couleur1 = generation_grillage.get_couleur_joueur(1,1);
+		couleur2 = generation_grillage.get_couleur_joueur(13, 13);
 		}while(couleur1 == couleur2);
-
 		
-		Joueur joueur1 = new Joueur(nom1, couleur1);
+		//System.out.println("Hello !");
+		 
+		Joueur joueur = new Joueur(nom,couleur);
+		Joueur joueur1 = new Joueur(nom1,couleur1);
 		Joueur joueur2 = new Joueur(nom2,couleur2);
 		
 		joueur1.tour = 1;
 		joueur2.tour = 0;
 		
-		//System.out.println(joueur1.nom);
-		//System.out.println(joueur2.couleur);
+		int c1 = 1;
+		int l1 = 1;
 		
-		int c = 0;
-		int l = 0;
+		if (joueur1.tour != 0){
+			joueur = joueur1;
+			couleur = couleur1;
+			nom = nom1;
+		}
+		else{
+			joueur = joueur2;
+			couleur = couleur2;
+			nom = nom2;
+		}
 		
-		if(joueur1.couleur != joueur2.couleur & joueur1.tour != 0){
-			System.out.println("C'est à " + joueur1.nom + " de jouer, veuillez choisir une couleur.");
-			String i = scan.nextLine(); 
-			joueur1.couleur = i ;
+		if(joueur1.couleur != joueur2.couleur){
 			
-			String couleur = couleur1; //???
-			Case case1 = new Case(c,l,couleur1);//Première case que le joueur possède
+			Case case1 = new Case(c1,l1,couleur);//Première case que le joueur possède
 			
 			ArrayList <Case> caseverif= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+			caseverif.add(new Case(c1,l1,couleur));
 			
-			for (int i1 = 0; i1<caseverif.size(); i1++ ){//défilement des cases adjacentes
-
-				joueur1.couleur = joueur1.couleur.toUpperCase();
-				generation_grillage.grillage[l][c]=joueur1.couleur.toUpperCase();
+			
+			
+			int i = 0;
+			do{
+				int c = caseverif.get(i).c;
+				int l = caseverif.get(i).l;
 				
-				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
+				if (joueur.couleur == generation_grillage.grillage[l][c+1]){//Vérification à droite
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l][c+1]=joueur1.couleur;
+					generation_grillage.grillage[l][c+1]=joueur.couleur.toUpperCase();
 					caseverif.add(new Case(c+1,l,couleur));
-					//Case case2 = new Case(c+1,l,couleur1);
+					System.out.println("un");
 				}
-				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l+1][c]){//Vérification en bas
+				if (joueur.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l+1][c]=joueur1.couleur;
+					generation_grillage.grillage[l+1][c]=joueur.couleur.toUpperCase();
 					caseverif.add(new Case(c,l+1,couleur));
+					System.out.println("deux");
 				}
-				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l-1][c]){//Vérification en haut
+				if (joueur.couleur == generation_grillage.grillage[l-1][c]){//Vérification en haut
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l-1][c]=joueur1.couleur;
+					generation_grillage.grillage[l-1][c]=joueur.couleur.toUpperCase();
 					caseverif.add(new Case(c,l-1,couleur));
+					System.out.println("trois");
 				}
-				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c-1]){//Vérification à gauche
+				if (joueur.couleur == generation_grillage.grillage[l][c-1]){//Vérification à gauche
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l][c-1]=joueur1.couleur;
+					generation_grillage.grillage[l][c-1]=joueur.couleur.toUpperCase();
 					caseverif.add(new Case(c-1,l,couleur));
+					System.out.println("quatre");
 				}
-				joueur1.tour = 0;
-				joueur2.tour = 1;
-			}
-		}
+
+				joueur.couleur = joueur.couleur.toUpperCase();
+				generation_grillage.grillage[l][c]=joueur.couleur;
+				
+				System.out.print("\n");
+				for (int l2=1;l2<14;l2++){ //Affichage du nouveau grillage
+					for (int c2=1;c2<14;c2++){
+						System.out.print("	|	" + generation_grillage.grillage[l2][c2]);
+					}
+				System.out.print("\n");
+				}
+				
+				i++;
+				System.out.println(i);
+
+			}while(i<caseverif.size());
 			
-			else if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
+		}
+		
+		joueur1.tour = 0;
+		joueur2.tour = 1;
+		System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur.");
+		String i = scan.nextLine(); 
+		joueur.couleur = i ;
+
+			
+			/*if(joueur1.couleur != joueur2.couleur & joueur2.tour != 0) {
 					System.out.println("C'est à " + joueur2.nom + " de jouer, veuillez choisir une couleur.");
 					String i = scan.nextLine(); 
 					joueur2.couleur = i ;
@@ -120,7 +155,7 @@ public class Main {
 						joueur1.tour = 1;
 						joueur2.tour = 0;
 					}
-				}
+				}*/
 			}
 		}
 
