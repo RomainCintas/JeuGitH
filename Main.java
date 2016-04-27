@@ -17,10 +17,14 @@ public class Main {
 		System.out.println("\n");
 		
 		Plateau generation_grillage = new Plateau();
-
-		String couleur1 = generation_grillage.get_couleur_joueur(0,0);
-		String couleur2 = generation_grillage.get_couleur_joueur(12, 12);
-
+		
+		String couleur1;
+		String couleur2;
+		
+		do{
+		couleur1 = generation_grillage.get_couleur_joueur(0,0);
+		couleur2 = generation_grillage.get_couleur_joueur(12, 12);
+		}while(couleur1 == couleur2);
 
 		
 		Joueur joueur1 = new Joueur(nom1, couleur1);
@@ -48,7 +52,7 @@ public class Main {
 			for (int i1 = 0; i1<caseverif.size(); i1++ ){//défilement des cases adjacentes
 
 				joueur1.couleur = joueur1.couleur.toUpperCase();
-				generation_grillage.grillage[l][c]=joueur1.couleur;
+				generation_grillage.grillage[l][c]=joueur1.couleur.toUpperCase();
 				
 				if (joueur1.couleur.toLowerCase() == generation_grillage.grillage[l][c+1]){//Vérification à droite
 					//On met en majuscule + changement de couleur
