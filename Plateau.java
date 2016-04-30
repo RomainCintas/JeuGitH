@@ -44,13 +44,13 @@ public class Plateau{
 	}
 	
 	
-	public static char toChar(int codeASCII) { //code ASCII d'une lettres
-		return (char)codeASCII; 
-	} 
+	//public static char toChar(int codeASCII) { //code ASCII d'une lettres
+	//	return (char)codeASCII; 
+	//} 
 
-	public static int toASCII(char lettre) { //lettre correspondant à un code ASCII
-		return (int)lettre; 
-	} 
+	//public static int toASCII(char lettre) { //lettre correspondant à un code ASCII
+	//	return (int)lettre; 
+	//} 
 }
 
 

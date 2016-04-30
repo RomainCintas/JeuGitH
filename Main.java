@@ -70,7 +70,7 @@ public class Main {
 					generation_grillage.grillage[l][c+1]=joueur.couleur.toUpperCase();
 					caseverif.add(new Case(c+1,l,couleur));
 					System.out.println("un");
-				}
+				} 
 				if (joueur.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
 					//On met en majuscule + changement de couleur
 					generation_grillage.grillage[l+1][c]=joueur.couleur.toUpperCase();
