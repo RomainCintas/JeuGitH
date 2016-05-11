@@ -39,13 +39,13 @@ public class Main {
 		
 		int c1 = 1;
 		int l1 = 1;
-		int c2 = 14;
-		int l2= 14;
+		int c2 = 13;
+		int l2= 13;
 		int colonne;
 		int ligne;
 		ArrayList <Case> caseverif;
-		ArrayList <Case> caseverif1;
-		ArrayList <Case> caseverif2;
+		ArrayList <Case> caseverif1 = null;
+		ArrayList <Case> caseverif2 = null;
 		
 		int compteur = 0; //compteur pour finir la boucle de jeu (temporaire)
 		
@@ -56,20 +56,22 @@ public class Main {
 				nom = nom1;
 				colonne = c1;
 				ligne = l1;
-				//Case case1 = new Case(colonne,ligne,couleur);//Première case que le joueur possède
-				caseverif1= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-				caseverif1.add(new Case(colonne,ligne,couleur));
+				if (compteur ==0 || compteur ==1){
+					caseverif1= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					caseverif1.add(new Case(colonne,ligne,couleur));
+				}
 				caseverif=caseverif1;
 			}
-			else{
+			else {
 				joueur = joueur2;
 				couleur = couleur2;
 				nom = nom2;
 				colonne = c2;
 				ligne = l2;
-				//Case case2 = new Case(colonne,ligne,couleur);//Première case que le joueur possède
-				caseverif2= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-				caseverif2.add(new Case(colonne,ligne,couleur));
+				if (compteur ==0 || compteur ==1){
+					caseverif2= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					caseverif2.add(new Case(colonne,ligne,couleur));
+				}
 				caseverif=caseverif2;
 			}
 			
@@ -79,6 +81,17 @@ public class Main {
 					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur.");
 					String i = scan.nextLine();
 					joueur.couleur = i;
+					
+					int j=0;
+					System.out.println("Taille : " + caseverif.size());
+					do{
+						int c = caseverif.get(j).c;
+						int l = caseverif.get(j).l;
+						System.out.println(j + "Colonne : " + c + " Ligne : " + l);
+						generation_grillage.grillage[l][c]=i.toUpperCase();
+						j++;
+					}while (j<caseverif.size());
+					
 				}
 				
 				int i = 0;
@@ -125,7 +138,7 @@ public class Main {
 					System.out.println(i);
 	
 				}while(i<caseverif.size());
-				
+				System.out.println("Taille2 : " + caseverif.size());
 			}
 			
 			if (joueur1.tour != 0){
