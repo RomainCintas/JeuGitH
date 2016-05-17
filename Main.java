@@ -89,34 +89,35 @@ public class Main {
 						int l = caseverif.get(j).l;
 						generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
 						j++;
+						System.out.println("Transformation de la liste déjà possédée dans la nouvelle couleur");
 					}while (j<caseverif.size());
 				}
-				
+								
 				int i = 0;
 				System.out.println("Taille en début de boucle : " + caseverif.size());
 				do{
 					int c = caseverif.get(i).c;
-					int l = caseverif.get(i).l;
-					System.out.println(i + " Colonne : " + c + " Ligne : " + l);
-					if (joueur.couleur == generation_grillage.grillage[l][c+1]){//Vérification à droite
+					int l = caseverif.get(i).l;							
+					
+					if (joueur.couleur.equals(generation_grillage.grillage[l][c+1])){//Vérification à droite
 						//On met en majuscule + changement de couleur
 						generation_grillage.grillage[l][c+1]=joueur.couleur.toUpperCase();
 						caseverif.add(new Case(c+1,l,couleur));
 						System.out.println("un");
-					} 
-					if (joueur.couleur == generation_grillage.grillage[l+1][c]){//Vérification en bas
+					}
+					if (joueur.couleur.equals(generation_grillage.grillage[l+1][c])){//Vérification en bas
 						//On met en majuscule + changement de couleur
 						generation_grillage.grillage[l+1][c]=joueur.couleur.toUpperCase();
 						caseverif.add(new Case(c,l+1,couleur));
 						System.out.println("deux");
 					}
-					if (joueur.couleur == generation_grillage.grillage[l-1][c]){//Vérification en haut
+					if (joueur.couleur.equals(generation_grillage.grillage[l-1][c])){//Vérification en haut
 						//On met en majuscule + changement de couleur
 						generation_grillage.grillage[l-1][c]=joueur.couleur.toUpperCase();
 						caseverif.add(new Case(c,l-1,couleur));
 						System.out.println("trois");
 					}
-					if (joueur.couleur == generation_grillage.grillage[l][c-1]){//Vérification à gauche
+					if (joueur.couleur.equals(generation_grillage.grillage[l][c-1])){//Vérification à gauche
 						//On met en majuscule + changement de couleur
 						generation_grillage.grillage[l][c-1]=joueur.couleur.toUpperCase();
 						caseverif.add(new Case(c-1,l,couleur));
@@ -124,9 +125,7 @@ public class Main {
 					}
 	
 					generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
-					
-					System.out.print("Toto");
-					
+										
 					System.out.print("\n");
 					for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){ //Affichage du nouveau grillage
 						for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
@@ -136,7 +135,7 @@ public class Main {
 					}
 					
 					i++;
-					System.out.println(i);
+					System.out.println("Taille de la liste : " + i);
 	
 				}while(i<caseverif.size());
 				System.out.println("Taille en fin de boucle : " + caseverif.size());
