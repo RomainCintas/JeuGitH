@@ -8,9 +8,9 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bonjour");
 		String nom = null;
-		System.out.println("Entrer votre pseudo du Joueur 1");
+		System.out.println("Entrer le pseudo du Joueur 1");
 		String nom1 = scan.nextLine();
-		System.out.println("Entrer votre pseudo du Joueur 2");
+		System.out.println("Entrer le pseudo du Joueur 2");
 		String nom2 = scan.nextLine();
 		
 		System.out.println( nom1 + " commence en haut à gauche" + " et " + nom2 + " commence en bas à droite.");
@@ -75,7 +75,7 @@ public class Main {
 				
 			if (compteur !=0 && compteur !=1){
 				do{
-					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur.");
+					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur");
 					joueur.couleur = scan.nextLine().toLowerCase();
 					if (couleur.equals(joueur.couleur)){
 						System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
@@ -87,7 +87,7 @@ public class Main {
 				couleur = joueur.couleur;	
 					
 				int j=0;
-				System.out.println("Taille : " + caseverif.size());
+		
 				do{
 					int c = caseverif.get(j).c;
 					int l = caseverif.get(j).l;
@@ -124,18 +124,19 @@ public class Main {
 	
 				generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
 										
-				System.out.print("\n");
-				for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){ //Affichage du nouveau grillage
-					for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
-						System.out.print("	|	" + generation_grillage.grillage[ligneBoucle][colonneBoucle]);
-					}
-				System.out.print("\n");
-				}
-					
 				i++;
 	
 			}while(i<caseverif.size());
-			System.out.println("Taille de la liste : " + caseverif.size());
+			//System.out.println("Taille de la liste de " + joueur.nom + caseverif.size());
+			
+			//for (int p = 0; p < 50; ++p) System.out.println(); // saut de ligne pour avoir une console plus propre (peu pratique)
+			System.out.print("\n"); //Affichage du nouveau grillage
+			for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
+				for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
+					System.out.print("	|	" + generation_grillage.grillage[ligneBoucle][colonneBoucle]);
+				}
+			System.out.print("\n");
+			}
 			
 			if (joueur1.tour != 0){
 				caseverif1 = caseverif;

@@ -15,12 +15,12 @@ public class Plateau{
 			}		
 		}
 
-		for (int l=1;l<14;l++){ //Affichage du grillage
-			for (int c=1;c<14;c++){
-				System.out.print("	|	" + grillage[l][c]);
-			}
-		System.out.print("\n");
-		}
+//		for (int l=1;l<14;l++){ //Affichage du grillage
+//			for (int c=1;c<14;c++){
+//				System.out.print("	|	" + grillage[l][c]);
+//			}
+//		System.out.print("\n");
+//		}
 		
 		//char couleur1 = grillage [0][0];
 		//char couleur2 = grillage [13][13];
