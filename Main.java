@@ -115,7 +115,6 @@ public class Main {
 					caseverif1.add(new Case(colonne,ligne,couleur));
 				}
 				caseverif=caseverif1;
-				System.out.println("Coucou 1 !!!");
 			}
 			if (joueur2.tour == true) { // Tour du joueur 2
 				joueur = joueur2;
@@ -128,7 +127,6 @@ public class Main {
 					caseverif2.add(new Case(colonne,ligne,couleur));
 				}
 				caseverif=caseverif2;
-				System.out.println("Coucou 2 !!! ");
 			}
 			
 			if (joueur3.tour == true && (nbJoueur == 3 || nbJoueur == 4)) { // Tour du joueur 3
@@ -142,11 +140,8 @@ public class Main {
 					caseverif3.add(new Case(colonne,ligne,couleur));
 				}
 				caseverif=caseverif3;
-				System.out.println(nbJoueur);
-				System.out.println("Coucou 3 !!!");
 			}
 			
-			System.out.println(nbJoueur);
 			if (joueur4.tour == true && nbJoueur == 4){ // Tour du joueur 4
 				joueur = joueur4;
 				couleur = couleur4;
@@ -158,13 +153,23 @@ public class Main {
 					caseverif4.add(new Case(colonne,ligne,couleur));
 				}
 				caseverif=caseverif4;
-				System.out.println("Coucou 4 !!!");
 			}
 			
 			// Début de la boucle pour les tours joués (pas durant l'initialisation)
-			if ((compteur !=0 && compteur !=1) && (nbJoueur == 2 || (compteur !=3 && nbJoueur == 3) || (compteur !=3 && compteur !=4 && nbJoueur == 4))){
+			if ((compteur>1 && nbJoueur == 2) || (compteur>2 && nbJoueur == 3) || (compteur>3 && nbJoueur == 4)){
 				do{
-					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur");
+					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
+					if (nbJoueur == 2){
+						System.out.print(couleur1 + " et " + couleur2 + ".");
+					}
+					else{
+						if(nbJoueur==3){
+							System.out.print(couleur1 + ", " + couleur2 + " et " + couleur3 + ".");
+						}
+						else{
+							System.out.print(couleur1 + ", " + couleur2 + ", " + couleur3 + " et " + couleur4 + ".");
+						}
+					}
 					joueur.couleur = scan5.nextLine().toLowerCase();
 					
 					if (couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur)){
@@ -172,7 +177,12 @@ public class Main {
 							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 						}
 						else{
-							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+							if (nbJoueur == 2){
+								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+							}
+							else{
+								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+							}
 						}
 					}
 				}while(couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur));
@@ -192,7 +202,6 @@ public class Main {
 
 				int c = caseverif.get(i).c;
 				int l = caseverif.get(i).l;
-				System.out.println("Ligne : " + l + "\nColonne : " + c);
 				
 				if (joueur.couleur.equals(generation_grillage.grillage[l][c+1])){//Vérification à droite
 					//On met en majuscule + changement de couleur
@@ -220,7 +229,7 @@ public class Main {
 				
 			}while(i<caseverif.size()); //Fin de la boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
 			
-			if (compteur != 0){
+			if ((compteur>0 && nbJoueur == 2) || (compteur>1 && nbJoueur == 3) || (compteur>2 && nbJoueur == 4)){
 				//for (int p = 0; p < 50; ++p) System.out.println(); // saut de ligne pour avoir une console plus propre (peu pratique)
 				System.out.print("\n"); //Affichage du nouveau grillage
 				for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
