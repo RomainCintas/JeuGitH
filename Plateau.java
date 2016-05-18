@@ -4,6 +4,8 @@ public class Plateau{
 	     
 	public String couleur1;
 	public String couleur2;
+	public String couleur3;
+	public String couleur4;
 	String grillage [][] = new String [15][15];
 	public int i;
 	public int j;
