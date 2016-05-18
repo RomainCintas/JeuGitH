@@ -402,9 +402,7 @@ public class Main {
 				}
 			}
 			//System.out.println("Joueur 1 : " + joueur1.tour + "Joueur 2 : " + joueur2.tour + "Joueur 3 : " + joueur3.tour + "Joueur 4 : " + joueur4.tour);
-			
 			compteur++; //Compteur de tour
 		} //Fin de la boucle du jeu (1 boucle = 1 tour)
 	}
 }
-
