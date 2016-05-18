@@ -3,7 +3,7 @@ public class Joueur{
 	
 	String nom;
 	String couleur;
-	int tour;
+	boolean tour;
 
 	public Joueur (String nom, String couleur){//Nom, couleur et tour
 		this.nom = nom;
