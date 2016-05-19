@@ -85,6 +85,7 @@ public class Plateau{
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 				}
 				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("blanc")){
+					StdDraw.setPenColor(StdDraw.WHITE);
 				}
 				StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
 			}
