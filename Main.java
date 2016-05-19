@@ -4,7 +4,13 @@ import java.util.ArrayList;
 public class Main {
 	
 	public static void main(String[] args) {
-		 
+		//initialisation interface graphique
+		StdDraw.setCanvasSize(1000, 1000);//initialisation de la feuille de dessin
+		StdDraw.setPenRadius(0.1);//définition de la taille du pinceau
+		StdDraw.setXscale(0, 15);//redéfinition de la grille sur le graphique
+		StdDraw.setYscale(0, 15);
+		StdDraw.setScale(0, 15);
+		
 		Scanner scan = new Scanner(System.in);
 		Scanner scan1 = new Scanner(System.in);
 		Scanner scan2 = new Scanner(System.in);
@@ -104,6 +110,7 @@ public class Main {
 		int compteur = 0; //pour compter le nombre de tour
 		
 		while (true){ //Début de la boucle du jeu (1 boucle = 1 tour)
+			StdDraw.setPenColor(StdDraw.BLACK);
 			if (joueur1.tour == true){ // Tour du joueur 1
 				joueur = joueur1;
 				couleur = couleur1;
@@ -175,13 +182,16 @@ public class Main {
 					if (couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur)){
 						if (couleur.equals(joueur.couleur)){
 							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
+							StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 						}
 						else{
 							if (nbJoueur == 2){
 								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+								StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
 							}
 							else{
 								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+								StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
 							}
 						}
 					}
@@ -229,12 +239,36 @@ public class Main {
 				
 			}while(i<caseverif.size()); //Fin de la boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
 			
+			StdDraw.clear();
+			
 			if ((compteur>0 && nbJoueur == 2) || (compteur>1 && nbJoueur == 3) || (compteur>2 && nbJoueur == 4)){
-				//for (int p = 0; p < 50; ++p) System.out.println(); // saut de ligne pour avoir une console plus propre (peu pratique)
 				System.out.print("\n"); //Affichage du nouveau grillage
 				for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
 					for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
+						// Affichage console
 						System.out.print("	|	" + generation_grillage.grillage[ligneBoucle][colonneBoucle]);
+						// Affichage graphique
+						StdDraw.setPenColor(StdDraw.GRAY);
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("R")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("r")){
+							StdDraw.setPenColor(StdDraw.RED);
+						}
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("O")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("o")){
+							StdDraw.setPenColor(StdDraw.ORANGE);
+						}
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("J")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("j")){
+							StdDraw.setPenColor(StdDraw.YELLOW);
+						}
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("V") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("v")){
+							StdDraw.setPenColor(StdDraw.GREEN);
+						}
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("B") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("b")){
+							StdDraw.setPenColor(StdDraw.BLUE);
+						}
+						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("I") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("i")){
+							StdDraw.setPenColor(StdDraw.MAGENTA);
+						}
+						
+						StdDraw.filledSquare(colonneBoucle, ligneBoucle, 0.4);
 					}
 				System.out.print("\n");
 				}
