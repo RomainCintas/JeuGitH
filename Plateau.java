@@ -6,7 +6,7 @@ public class Plateau{
 	public String couleur2;
 	public String couleur3;
 	public String couleur4;
-	String grillage [][] = new String [15][15];
+	String grillage [][] = new String [15][16];
 	public int colonne;
 	public int ligne;
 	
@@ -17,6 +17,17 @@ public class Plateau{
 				grillage[ligne][colonne]= Random_letter() ; 
 			}		
 		}
+		for (int ligne=1;ligne<14;ligne++){ 
+			for (int colonne=14;colonne<16;colonne++){
+				grillage[ligne][colonne]= "blanc" ; 
+			}		
+		}
+		grillage[5][15]="i";
+		grillage[6][15]="b";
+		grillage[7][15]="v";
+		grillage[8][15]="j";
+		grillage[9][15]="o";
+		grillage[10][15]="r";
 	}
 	
 	//Couleur des joueurs
@@ -53,7 +64,7 @@ public class Plateau{
 	public static void affichagePlateauGraphique(Plateau grillage){
 		StdDraw.clear();
 		for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
-			for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
+			for (int colonneBoucle=1;colonneBoucle<16;colonneBoucle++){
 				StdDraw.setPenColor(StdDraw.GRAY);
 				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("r")){
 					StdDraw.setPenColor(StdDraw.RED);
@@ -73,7 +84,8 @@ public class Plateau{
 				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("i")){
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 				}
-				
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("blanc")){
+				}
 				StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
 			}
 		}

@@ -13,14 +13,19 @@ public class Main {
 		Plateau.affichagePlateauGraphique(grillage);
 	}
 	
+	public static String selectionCase(String couleurChoisie){
+		couleurChoisie = Case.selectionCase(couleurChoisie);
+		return couleurChoisie;
+	}
+	
 	public static void main(String[] args) {
 		
 		//initialisation interface graphique
 		StdDraw.setCanvasSize(1000, 1000);//initialisation de la feuille de dessin
 		StdDraw.setPenRadius(0.1);//définition de la taille du pinceau
-		StdDraw.setXscale(0, 15);//redéfinition de la grille sur le graphique
-		StdDraw.setYscale(0, 15);
-		StdDraw.setScale(0, 15);
+		StdDraw.setXscale(0, 16);//redéfinition de la grille sur le graphique
+		StdDraw.setYscale(0, 16);
+		StdDraw.setScale(0, 16);
 		
 		Scanner scan = new Scanner(System.in);
 		Scanner scan1 = new Scanner(System.in);
@@ -109,14 +114,14 @@ public class Main {
 					couleur4 = grillage.getCouleurJoueur(ligne4, colonne4);
 				}
 			}
-			if((couleur1.equals(couleur2) || couleur2.equals(couleur3)) && NBJOUEUR == 2 ||
-					(NBJOUEUR == 3 && (couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
-					(NBJOUEUR == 4 && (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4)))){
+			if((couleur1.equals(couleur2) && NBJOUEUR == 2) ||
+					(NBJOUEUR == 3 && (couleur1.equals(couleur2) || couleur2.equals(couleur3) ||couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
+					(NBJOUEUR == 4 && (couleur1.equals(couleur2) || (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4))))){
 				grillage = new Plateau();
 			}
-		}while((couleur1.equals(couleur2) || couleur2.equals(couleur3)) && NBJOUEUR == 2 ||
-				(NBJOUEUR == 3 && (couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
-				(NBJOUEUR == 4 && (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4))));
+		}while((couleur1.equals(couleur2) && NBJOUEUR == 2) ||
+				(NBJOUEUR == 3 && (couleur1.equals(couleur2) || couleur2.equals(couleur3) ||couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
+				(NBJOUEUR == 4 && (couleur1.equals(couleur2) || (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4)))));
 		
 		Joueur joueur = new Joueur(nom,couleur,colonne,ligne,caseControl);
 		Joueur joueur1 = new Joueur(nom1,couleur1,colonne1,ligne1,caseControl1);
@@ -137,7 +142,7 @@ public class Main {
 				joueur = joueur1;
 				if (compteurTour == 0){
 					joueur1.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					joueur1.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
+					joueur1.caseControl.add(new Case(joueur.colonne,joueur.ligne,joueur1.couleur));
 				}
 				caseControl=joueur1.caseControl;
 			}
@@ -145,7 +150,7 @@ public class Main {
 				joueur = joueur2;
 				if (compteurTour == 1){
 					joueur2.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					joueur2.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
+					joueur2.caseControl.add(new Case(joueur.colonne,joueur.ligne,joueur2.couleur));
 				}
 				caseControl=joueur2.caseControl;
 			}
@@ -154,42 +159,47 @@ public class Main {
 				joueur = joueur3;
 				if (compteurTour == 2){
 					joueur3.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					joueur3.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
+					joueur3.caseControl.add(new Case(joueur.colonne,joueur.ligne,joueur3.couleur));
 				}
-				caseControl=caseControl3;
+				caseControl=joueur3.caseControl;
 			}
 			
 			if (joueur4.tour == true && NBJOUEUR == 4){ // Tour du joueur 4
 				joueur = joueur4;
 				if (compteurTour == 3){
 					joueur4.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					joueur4.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
+					joueur4.caseControl.add(new Case(joueur.colonne,joueur.ligne,joueur4.couleur));
 				}
 				caseControl=joueur4.caseControl;
 			}
 			
 			// Début de la boucle pour les tours joués (pas durant l'initialisation)
 			if ((compteurTour>1 && NBJOUEUR == 2) || (compteurTour>2 && NBJOUEUR == 3) || (compteurTour>3 && NBJOUEUR == 4)){
-				String couleurChoisie;
+				String couleurChoisie = "couleur choisie";
 				do{ //boucle de choix de la couleur
 					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 					StdDraw.text(6.65, 14.3, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 					if (NBJOUEUR == 2){
 						System.out.print(joueur1.couleur + " et " + joueur2.couleur + ".");
-						StdDraw.text(10, 14.3, joueur1.couleur + " et " + joueur2.couleur + ".");
+						StdDraw.text(10.22, 14.3, joueur1.couleur + " et " + joueur2.couleur + ".");
 					}
 					else{
 						if(NBJOUEUR==3){
 							System.out.print(joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
-							StdDraw.text(10, 14.3, joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+							StdDraw.text(10.4, 14.3, joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
 						}
 						else{
 							System.out.print(joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
-							StdDraw.text(10, 14.3, joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+							StdDraw.text(10.4, 14.3, joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
 						}
 					}
-					couleurChoisie = scan5.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
 					
+					//1) mode souris
+					couleurChoisie = selectionCase(couleurChoisie);
+					
+					//2) mode console
+					//couleurChoisie = scan5.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
+				
 					if (joueur1.couleur.equals(couleurChoisie) || joueur2.couleur.equals(couleurChoisie) || joueur3.couleur.equals(couleurChoisie) || joueur4.couleur.equals(couleurChoisie)){
 						if (couleurChoisie.equals(joueur.couleur)){
 							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
@@ -223,7 +233,8 @@ public class Main {
 
 				colonne = caseControl.get(i).colonne;
 				ligne = caseControl.get(i).ligne;
-				
+				System.out.println(" Couleur de la case : " + grillage.grillage[ligne][colonne+1]);
+				System.out.println(" Couleur du joueur : " + joueur.couleur);
 				if (joueur.couleur.equals(grillage.grillage[ligne][colonne+1])){//Vérification à droite
 					//On met en majuscule + changement de couleur
 					grillage.grillage[ligne][colonne+1]=joueur.couleur.toUpperCase();
@@ -280,7 +291,7 @@ public class Main {
 				}
 				else
 				{	
-					if (joueur1.caseControl.size() ==joueur2.caseControl.size()){
+					if (joueur1.caseControl.size() == joueur2.caseControl.size()){
 						System.out.println("Dans le doute, on va dire que Timothée a gagné");
 					}
 					else {
