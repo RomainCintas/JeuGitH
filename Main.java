@@ -3,7 +3,18 @@ import java.util.ArrayList;
 
 public class Main {
 	
+	static int NBJOUEUR = Joueur.NBJOUEUR;
+	
+	public static void affichagePlateauConsole(Plateau grillage){
+		Plateau.affichagePlateauConsole(grillage);
+	}
+	
+	public static void affichagePlateauGraphique(Plateau grillage){
+		Plateau.affichagePlateauGraphique(grillage);
+	}
+	
 	public static void main(String[] args) {
+		
 		//initialisation interface graphique
 		StdDraw.setCanvasSize(1000, 1000);//initialisation de la feuille de dessin
 		StdDraw.setPenRadius(0.1);//définition de la taille du pinceau
@@ -23,16 +34,15 @@ public class Main {
 		String nom3 = null;
 		String nom4 = null;
 		
-		int nbJoueur;
 		do{
 			System.out.println("Combien de joueurs voulez-vous ?");
 			StdDraw.text(7, 14, "Combien de joueurs voulez-vous ?");
-			nbJoueur = scan.nextInt();
-			if (nbJoueur != 2 && nbJoueur != 3 && nbJoueur != 4){
+			NBJOUEUR = scan.nextInt();
+			if (NBJOUEUR != 2 && NBJOUEUR != 3 && NBJOUEUR != 4){
 				System.out.println("VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
 				StdDraw.text(7, 13, "VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
 			}
-		}while (nbJoueur != 2 && nbJoueur != 3 && nbJoueur != 4);
+		}while (NBJOUEUR != 2 && NBJOUEUR != 3 && NBJOUEUR != 4);
 		
 		System.out.println("Entrer le pseudo du Joueur 1");
 		StdDraw.text(7, 12, "Entrer le pseudo du Joueur 1");
@@ -41,11 +51,11 @@ public class Main {
 		StdDraw.text(7, 11, "Entrer le pseudo du Joueur 2");
 		String nom2 = scan2.nextLine();
 		
-		if (nbJoueur == 3 || nbJoueur == 4){
+		if (NBJOUEUR == 3 || NBJOUEUR == 4){
 			System.out.println("Entrer le pseudo du Joueur 3");
 			StdDraw.text(7, 10, "Entrer le pseudo du Joueur 3");
 			nom3 = scan3.nextLine();
-			if (nbJoueur == 4){
+			if (NBJOUEUR == 4){
 				System.out.println("Entrer le pseudo du Joueur 4");
 				StdDraw.text(7, 9, "Entrer le pseudo du Joueur 4");
 				nom4 = scan4.nextLine();
@@ -56,10 +66,10 @@ public class Main {
 		//StdDraw.text(7, 15, nom1 + " commence en haut à gauche");
 		System.out.println(nom2 + " commence en bas à droite");
 		//StdDraw.text(7, 14.7, nom2 + " commence en bas à droite");
-		if (nbJoueur == 3 || nbJoueur == 4){
+		if (NBJOUEUR == 3 || NBJOUEUR == 4){
 			System.out.println(nom3 + " commence en haut à droite");
 			//StdDraw.text(7, 14.7, nom3 + " commence en haut à droite");
-			if (nbJoueur == 4){
+			if (NBJOUEUR == 4){
 				System.out.println(nom4 + " commence en bas à gauche");
 				//StdDraw.text(7, 14.7, nom4 + " commence en bas à gauche");
 			}
@@ -67,138 +77,126 @@ public class Main {
 		
 		System.out.println("\n");
 		
-		Plateau generation_grillage = new Plateau();
+		Plateau grillage = new Plateau();
 		
 		String couleur = null;
 		String couleur1;
 		String couleur2;
 		String couleur3 = "couleur 3";
 		String couleur4 = "couleur 4";
-		int l1 = 1;
-		int c1 = 1;
-		int l2= 13;
-		int c2 = 13;
-		int l3 = 1;
-		int c3 = 13;
-		int l4= 13;
-		int c4 = 1;
+		int colonne = 0;
+		int ligne = 0;
+		int ligne1 = 1;
+		int colonne1 = 1;
+		int ligne2= 13;
+		int colonne2 = 13;
+		int ligne3 = 1;
+		int colonne3 = 13;
+		int ligne4= 13;
+		int colonne4 = 1;
+		ArrayList <Case> caseControl = null;
+		ArrayList <Case> caseControl1 = null;
+		ArrayList <Case> caseControl2 = null;
+		ArrayList <Case> caseControl3 = null;
+		ArrayList <Case> caseControl4 = null;
 		
 		do{
-			couleur1 = generation_grillage.get_couleur_joueur(l1,c1);
-			couleur2 = generation_grillage.get_couleur_joueur(l2,c2);
-			if (nbJoueur == 3 || nbJoueur == 4){
-				couleur3 = generation_grillage.get_couleur_joueur(l3,c3);
-				if (nbJoueur == 4){
-					couleur4 = generation_grillage.get_couleur_joueur(l4, c4);
+			couleur1 = grillage.getCouleurJoueur(ligne1,colonne1);
+			couleur2 = grillage.getCouleurJoueur(ligne2,colonne2);
+			if (NBJOUEUR == 3 || NBJOUEUR == 4){
+				couleur3 = grillage.getCouleurJoueur(ligne3,colonne3);
+				if (NBJOUEUR == 4){
+					couleur4 = grillage.getCouleurJoueur(ligne4, colonne4);
 				}
 			}
-			if(couleur1.equals(couleur2) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4) || couleur1.equals(couleur3)){
-				generation_grillage = new Plateau();
+			if((couleur1.equals(couleur2) || couleur2.equals(couleur3)) && NBJOUEUR == 2 ||
+					(NBJOUEUR == 3 && (couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
+					(NBJOUEUR == 4 && (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4)))){
+				grillage = new Plateau();
 			}
-		}while(couleur1.equals(couleur2) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4) || couleur1.equals(couleur3));
-				 
-		Joueur joueur = new Joueur(nom,couleur);
-		Joueur joueur1 = new Joueur(nom1,couleur1);
-		Joueur joueur2 = new Joueur(nom2,couleur2);
-		Joueur joueur3 = new Joueur(nom3,couleur3);
-		Joueur joueur4 = new Joueur(nom4,couleur4);
+		}while((couleur1.equals(couleur2) || couleur2.equals(couleur3)) && NBJOUEUR == 2 ||
+				(NBJOUEUR == 3 && (couleur1.equals(couleur3) || couleur2.equals(couleur3))) ||
+				(NBJOUEUR == 4 && (couleur1.equals(couleur3) || couleur2.equals(couleur3) || couleur3.equals(couleur4) || couleur1.equals(couleur4) || couleur2.equals(couleur4))));
+		
+		Joueur joueur = new Joueur(nom,couleur,colonne,ligne,caseControl);
+		Joueur joueur1 = new Joueur(nom1,couleur1,colonne1,ligne1,caseControl1);
+		Joueur joueur2 = new Joueur(nom2,couleur2,colonne2,ligne2,caseControl2);
+		Joueur joueur3 = new Joueur(nom3,couleur3,colonne3,ligne3,caseControl3);
+		Joueur joueur4 = new Joueur(nom4,couleur4,colonne4,ligne4,caseControl4);
 		
 		joueur1.tour = true;
 		joueur2.tour = false;
 		joueur3.tour = false;
 		joueur4.tour = false;
 		
-		int colonne;
-		int ligne;
-		ArrayList <Case> caseverif = null;
-		ArrayList <Case> caseverif1 = null;
-		ArrayList <Case> caseverif2 = null;
-		ArrayList <Case> caseverif3 = null;
-		ArrayList <Case> caseverif4 = null;
-		
-		int compteur = 0; //pour compter le nombre de tour
+		int compteurTour = 0; //pour compter le nombre de tour
 		
 		while (true){ //Début de la boucle du jeu (1 boucle = 1 tour)
 			StdDraw.setPenColor(StdDraw.BLACK);
 			if (joueur1.tour == true){ // Tour du joueur 1
 				joueur = joueur1;
-				couleur = couleur1;
-				nom = nom1;
-				colonne = c1;
-				ligne = l1;
-				if (compteur == 0){
-					caseverif1= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					caseverif1.add(new Case(colonne,ligne,couleur));
+				if (compteurTour == 0){
+					joueur1.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					joueur1.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
 				}
-				caseverif=caseverif1;
+				caseControl=joueur1.caseControl;
 			}
 			if (joueur2.tour == true) { // Tour du joueur 2
 				joueur = joueur2;
-				couleur = couleur2;
-				nom = nom2;
-				colonne = c2;
-				ligne = l2;
-				if (compteur == 1){
-					caseverif2= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					caseverif2.add(new Case(colonne,ligne,couleur));
+				if (compteurTour == 1){
+					joueur2.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					joueur2.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
 				}
-				caseverif=caseverif2;
+				caseControl=joueur2.caseControl;
 			}
 			
-			if (joueur3.tour == true && (nbJoueur == 3 || nbJoueur == 4)) { // Tour du joueur 3
+			if (joueur3.tour == true && (NBJOUEUR == 3 || NBJOUEUR == 4)) { // Tour du joueur 3
 				joueur = joueur3;
-				couleur = couleur3;
-				nom = nom3;
-				colonne = c3;
-				ligne = l3;
-				if (compteur == 2){
-					caseverif3= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					caseverif3.add(new Case(colonne,ligne,couleur));
+				if (compteurTour == 2){
+					joueur3.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					joueur3.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
 				}
-				caseverif=caseverif3;
+				caseControl=caseControl3;
 			}
 			
-			if (joueur4.tour == true && nbJoueur == 4){ // Tour du joueur 4
+			if (joueur4.tour == true && NBJOUEUR == 4){ // Tour du joueur 4
 				joueur = joueur4;
-				couleur = couleur4;
-				nom = nom4;
-				colonne = c4;
-				ligne = l4;
-				if (compteur == 3){
-					caseverif4= new ArrayList<Case>();//liste qui stocke les cases adjacentes
-					caseverif4.add(new Case(colonne,ligne,couleur));
+				if (compteurTour == 3){
+					joueur4.caseControl= new ArrayList<Case>();//liste qui stocke les cases adjacentes
+					joueur4.caseControl.add(new Case(joueur.colonne,joueur.ligne,couleur));
 				}
-				caseverif=caseverif4;
+				caseControl=joueur4.caseControl;
 			}
 			
 			// Début de la boucle pour les tours joués (pas durant l'initialisation)
-			if ((compteur>1 && nbJoueur == 2) || (compteur>2 && nbJoueur == 3) || (compteur>3 && nbJoueur == 4)){
-				do{
+			if ((compteurTour>1 && NBJOUEUR == 2) || (compteurTour>2 && NBJOUEUR == 3) || (compteurTour>3 && NBJOUEUR == 4)){
+				String couleurChoisie;
+				do{ //boucle de choix de la couleur
 					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 					StdDraw.text(6.65, 14.3, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
-					if (nbJoueur == 2){
-						System.out.print(couleur1 + " et " + couleur2 + ".");
-						StdDraw.text(10, 14.3, couleur1 + " et " + couleur2 + ".");
+					if (NBJOUEUR == 2){
+						System.out.print(joueur1.couleur + " et " + joueur2.couleur + ".");
+						StdDraw.text(10, 14.3, joueur1.couleur + " et " + joueur2.couleur + ".");
 					}
 					else{
-						if(nbJoueur==3){
-							System.out.print(couleur1 + ", " + couleur2 + " et " + couleur3 + ".");
-							StdDraw.text(10, 14.3, couleur1 + ", " + couleur2 + " et " + couleur3 + ".");
+						if(NBJOUEUR==3){
+							System.out.print(joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+							StdDraw.text(10, 14.3, joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
 						}
 						else{
-							System.out.print(couleur1 + ", " + couleur2 + ", " + couleur3 + " et " + couleur4 + ".");
-							StdDraw.text(10, 14.3, couleur1 + ", " + couleur2 + ", " + couleur3 + " et " + couleur4 + ".");
+							System.out.print(joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+							StdDraw.text(10, 14.3, joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
 						}
 					}
-					joueur.couleur = scan5.nextLine().toLowerCase();
+					couleurChoisie = scan5.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
 					
-					if (couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur)){
-						if (couleur.equals(joueur.couleur)){
+					if (joueur1.couleur.equals(couleurChoisie) || joueur2.couleur.equals(couleurChoisie) || joueur3.couleur.equals(couleurChoisie) || joueur4.couleur.equals(couleurChoisie)){
+						if (couleurChoisie.equals(joueur.couleur)){
 							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 							StdDraw.text(7, 14, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 						}
 						else{
-							if (nbJoueur == 2){
+							if (NBJOUEUR == 2){
 								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
 								StdDraw.text(7, 13.7, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
 							}
@@ -208,127 +206,99 @@ public class Main {
 							}
 						}
 					}
-				}while(couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur));
-				couleur = joueur.couleur;
+				}while(couleurChoisie.equals(joueur1.couleur) || couleurChoisie.equals(joueur2.couleur) || couleurChoisie.equals(joueur3.couleur) || couleurChoisie.equals(joueur4.couleur));
+				joueur.couleur = couleurChoisie; //prise en compte de la couleur choisie
 				
 				int j=0;
 				do{
-					int c = caseverif.get(j).c;
-					int l = caseverif.get(j).l;
-					generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
+					colonne = caseControl.get(j).colonne;
+					ligne = caseControl.get(j).ligne;
+					grillage.grillage[ligne][colonne]=joueur.couleur.toUpperCase();
 					j++;
-				}while (j<caseverif.size());
+				}while (j<caseControl.size());
 			} // Fin de la boucle pour les tours joués (pas durant l'initialisation)
 			
 			int i = 0;
 			do{ //Boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
 
-				int c = caseverif.get(i).c;
-				int l = caseverif.get(i).l;
+				colonne = caseControl.get(i).colonne;
+				ligne = caseControl.get(i).ligne;
 				
-				if (joueur.couleur.equals(generation_grillage.grillage[l][c+1])){//Vérification à droite
+				if (joueur.couleur.equals(grillage.grillage[ligne][colonne+1])){//Vérification à droite
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l][c+1]=joueur.couleur.toUpperCase();
-					caseverif.add(new Case(c+1,l,couleur));
+					grillage.grillage[ligne][colonne+1]=joueur.couleur.toUpperCase();
+					caseControl.add(new Case(colonne+1,ligne,joueur.couleur));
 				}
-				if (joueur.couleur.equals(generation_grillage.grillage[l+1][c])){//Vérification en bas
+				if (joueur.couleur.equals(grillage.grillage[ligne+1][colonne])){//Vérification en bas
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l+1][c]=joueur.couleur.toUpperCase();
-					caseverif.add(new Case(c,l+1,couleur));
+					grillage.grillage[ligne+1][colonne]=joueur.couleur.toUpperCase();
+					caseControl.add(new Case(colonne,ligne+1,joueur.couleur));
 				}
-				if (joueur.couleur.equals(generation_grillage.grillage[l-1][c])){//Vérification en haut
+				if (joueur.couleur.equals(grillage.grillage[ligne-1][colonne])){//Vérification en haut
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l-1][c]=joueur.couleur.toUpperCase();
-					caseverif.add(new Case(c,l-1,couleur));
+					grillage.grillage[ligne-1][colonne]=joueur.couleur.toUpperCase();
+					caseControl.add(new Case(colonne,ligne-1,joueur.couleur));
 				}
-				if (joueur.couleur.equals(generation_grillage.grillage[l][c-1])){//Vérification à gauche
+				if (joueur.couleur.equals(grillage.grillage[ligne][colonne-1])){//Vérification à gauche
 					//On met en majuscule + changement de couleur
-					generation_grillage.grillage[l][c-1]=joueur.couleur.toUpperCase();
-					caseverif.add(new Case(c-1,l,couleur));
+					grillage.grillage[ligne][colonne-1]=joueur.couleur.toUpperCase();
+					caseControl.add(new Case(colonne-1,ligne,joueur.couleur));
 				}
 	
-				generation_grillage.grillage[l][c]=joueur.couleur.toUpperCase();
+				grillage.grillage[ligne][colonne]=joueur.couleur.toUpperCase();
 				i++;
 				
-			}while(i<caseverif.size()); //Fin de la boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
-			
-			StdDraw.clear();
-			
-			if ((compteur>0 && nbJoueur == 2) || (compteur>1 && nbJoueur == 3) || (compteur>2 && nbJoueur == 4)){
-				System.out.print("\n"); //Affichage du nouveau grillage
-				for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
-					for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
-						// Affichage console
-						System.out.print("	|	" + generation_grillage.grillage[ligneBoucle][colonneBoucle]);
-						// Affichage graphique
-						StdDraw.setPenColor(StdDraw.GRAY);
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("R")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("r")){
-							StdDraw.setPenColor(StdDraw.RED);
-						}
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("O")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("o")){
-							StdDraw.setPenColor(StdDraw.ORANGE);
-						}
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("J")|| generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("j")){
-							StdDraw.setPenColor(StdDraw.YELLOW);
-						}
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("V") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("v")){
-							StdDraw.setPenColor(StdDraw.GREEN);
-						}
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("B") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("b")){
-							StdDraw.setPenColor(StdDraw.BLUE);
-						}
-						if (generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("I") || generation_grillage.grillage[ligneBoucle][colonneBoucle].equals("i")){
-							StdDraw.setPenColor(StdDraw.MAGENTA);
-						}
-						
-						StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
-					}
-				System.out.print("\n");
-				}
+			}while(i<caseControl.size()); //Fin de la boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
+				
+			if ((compteurTour>0 && NBJOUEUR == 2) || (compteurTour>1 && NBJOUEUR == 3) || (compteurTour>2 && NBJOUEUR == 4)){
+				
+				affichagePlateauConsole(grillage);
+				affichagePlateauGraphique(grillage);
+				
 			}
 			
 			if (joueur1.tour == true){
-				caseverif1 = caseverif;
+				joueur1.caseControl = caseControl;
 				couleur1 = couleur;
 			}
 			if (joueur2.tour == true){
-				caseverif2 = caseverif;
+				joueur2.caseControl = caseControl;
 				couleur2 = couleur;
 			}
 			if (joueur3.tour == true){
-				caseverif3 = caseverif;
+				joueur3.caseControl = caseControl;
 				couleur3 = couleur;
 			}
 			if (joueur4.tour == true){
-				caseverif4 = caseverif;
+				joueur4.caseControl = caseControl;
 				couleur4 = couleur;
 			}
 			
-			if (compteur != 0 && compteur != 1 && nbJoueur == 2 && (caseverif1.size()>84 || caseverif2.size()>84)){ // Conditions de victoire pour une partie à 2 joueurs
-				if (caseverif1.size()>caseverif2.size()){
+			if (compteurTour != 0 && compteurTour != 1 && NBJOUEUR == 2 && (joueur1.caseControl.size()>84 || joueur2.caseControl.size()>84)){ // Conditions de victoire pour une partie à 2 joueurs
+				if (joueur1.caseControl.size()>joueur2.caseControl.size()){
 					System.out.println("Victoire de " + joueur1.nom + " !!!");
 				}
 				else
 				{	
-					if (caseverif1.size() == caseverif2.size()){
+					if (joueur1.caseControl.size() ==joueur2.caseControl.size()){
 						System.out.println("Dans le doute, on va dire que Timothée a gagné");
 					}
 					else {
 						System.out.println("Victoire de " + joueur2.nom + " !!!");
 					}
 				}
-				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + caseverif1.size());
-				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + caseverif2.size());
+				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
 				break;
 			}
 			
-			if (compteur != 0 && compteur != 1 && compteur != 2 && nbJoueur == 3 && (caseverif1.size()>84 || caseverif2.size()>84 || caseverif3.size()>84)){ // Conditions de victoire pour une partie à 3 joueurs
-				if (caseverif1.size()>caseverif2.size()){
-					if(caseverif1.size()>caseverif3.size()){
+			if (compteurTour != 0 && compteurTour != 1 && compteurTour != 2 && NBJOUEUR == 3 && (joueur1.caseControl.size()>84 || joueur2.caseControl.size()>84 || joueur3.caseControl.size()>84)){ // Conditions de victoire pour une partie à 3 joueurs
+				if (joueur1.caseControl.size()>joueur2.caseControl.size()){
+					if(joueur1.caseControl.size()>joueur3.caseControl.size()){
 						System.out.println("Victoire de " + joueur1.nom + " !!!");
 					}
 					else{
-						if(caseverif1.size()==caseverif3.size()){
+						if(joueur1.caseControl.size()==joueur3.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
 						}
 						else{
@@ -338,8 +308,8 @@ public class Main {
 				}
 				else
 				{	
-					if(caseverif2.size()>caseverif3.size()){
-						if(caseverif1.size()==caseverif2.size()){
+					if(joueur2.caseControl.size()>joueur3.caseControl.size()){
+						if(joueur1.caseControl.size()==joueur2.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
 						}
 						else {
@@ -347,7 +317,7 @@ public class Main {
 						}
 					}
 					else{
-						if (caseverif2.size() == caseverif3.size()){
+						if (joueur2.caseControl.size() == joueur3.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
 						}
 						else{
@@ -355,20 +325,20 @@ public class Main {
 						}
 					}
 				}
-				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + caseverif1.size());
-				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + caseverif2.size());
-				System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + caseverif3.size());
+				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());
 				break;
 			}
 			
-			if (compteur != 0 && compteur != 1 && compteur != 2 && compteur != 3 && nbJoueur == 4 && (caseverif1.size()>84 || caseverif2.size()>84 || caseverif3.size()>84 || caseverif4.size()>84)){ // Conditions de victoire pour une partie à 4 joueurs
-				if (caseverif1.size()>caseverif2.size()){
-					if(caseverif1.size()>caseverif3.size()){
-						if(caseverif1.size()>caseverif4.size()){
+			if (compteurTour != 0 && compteurTour != 1 && compteurTour != 2 && compteurTour != 3 && NBJOUEUR == 4 && (joueur1.caseControl.size()>84 ||joueur2.caseControl.size()>84 || joueur3.caseControl.size()>84 || joueur4.caseControl.size()>84)){ // Conditions de victoire pour une partie à 4 joueurs
+				if (joueur1.caseControl.size()>joueur2.caseControl.size()){
+					if(joueur1.caseControl.size()>joueur3.caseControl.size()){
+						if(joueur1.caseControl.size()>joueur4.caseControl.size()){
 							System.out.println("Victoire de " + joueur1.nom + " !!!");
 						}
 						else{
-							if (caseverif1.size()==caseverif4.size()){
+							if (joueur1.caseControl.size()==joueur4.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");
 							}
 							else{
@@ -377,11 +347,11 @@ public class Main {
 						}
 					}
 					else{
-						if (caseverif3.size()>caseverif4.size()){
+						if (joueur3.caseControl.size()>joueur4.caseControl.size()){
 							System.out.println("Victoire de " + joueur3.nom + " !!!");
 						}
 						else{
-							if(caseverif3.size()==caseverif4.size()){
+							if(joueur3.caseControl.size()==joueur4.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");
 							}
 							else{
@@ -393,16 +363,16 @@ public class Main {
 				}
 				else //si 2=<1
 				{	
-					if(caseverif2.size()>caseverif3.size()){
-						if(caseverif2.size()>caseverif4.size()){
-							if (caseverif1.size()==caseverif2.size()){
+					if(joueur2.caseControl.size()>joueur3.caseControl.size()){
+						if(joueur2.caseControl.size()>joueur4.caseControl.size()){
+							if (joueur1.caseControl.size()==joueur2.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");							}
 							else{
 								System.out.println("Victoire de " + joueur2.nom + " !!!");
 							}
 						}
 						else{ // si 4=<2
-							if (caseverif2.size()==caseverif4.size()){
+							if (joueur2.caseControl.size()==joueur4.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");							}
 							else{
 								System.out.println("Victoire de " + joueur2.nom + " !!!");
@@ -411,8 +381,8 @@ public class Main {
 					}
 					
 					else{ // si 3=<2
-						if (caseverif3.size() > caseverif4.size()){
-							if(caseverif2.size() == caseverif3.size()){
+						if (joueur3.caseControl.size() > joueur4.caseControl.size()){
+							if(joueur2.caseControl.size() == joueur3.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");
 							}
 							else{
@@ -420,7 +390,7 @@ public class Main {
 							}
 						}
 						else{ //si 4>=3
-							if(caseverif1.size() == caseverif2.size()){
+							if(joueur1.caseControl.size() == joueur2.caseControl.size()){
 								System.out.println("Dans le doute, on va dire que Timothée a gagné");
 							}
 							else{
@@ -429,21 +399,21 @@ public class Main {
 						}
 					}
 				}
-				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + caseverif1.size());
-				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + caseverif2.size());
-				System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + caseverif3.size());
-				System.out.println("Nombre de cases possédées par " + joueur4.nom + " : " + caseverif4.size());
+				System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());
+				System.out.println("Nombre de cases possédées par " + joueur4.nom + " : " + joueur4.caseControl.size());
 				break;
 			}
 			
 			boolean joueurTemporaire; //Rotation du tour des joueurs
-			if (nbJoueur == 2){
+			if (NBJOUEUR == 2){
 				joueurTemporaire = joueur2.tour;
 				joueur2.tour = joueur1.tour;
 				joueur1.tour = joueurTemporaire;
 			}
 			else{
-				if (nbJoueur == 4){
+				if (NBJOUEUR == 4){
 					joueurTemporaire = joueur4.tour;
 					joueur4.tour = joueur3.tour;
 					joueur3.tour = joueur2.tour;
@@ -458,7 +428,7 @@ public class Main {
 				}
 			}
 			//System.out.println("Joueur 1 : " + joueur1.tour + "Joueur 2 : " + joueur2.tour + "Joueur 3 : " + joueur3.tour + "Joueur 4 : " + joueur4.tour);
-			compteur++; //Compteur de tour
+			compteurTour++; //Compteur de tour
 		} //Fin de la boucle du jeu (1 boucle = 1 tour)
 	}
 }

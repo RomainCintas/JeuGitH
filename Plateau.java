@@ -7,52 +7,77 @@ public class Plateau{
 	public String couleur3;
 	public String couleur4;
 	String grillage [][] = new String [15][15];
-	public int i;
-	public int j;
+	public int colonne;
+	public int ligne;
 	
-	public Plateau(){	
-		for (int l=1;l<14;l++){ //Génération grillage
-			for (int c=1;c<14;c++){
-				grillage[l][c]= Random_letter() ; 
+	//Génération du grillage
+	public Plateau(){
+		for (int ligne=1;ligne<14;ligne++){ 
+			for (int colonne=1;colonne<14;colonne++){
+				grillage[ligne][colonne]= Random_letter() ; 
 			}		
 		}
-
-//		for (int l=1;l<14;l++){ //Affichage du grillage
-//			for (int c=1;c<14;c++){
-//				System.out.print("	|	" + grillage[l][c]);
-//			}
-//		System.out.print("\n");
-//		}
-		
-		//char couleur1 = grillage [0][0];
-		//char couleur2 = grillage [13][13];
 	}
 	
-	public String get_couleur_joueur(int i, int j){//Couleur des joueurs
-		return grillage [i][j];
+	//Couleur des joueurs
+	public String getCouleurJoueur(int ligne, int colonne){
+		return grillage [ligne][colonne];
 	}
 	
-	
-	public String Random_letter(){//Génération d'une lettre aléatoire r,o,y,g,b,p
+	//Génération d'une lettre aléatoire r,o,y,g,b,p
+	public String Random_letter(){
 		String alphabet[] = {"r","o","j","v","b","i"};
 		return alphabet[Alea(0,5)];
 	}
 	
-	public int Alea (int min, int max){//Génération de nombre aléatoire entre min et max
+	//Génération de nombre aléatoire entre min et max
+	public int Alea (int min, int max){
 		Random rand = new Random();
 		int Alea = rand.nextInt(max - min + 1) + min;
 		return Alea;
 		
 	}
 	
+	//Affichage console du plateau
+	public static void affichagePlateauConsole(Plateau grillage){
+		System.out.print("\n");
+		for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
+			for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
+				System.out.print("	|	" + grillage.grillage[ligneBoucle][colonneBoucle]);
+			}
+		System.out.print("\n");
+		}
+	}
 	
-	//public static char toChar(int codeASCII) { //code ASCII d'une lettres
-	//	return (char)codeASCII; 
-	//} 
-
-	//public static int toASCII(char lettre) { //lettre correspondant à un code ASCII
-	//	return (int)lettre; 
-	//} 
+	//Affichage graphique du plateau
+	public static void affichagePlateauGraphique(Plateau grillage){
+		StdDraw.clear();
+		for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
+			for (int colonneBoucle=1;colonneBoucle<14;colonneBoucle++){
+				StdDraw.setPenColor(StdDraw.GRAY);
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("r")){
+					StdDraw.setPenColor(StdDraw.RED);
+				}
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("o")){
+					StdDraw.setPenColor(StdDraw.ORANGE);
+				}
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("j")){
+					StdDraw.setPenColor(StdDraw.YELLOW);
+				}
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("v")){
+					StdDraw.setPenColor(StdDraw.GREEN);
+				}
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("b")){
+					StdDraw.setPenColor(StdDraw.BLUE);
+				}
+				if (grillage.grillage[ligneBoucle][colonneBoucle].toLowerCase().equals("i")){
+					StdDraw.setPenColor(StdDraw.MAGENTA);
+				}
+				
+				StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
+			}
+		}
+	}
 }
 
 

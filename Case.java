@@ -1,13 +1,13 @@
 
 public class Case {
 
-	int c;
-	int l;
+	int colonne;
+	int ligne;
 	String couleur;
 	
-	public Case (int c, int l, String couleur){//coordonnées et couleur d'une case
-		this.c = c;
-		this.l = l;
+	public Case (int colonne, int ligne, String couleur){//coordonnées et couleur d'une case
+		this.colonne = colonne;
+		this.ligne = ligne;
 		this.couleur = couleur;
 	}
 
