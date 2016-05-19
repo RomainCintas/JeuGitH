@@ -268,7 +268,7 @@ public class Main {
 							StdDraw.setPenColor(StdDraw.MAGENTA);
 						}
 						
-						StdDraw.filledSquare(colonneBoucle, ligneBoucle, 0.4);
+						StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
 					}
 				System.out.print("\n");
 				}
