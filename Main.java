@@ -26,33 +26,42 @@ public class Main {
 		int nbJoueur;
 		do{
 			System.out.println("Combien de joueurs voulez-vous ?");
+			StdDraw.text(7, 14, "Combien de joueurs voulez-vous ?");
 			nbJoueur = scan.nextInt();
 			if (nbJoueur != 2 && nbJoueur != 3 && nbJoueur != 4){
 				System.out.println("VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
+				StdDraw.text(7, 13, "VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
 			}
 		}while (nbJoueur != 2 && nbJoueur != 3 && nbJoueur != 4);
 		
 		System.out.println("Entrer le pseudo du Joueur 1");
+		StdDraw.text(7, 12, "Entrer le pseudo du Joueur 1");
 		String nom1 = scan1.nextLine();
 		System.out.println("Entrer le pseudo du Joueur 2");
+		StdDraw.text(7, 11, "Entrer le pseudo du Joueur 2");
 		String nom2 = scan2.nextLine();
 		
 		if (nbJoueur == 3 || nbJoueur == 4){
 			System.out.println("Entrer le pseudo du Joueur 3");
+			StdDraw.text(7, 10, "Entrer le pseudo du Joueur 3");
 			nom3 = scan3.nextLine();
 			if (nbJoueur == 4){
 				System.out.println("Entrer le pseudo du Joueur 4");
+				StdDraw.text(7, 9, "Entrer le pseudo du Joueur 4");
 				nom4 = scan4.nextLine();
 			}
 		}
 		
 		System.out.println(nom1 + " commence en haut à gauche");
+		//StdDraw.text(7, 15, nom1 + " commence en haut à gauche");
 		System.out.println(nom2 + " commence en bas à droite");
-		
+		//StdDraw.text(7, 14.7, nom2 + " commence en bas à droite");
 		if (nbJoueur == 3 || nbJoueur == 4){
 			System.out.println(nom3 + " commence en haut à droite");
+			//StdDraw.text(7, 14.7, nom3 + " commence en haut à droite");
 			if (nbJoueur == 4){
 				System.out.println(nom4 + " commence en bas à gauche");
+				//StdDraw.text(7, 14.7, nom4 + " commence en bas à gauche");
 			}
 		}
 		
@@ -166,15 +175,19 @@ public class Main {
 			if ((compteur>1 && nbJoueur == 2) || (compteur>2 && nbJoueur == 3) || (compteur>3 && nbJoueur == 4)){
 				do{
 					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
+					StdDraw.text(6.65, 14.3, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 					if (nbJoueur == 2){
 						System.out.print(couleur1 + " et " + couleur2 + ".");
+						StdDraw.text(10, 14.3, couleur1 + " et " + couleur2 + ".");
 					}
 					else{
 						if(nbJoueur==3){
 							System.out.print(couleur1 + ", " + couleur2 + " et " + couleur3 + ".");
+							StdDraw.text(10, 14.3, couleur1 + ", " + couleur2 + " et " + couleur3 + ".");
 						}
 						else{
 							System.out.print(couleur1 + ", " + couleur2 + ", " + couleur3 + " et " + couleur4 + ".");
+							StdDraw.text(10, 14.3, couleur1 + ", " + couleur2 + ", " + couleur3 + " et " + couleur4 + ".");
 						}
 					}
 					joueur.couleur = scan5.nextLine().toLowerCase();
@@ -182,16 +195,16 @@ public class Main {
 					if (couleur1.equals(joueur.couleur) || couleur2.equals(joueur.couleur) || couleur3.equals(joueur.couleur) || couleur4.equals(joueur.couleur)){
 						if (couleur.equals(joueur.couleur)){
 							System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
-							StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
+							StdDraw.text(7, 14, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 						}
 						else{
 							if (nbJoueur == 2){
 								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
-								StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+								StdDraw.text(7, 13.7, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
 							}
 							else{
 								System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
-								StdDraw.text(7, 0.3, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+								StdDraw.text(7, 13.7, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
 							}
 						}
 					}
