@@ -178,19 +178,26 @@ public class Main {
 				String couleurChoisie = "couleur choisie";
 				do{ //boucle de choix de la couleur
 					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
-					StdDraw.text(6.65, 14.3, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
+					System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
+					StdDraw.text(6.65, 14.6, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 					if (NBJOUEUR == 2){
-						System.out.print(joueur1.couleur + " et " + joueur2.couleur + ".");
-						StdDraw.text(10.22, 14.3, joueur1.couleur + " et " + joueur2.couleur + ".");
+						System.out.println(joueur1.couleur + " et " + joueur2.couleur + ".");
+						StdDraw.text(10.22, 14.6, joueur1.couleur + " et " + joueur2.couleur + ".");
+						System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size());
+						StdDraw.text(6.65, 14.9, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size());
 					}
 					else{
 						if(NBJOUEUR==3){
-							System.out.print(joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
-							StdDraw.text(10.4, 14.3, joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+							System.out.println(joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+							StdDraw.text(10.4, 14.6, joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+							System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size());
+							StdDraw.text(6.65, 14.9, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size());
 						}
 						else{
-							System.out.print(joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
-							StdDraw.text(10.4, 14.3, joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+							System.out.println(joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+							StdDraw.text(10.4, 14.6, joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+							System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size() + "  Score de " + joueur4.nom + " : " + joueur4.caseControl.size());
+							StdDraw.text(6.65, 14.9, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size() + "  Score de " + joueur4.nom + " : " + joueur4.caseControl.size());
 						}
 					}
 					
