@@ -1,8 +1,9 @@
+import java.util.Scanner;
 
 public class Case {
 
-	int colonne;
-	int ligne;
+	public int colonne;
+	public int ligne;
 	String couleur;
 	
 	public Case (int colonne, int ligne, String couleur){//coordonnées et couleur d'une case
@@ -10,8 +11,11 @@ public class Case {
 		this.ligne = ligne;
 		this.couleur = couleur;
 	}
+	//Choix de la couleur
 	
-	public static String selectionCase(String couleurChoisie){
+	//Sélection de la couleur en mode graphique (avec la souris)
+	public static String selectionCouleurGraphique(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+		String couleurChoisie = "couleur choisie";
 		double x = 0;
 		double y = 0;
 		int xPos = 0;
@@ -46,7 +50,36 @@ public class Case {
 		if(yPos == 9){
 			couleurChoisie = "i";
 		}
+		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR);
 		return couleurChoisie;
 	}
-
+	
+	//Sélection de la couleur en mode console
+	public static String selectionCouleurConsole(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+		Scanner scan = new Scanner(System.in);
+		String couleurChoisie = scan.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
+		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR);
+		return couleurChoisie;
+	}
+	
+	//Vérification si la couleur choisie n'est pas déjà prise
+	public static String verifCouleurChoisie(String couleurChoisie, String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+		if (couleur1.equals(couleurChoisie) || couleur2.equals(couleurChoisie) || couleur3.equals(couleurChoisie) || couleur4.equals(couleurChoisie)){
+			if (couleurChoisie.equals(couleur)){
+				System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
+				StdDraw.text(7, 14, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
+			}
+			else{
+				if (NBJOUEUR == 2){
+					System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+					StdDraw.text(7, 13.7, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+				}
+				else{
+					System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+					StdDraw.text(7, 13.7, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+				}
+			}
+		}
+		return couleurChoisie;
+	}
 }
