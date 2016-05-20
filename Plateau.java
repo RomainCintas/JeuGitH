@@ -34,7 +34,7 @@ public class Plateau{
 		return alphabet[Alea(0,5)];
 	}
 	
-	//Génération du grillage
+	//Génération d'un grillage
 	public Plateau(){
 		for (int ligne=1;ligne<14;ligne++){ 
 			for (int colonne=1;colonne<14;colonne++){
@@ -59,7 +59,7 @@ public class Plateau{
 		return grillage [ligne][colonne];
 	}
 		
-	//Création de la grille
+	//Création de la grille initiale
 	public static void creaGrille(int NBJOUEUR){
 		Plateau grillage = new Plateau();
 		do{
@@ -85,6 +85,14 @@ public class Plateau{
 	
 	}
 	
+	//Affichage du plateau
+	public static void affichagePlateau(String[][] grillage, int compteurTour,int NBJOUEUR){
+		if ((compteurTour>0 && NBJOUEUR == 2) || (compteurTour>1 && NBJOUEUR == 3) || (compteurTour>2 && NBJOUEUR == 4)){
+			affichagePlateauConsole(grillage);
+			affichagePlateauGraphique(grillage);
+		}
+	}
+	
 	//Affichage console du plateau
 	public static void affichagePlateauConsole(String[][] grillage){
 		System.out.print("\n");
@@ -98,7 +106,7 @@ public class Plateau{
 	
 	//Affichage graphique du plateau
 	public static void affichagePlateauGraphique(String[][] grillage){
-		StdDraw.clear();
+		//StdDraw.clear();
 		for (int ligneBoucle=1;ligneBoucle<14;ligneBoucle++){
 			for (int colonneBoucle=1;colonneBoucle<16;colonneBoucle++){
 				StdDraw.setPenColor(StdDraw.GRAY);
@@ -126,6 +134,7 @@ public class Plateau{
 				StdDraw.filledSquare(colonneBoucle, 14-ligneBoucle, 0.4);
 			}
 		}
+		StdDraw.setPenColor(StdDraw.BLACK);
 	}
 }
 
