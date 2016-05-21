@@ -33,15 +33,15 @@ public class Joueur{
 		this.humain = humain;
 	}
 	
-	//Choix du nombre de joueurs
+	//Choix du nombre de joueurs en mode console
 	public static int choixNbJoueur(){
 		do{
 			System.out.println("Combien de joueurs voulez-vous ?");
-			StdDraw.text(7, 14, "Combien de joueurs voulez-vous ?");
+			StdDraw.text(8, 7, "Nombre de joueurs");
 			NBJOUEUR = scan.nextInt();
 			if (NBJOUEUR != 2 && NBJOUEUR != 3 && NBJOUEUR != 4){
 				System.out.println("VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
-				StdDraw.text(7, 13, "VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
+				StdDraw.text(8, 13, "VEUILLEZ CHOISIR DEUX, TROIS OU QUATRE JOUEURS");
 			}
 		}while (NBJOUEUR != 2 && NBJOUEUR != 3 && NBJOUEUR != 4);
 		return NBJOUEUR;
@@ -49,50 +49,53 @@ public class Joueur{
 	
 	//choix des pseudos des joueurs
 	public static void choixPseudoJoueur(int NBJOUEUR, boolean HUMAIN){
+		
+		Menu.menuPseudo(HUMAIN);
+		
 		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.rectangle(8.5, 7, 2, 0.01);
-		StdDraw.setPenColor(StdDraw.GREEN);
-		StdDraw.rectangle(8.5, 7, 2, 0.01);
+		StdDraw.rectangle(8, 9, 2, 0.01);
+		StdDraw.setPenColor(StdDraw.YELLOW);
+		StdDraw.rectangle(8, 9, 2, 0.01);
 		StdDraw.setPenColor(StdDraw.BLACK);
 		
 		System.out.println("Entrer le pseudo du Joueur 1");
-		StdDraw.text(8.5, 7, "Entrer le pseudo du Joueur 1");
+		StdDraw.text(8, 9, "Entrer le pseudo du Joueur 1");
 		
 		nom1 = scan1.nextLine();
-		
+			
 		if (HUMAIN == true){
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.rectangle(8.5, 7, 2, 0.01);
-			StdDraw.setPenColor(StdDraw.GREEN);
-			StdDraw.rectangle(8.5, 7, 2, 0.01);
+			StdDraw.rectangle(8, 9, 2, 0.01);
+			StdDraw.setPenColor(StdDraw.YELLOW);
+			StdDraw.rectangle(8, 9, 2, 0.01);
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
 			System.out.println("Entrer le pseudo du Joueur 2");
-			StdDraw.text(8.5, 7, "Entrer le pseudo du Joueur 2");
-			
+			StdDraw.text(8, 9, "Entrer le pseudo du Joueur 2");
+				
 			nom2 = scan2.nextLine();
 
 			if (NBJOUEUR == 3 || NBJOUEUR == 4){
 				
 				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(8.5, 7, 2, 0.01);
-				StdDraw.setPenColor(StdDraw.GREEN);
-				StdDraw.rectangle(8.5, 7, 2, 0.01);
+				StdDraw.rectangle(8, 9, 2, 0.01);
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.rectangle(8, 9, 2, 0.01);
 				StdDraw.setPenColor(StdDraw.BLACK);
-				
+					
 				System.out.println("Entrer le pseudo du Joueur 3");
-				StdDraw.text(8.5, 7, "Entrer le pseudo du Joueur 3");
+				StdDraw.text(8, 9, "Entrer le pseudo du Joueur 3");
 				nom3 = scan3.nextLine();
 				if (NBJOUEUR == 4){
-					
+						
 					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.rectangle(8.5, 7, 2, 0.01);
-					StdDraw.setPenColor(StdDraw.GREEN);
-					StdDraw.rectangle(8.5, 7, 2, 0.01);
+					StdDraw.rectangle(8, 9, 2, 0.01);
+					StdDraw.setPenColor(StdDraw.YELLOW);
+					StdDraw.rectangle(8, 9, 2, 0.01);
 					StdDraw.setPenColor(StdDraw.BLACK);
-					
+						
 					System.out.println("Entrer le pseudo du Joueur 4");
-					StdDraw.text(8.5, 7, "Entrer le pseudo du Joueur 4");
+					StdDraw.text(8, 9, "Entrer le pseudo du Joueur 4");
 					nom4 = scan4.nextLine();
 				}
 			}
@@ -107,12 +110,11 @@ public class Joueur{
 			}
 		}
 		
-		
 		StdDraw.clear();
 	}
 	
 	//Affiche la position des joueurs
-	public static void positionJoueur(String nom1, String nom2, String nom3, String nom4){
+	public static void positionJoueur(String nom1, String nom2, String nom3, String nom4, int NBJOUEUR){
 		System.out.println(nom1 + " est en haut à gauche");
 		StdDraw.text(7, 16.8, nom1 + " est en haut à gauche");
 		System.out.println(nom2 + " est en bas à droite");
@@ -123,6 +125,7 @@ public class Joueur{
 			if (NBJOUEUR == 4){
 				System.out.println(nom4 + " est en bas à gauche");
 				StdDraw.text(7, 15.6, nom4 + " est en bas à gauche");
+				
 			}
 		}
 	}

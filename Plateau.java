@@ -7,6 +7,10 @@ public class Plateau{
 	public static String couleur2;
 	public static String couleur3;
 	public static String couleur4;
+	
+	public static int tailleGrille= 13;
+
+	
 	public static int ligne1 = 1;
 	public static int colonne1 = 1;
 	public static int ligne2= 13;
@@ -21,7 +25,7 @@ public class Plateau{
 	public int ligne;
 	
 	//Génération de nombre aléatoire entre min et max
-	public int Alea (int min, int max){
+	public static int Alea (int min, int max){
 		Random rand = new Random();
 		int Alea = rand.nextInt(max - min + 1) + min;
 		return Alea;
@@ -29,7 +33,7 @@ public class Plateau{
 	}
 	
 	//Génération d'une lettre aléatoire r,o,y,g,b,p
-	public String Random_letter(){
+	public static String Random_letter(){
 		String alphabet[] = {"r","o","j","v","b","i"};
 		return alphabet[Alea(0,5)];
 	}

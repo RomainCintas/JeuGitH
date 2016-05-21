@@ -45,11 +45,16 @@ public class Case {
 				}
 			}
 			
-			//(1) sélection de la couleur en mode graphique (avec la souris)
-			couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
+			if (joueur.humain == true){
+				//(1) sélection de la couleur en mode graphique (avec la souris)
+				couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
 
-			//(2) sélection de la couleur en mode console
-			//couleurChoisie = selectionCouleurConsole(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
+				//(2) sélection de la couleur en mode console
+				//couleurChoisie = selectionCouleurConsole(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
+			}
+			else{// sélection de la couleur par l'IA
+				couleurChoisie = Plateau.Random_letter();
+			}
 			
 		}while(couleurChoisie.equals(joueur1.couleur) || couleurChoisie.equals(joueur2.couleur) || couleurChoisie.equals(joueur3.couleur) || couleurChoisie.equals(joueur4.couleur));
 		joueur.couleur = couleurChoisie; //prise en compte de la couleur choisie
@@ -151,8 +156,6 @@ public class Case {
 	public static void verifCaseVoisine(Joueur joueur, String[][] grillage){
 		for (int i=0;i<joueur.caseControl.size();++i){
 			//Boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
-			System.out.println(joueur.caseControl.get(i).colonne);
-			System.out.println(joueur.caseControl.get(i).ligne);
 			int colonne = joueur.caseControl.get(i).colonne;
 			int ligne = joueur.caseControl.get(i).ligne;
 			if (joueur.couleur.equals(grillage[ligne][colonne+1])){//Vérification à droite

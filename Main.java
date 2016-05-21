@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.awt.Color;
-
 public class Main {
 	static int NBJOUEUR = Joueur.NBJOUEUR;
 	

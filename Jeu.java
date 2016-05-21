@@ -4,23 +4,27 @@ public class Jeu {
 	
 	//mode un joueur (jouer contre l'IA)
 	public static void unJoueur(int NBJOUEUR){
-		boolean HUMAIN = false;
-		jeu(NBJOUEUR,HUMAIN);
+		
+		//choix du pseudos du joueur
+		Joueur.choixPseudoJoueur(NBJOUEUR, false);
+		
+		//Lancement du jeu
+		jeu(NBJOUEUR,false);
 	}
 	
 	//mode multijoueur (classique)
 	public static void multijoueur(int NBJOUEUR){
-		Menu.menuMultijoueur();
-		boolean HUMAIN = true;
-		jeu(NBJOUEUR,HUMAIN);
+
+		//choix des pseudos des joueurs
+		Joueur.choixPseudoJoueur(NBJOUEUR, true);
+		
+		//Lancement du jeu
+		jeu(NBJOUEUR,true);
 	}
 	
 	//jeu
 	public static void jeu(int NBJOUEUR, boolean HUMAIN){
 		ArrayList <Case> caseControl = null;
-		
-		//choix des pseudos des joueurs
-		Joueur.choixPseudoJoueur(NBJOUEUR, HUMAIN);
 		
 		//création de la grille initiale
 		Plateau.creaGrille(NBJOUEUR);
@@ -46,7 +50,7 @@ public class Jeu {
 		
 		
 		//Affiche la position des joueurs
-		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom);
+		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR);
 		
 		//Attribution des tours initiaux
 		joueur1.tour = true;
