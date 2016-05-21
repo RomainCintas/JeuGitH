@@ -13,44 +13,44 @@ public class Case {
 	}
 	
 	//Choix de la couleur
-	public static String choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR){
+	public static String choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
 		String couleurChoisie = "couleur choisie";
 		
 		do{ //boucle de choix de la couleur
 			
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.rectangle(6.65, 15, 15, 0.01);
+			StdDraw.rectangle(tailleGrille-6.35, tailleGrille+2, 15, 0.01);//par défaut 6.65, 15
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
 			System.out.println("C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de ");
 			
 			if (NBJOUEUR == 2){
 				System.out.println(joueur1.couleur + " et " + joueur2.couleur + ".");
-				StdDraw.text(7, 14.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + " et " + joueur2.couleur + ".");
+				StdDraw.text(tailleGrille-6, tailleGrille+1.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + " et " + joueur2.couleur + ".");//par défaut 7, 14.8
 				System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size());
-				StdDraw.text(6.65, 15.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size());
+				StdDraw.text(tailleGrille-6.35, tailleGrille+2.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size());//par défaut 6.65, 15.2
 			}
 			else{
 				if(NBJOUEUR==3){
 					System.out.println(joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
-					StdDraw.text(7, 14.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");
+					StdDraw.text(tailleGrille-6, tailleGrille+1.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + ", " + joueur2.couleur + " et " + joueur3.couleur + ".");//par défaut 7, 14.8
 					System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size());
-					StdDraw.text(6.65, 15.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size());
+					StdDraw.text(tailleGrille-6.35, tailleGrille+2.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size());//par défaut 6.65, 15.2
 				}
 				else{
 					System.out.println(joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
-					StdDraw.text(7, 14.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");
+					StdDraw.text(tailleGrille-6, tailleGrille+1.8, "C'est à " + joueur.nom + " de jouer, veuillez choisir une couleur différente de " + joueur1.couleur + ", " + joueur2.couleur + ", " + joueur3.couleur + " et " + joueur4.couleur + ".");//par défaut 7, 14.8
 					System.out.println("Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size() + "  Score de " + joueur4.nom + " : " + joueur4.caseControl.size());
-					StdDraw.text(6.65, 15.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size() + "  Score de " + joueur4.nom + " : " + joueur4.caseControl.size());
+					StdDraw.text(tailleGrille-6.35, tailleGrille+2.2, "Score de " + joueur1.nom + " : " + joueur1.caseControl.size() + "  Score de " + joueur2.nom + " : " + joueur2.caseControl.size() + "  Score de " + joueur3.nom + " : " + joueur3.caseControl.size() + "  Score de " + joueur4.nom + " : " + joueur4.caseControl.size());//par défaut 6.65, 15.2
 				}
 			}
 			
 			if (joueur.humain == true){
 				//(1) sélection de la couleur en mode graphique (avec la souris)
-				couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
+				couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR, tailleGrille);
 
 				//(2) sélection de la couleur en mode console
-				//couleurChoisie = selectionCouleurConsole(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR);
+				//couleurChoisie = selectionCouleurConsole(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR, tailleGrille);
 			}
 			else{// sélection de la couleur par l'IA
 				couleurChoisie = Plateau.Random_letter();
@@ -60,20 +60,20 @@ public class Case {
 		joueur.couleur = couleurChoisie; //prise en compte de la couleur choisie
 		
 		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.rectangle(6.65, 14, 15, 0.01);
+		StdDraw.rectangle(tailleGrille-6.35, tailleGrille+1, 15, 0.01);//par défaut 6.65, 14
 		StdDraw.setPenColor(StdDraw.BLACK);
 		
 		return couleurChoisie;
 	}
 	
 	//Sélection de la couleur en mode graphique (avec la souris)
-	public static String selectionCouleurGraphique(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+	public static String selectionCouleurGraphique(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
 		String couleurChoisie = "couleur choisie";
 		double x = 0;
 		double y = 0;
 		int xPos = 0;
 		int yPos = 0;
-		while(!(xPos == 15 && (yPos == 4 || yPos == 5 || yPos == 6 || yPos == 7 || yPos == 8 || yPos == 9))){
+		while(!(xPos == tailleGrille+2 && (yPos >= tailleGrille-9 && yPos <= tailleGrille-4))){//par défaut 15, 4, 9
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
@@ -85,56 +85,56 @@ public class Case {
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
 		}
-		if(yPos == 4){
+		if(yPos == tailleGrille-9){//par défaut 4
 			couleurChoisie = "r";
 		}
-		if(yPos == 5){
+		if(yPos == tailleGrille-8){//par défaut 5
 			couleurChoisie = "o";
 		}
-		if(yPos == 6){
+		if(yPos == tailleGrille-7){//par défaut 6
 			couleurChoisie = "j";
 		}
-		if(yPos == 7){
+		if(yPos == tailleGrille-6){//par défaut 7
 			couleurChoisie = "v";
 		}
-		if(yPos == 8){
+		if(yPos == tailleGrille-5){//par défaut 8
 			couleurChoisie = "b";
 		}
-		if(yPos == 9){
+		if(yPos == tailleGrille-4){//par défaut 9
 			couleurChoisie = "i";
 		}
-		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR);
+		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
 	}
 	
 	//Sélection de la couleur en mode console
-	public static String selectionCouleurConsole(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+	public static String selectionCouleurConsole(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
 		Scanner scan = new Scanner(System.in);
 		String couleurChoisie = scan.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
-		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR);
+		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
 	}
 	
 	//Vérification si la couleur choisie n'est pas déjà prise
-	public static String verifCouleurChoisie(String couleurChoisie, String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR){
+	public static String verifCouleurChoisie(String couleurChoisie, String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
 		if (couleur1.equals(couleurChoisie) || couleur2.equals(couleurChoisie) || couleur3.equals(couleurChoisie) || couleur4.equals(couleurChoisie)){
 			
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.rectangle(6.65, 14, 15, 0.01);
+			StdDraw.rectangle(tailleGrille-6.35, tailleGrille+1, 15, 0.01);//par défaut 6.65, 14
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
 			if (couleurChoisie.equals(couleur)){
 				System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
-				StdDraw.text(7, 14.2, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
+				StdDraw.text(tailleGrille-6, tailleGrille+1.2, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");//par défaut 7, 14.2
 			}
 			else{
 				if (NBJOUEUR == 2){
 					System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
-					StdDraw.text(7, 13.8, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");
+					StdDraw.text(tailleGrille-6, tailleGrille+0.8, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLE DE VOTRE ADVERSAIRE");//par défaut 7, 13.8
 				}
 				else{
 					System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
-					StdDraw.text(7, 13.8, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");
+					StdDraw.text(tailleGrille-6, tailleGrille+0.8, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE CELLES DE VOS ADVERSAIRES");//par défaut 7, 13.8
 				}
 			}
 		}

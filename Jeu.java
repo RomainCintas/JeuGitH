@@ -2,32 +2,15 @@ import java.util.ArrayList;
 
 public class Jeu {
 	
-	//mode un joueur (jouer contre l'IA)
-	public static void unJoueur(int NBJOUEUR){
-		
-		//choix du pseudos du joueur
-		Joueur.choixPseudoJoueur(NBJOUEUR, false);
-		
-		//Lancement du jeu
-		jeu(NBJOUEUR,false);
-	}
-	
-	//mode multijoueur (classique)
-	public static void multijoueur(int NBJOUEUR){
-
-		//choix des pseudos des joueurs
-		Joueur.choixPseudoJoueur(NBJOUEUR, true);
-		
-		//Lancement du jeu
-		jeu(NBJOUEUR,true);
-	}
-	
 	//jeu
-	public static void jeu(int NBJOUEUR, boolean HUMAIN){
+	public static void jeu(int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR){
 		ArrayList <Case> caseControl = null;
 		
+		//choix du pseudos du joueur
+		Joueur.choixPseudoJoueur(NBJOUEUR, tailleGrille, MULTIJOUEUR);
+		
 		//création de la grille initiale
-		Plateau.creaGrille(NBJOUEUR);
+		Plateau.creaGrille(NBJOUEUR,tailleGrille);
 		String[][] grillage = Plateau.grillage;
 		
 		//Création des joueurs
@@ -36,7 +19,7 @@ public class Jeu {
 		
 		boolean humain;
 		
-		if (HUMAIN == true){
+		if (MULTIJOUEUR == true){
 			humain = true;
 		}
 		else{
@@ -46,11 +29,9 @@ public class Jeu {
 		Joueur joueur2 = new Joueur(Joueur.nom2,Plateau.couleur2,Plateau.colonne2,Plateau.ligne2,1,caseControl,humain);
 		Joueur joueur3 = new Joueur(Joueur.nom3,Plateau.couleur3,Plateau.colonne3,Plateau.ligne3,2,caseControl,humain);
 		Joueur joueur4 = new Joueur(Joueur.nom4,Plateau.couleur4,Plateau.colonne4,Plateau.ligne4,3,caseControl,humain);
-
-		
 		
 		//Affiche la position des joueurs
-		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR);
+		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR, tailleGrille);
 		
 		//Attribution des tours initiaux
 		joueur1.tour = true;
@@ -71,7 +52,7 @@ public class Jeu {
 			if ((compteurTour>1 && NBJOUEUR == 2) || (compteurTour>2 && NBJOUEUR == 3) || (compteurTour>3 && NBJOUEUR == 4)){
 				
 				//Choix de la couleur
-				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, NBJOUEUR);
+				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
 				
 				//Coloration des cases déjà contrôlées
 				grillage = Case.colorationCaseControl(joueur, grillage); 
@@ -81,7 +62,7 @@ public class Jeu {
 			Case.verifCaseVoisine(joueur, grillage);
 			
 			//Affichage du plateau
-			Plateau.affichagePlateau(grillage, compteurTour, NBJOUEUR);
+			Plateau.affichagePlateau(grillage, compteurTour, NBJOUEUR, tailleGrille);
 			
 			//Récupération des variables spécifiques au tour par le joueur concerné
 			Joueur.finTourJoueur(joueur, joueur1, joueur2, joueur3, joueur4);

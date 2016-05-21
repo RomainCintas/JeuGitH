@@ -48,14 +48,14 @@ public class Joueur{
 	}
 	
 	//choix des pseudos des joueurs
-	public static void choixPseudoJoueur(int NBJOUEUR, boolean HUMAIN){
+	public static void choixPseudoJoueur(int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR){
 		
-		Menu.menuPseudo(HUMAIN);
+		Menu.menuPseudo(tailleGrille, MULTIJOUEUR);
 		
 		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.rectangle(8, 9, 2, 0.01);
+		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 		StdDraw.setPenColor(StdDraw.YELLOW);
-		StdDraw.rectangle(8, 9, 2, 0.01);
+		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 		StdDraw.setPenColor(StdDraw.BLACK);
 		
 		System.out.println("Entrer le pseudo du Joueur 1");
@@ -63,39 +63,39 @@ public class Joueur{
 		
 		nom1 = scan1.nextLine();
 			
-		if (HUMAIN == true){
+		if (MULTIJOUEUR == true){
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.rectangle(8, 9, 2, 0.01);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 			StdDraw.setPenColor(StdDraw.YELLOW);
-			StdDraw.rectangle(8, 9, 2, 0.01);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
 			System.out.println("Entrer le pseudo du Joueur 2");
-			StdDraw.text(8, 9, "Entrer le pseudo du Joueur 2");
+			StdDraw.text(tailleGrille-5, tailleGrille-4, "Entrer le pseudo du Joueur 2");
 				
 			nom2 = scan2.nextLine();
 
 			if (NBJOUEUR == 3 || NBJOUEUR == 4){
 				
 				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.rectangle(8, 9, 2, 0.01);
+				StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.rectangle(8, 9, 2, 0.01);
+				StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 				StdDraw.setPenColor(StdDraw.BLACK);
 					
 				System.out.println("Entrer le pseudo du Joueur 3");
-				StdDraw.text(8, 9, "Entrer le pseudo du Joueur 3");
+				StdDraw.text(tailleGrille-5, tailleGrille-4, "Entrer le pseudo du Joueur 3");
 				nom3 = scan3.nextLine();
 				if (NBJOUEUR == 4){
 						
 					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.rectangle(8, 9, 2, 0.01);
+					StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 					StdDraw.setPenColor(StdDraw.YELLOW);
-					StdDraw.rectangle(8, 9, 2, 0.01);
+					StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
 					StdDraw.setPenColor(StdDraw.BLACK);
 						
 					System.out.println("Entrer le pseudo du Joueur 4");
-					StdDraw.text(8, 9, "Entrer le pseudo du Joueur 4");
+					StdDraw.text(tailleGrille-5, tailleGrille-4, "Entrer le pseudo du Joueur 4");
 					nom4 = scan4.nextLine();
 				}
 			}
@@ -114,23 +114,23 @@ public class Joueur{
 	}
 	
 	//Affiche la position des joueurs
-	public static void positionJoueur(String nom1, String nom2, String nom3, String nom4, int NBJOUEUR){
+	public static void positionJoueur(String nom1, String nom2, String nom3, String nom4, int NBJOUEUR, int tailleGrille){
 		System.out.println(nom1 + " est en haut à gauche");
-		StdDraw.text(7, 16.8, nom1 + " est en haut à gauche");
+		StdDraw.text(tailleGrille-6, tailleGrille+3.8, nom1 + " est en haut à gauche");//par défaut 7, 16.8
 		System.out.println(nom2 + " est en bas à droite");
-		StdDraw.text(7, 16.4, nom2 + " est en bas à droite");
+		StdDraw.text(7, tailleGrille+3.4, nom2 + " est en bas à droite");//par défaut 7, 16.4
 		if (NBJOUEUR == 3 || NBJOUEUR == 4){
 			System.out.println(nom3 + " est en haut à droite");
-			StdDraw.text(7, 16, nom3 + " est en haut à droite");
+			StdDraw.text(7, tailleGrille+3, nom3 + " est en haut à droite");//par défaut 7, 16
 			if (NBJOUEUR == 4){
 				System.out.println(nom4 + " est en bas à gauche");
-				StdDraw.text(7, 15.6, nom4 + " est en bas à gauche");
+				StdDraw.text(7, tailleGrille+2.6, nom4 + " est en bas à gauche");//par défaut 7, 15.6
 				
 			}
 		}
 	}
 	
-	//Attribution des variables spécifiques au tour au joueur concerné
+	//Attribution des variables spécifiques au tour au joueur concerné en début de tour
 	public static Joueur debutTourJoueur(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int compteurTour){
 		Joueur joueur = null;
 		if (joueur1.tour == true){
@@ -152,7 +152,7 @@ public class Joueur{
 		return joueur;
 	}
 	
-	//Récupération des variables spécifiques au tour par le joueur concerné
+	//Récupération des variables spécifiques au tour par le joueur concerné en fin de tour
 	public static void finTourJoueur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4){
 		if (joueur1.tour == true){
 			joueur1 = joueur;
