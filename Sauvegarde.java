@@ -14,10 +14,12 @@ import java.io.ObjectOutputStream;
 public class Sauvegarde {
   public static void sauvegardePartie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, String[][] grillage, int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR, int compteurTour){
     //Nous déclarons nos objets en dehors du bloc try/catch
-    ObjectInputStream ois;
+    //ObjectInputStream ois;
     ObjectOutputStream oos;
-    DataInputStream dis;
+    //DataInputStream dis;
     DataOutputStream dos;
+    
+    //Données objet
     try {
       oos = new ObjectOutputStream(
               new BufferedOutputStream(
@@ -51,48 +53,48 @@ public class Sauvegarde {
       oos.close();
         	
       //On récupère maintenant les données !
-      ois = new ObjectInputStream(
-              new BufferedInputStream(
-                new FileInputStream(
-                  new File("partie.txt"))));
-            
-      try {
-        System.out.println("Affichage des données objets :");
-        System.out.println("*************************\n");
-        System.out.println("Joueur 1 :\n" + ((Joueur)ois.readObject()).toString());
-        System.out.println("Joueur 2 :\n" + ((Joueur)ois.readObject()).toString());
-        System.out.println("Joueur 3 :\n" + ((Joueur)ois.readObject()).toString());
-        System.out.println("Joueur 4 :\n" + ((Joueur)ois.readObject()).toString());
-        for (int i=0;i<joueur1.caseControl.size();++i){
-            System.out.println("Case contrôlée par le joueur 1\n" + ((Case)ois.readObject()).toString());
-        }
-        for (int i=0;i<joueur2.caseControl.size();++i){
-        	System.out.println("Case contrôlée par le joueur 2\n" + ((Case)ois.readObject()).toString());
-        }
-        for (int i=0;i<joueur3.caseControl.size();++i){
-        	System.out.println("Case contrôlée par le joueur 3\n" + ((Case)ois.readObject()).toString());
-        }
-        for (int i=0;i<joueur4.caseControl.size();++i){
-        	System.out.println("Case contrôlée par le joueur4\n" + ((Case)ois.readObject()).toString());
-        }
-        for (int ligneBoucle=1;ligneBoucle<tailleGrille+1;ligneBoucle++){//par défaut 14
-  		for (int colonneBoucle=1;colonneBoucle<tailleGrille+1;colonneBoucle++){//par défaut 14
-  			System.out.println("Grille : " + ((String)ois.readObject()).toString());
-  		}
-        }
-        
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      }
-	
-      ois.close();
+//      ois = new ObjectInputStream(
+//              new BufferedInputStream(
+//                new FileInputStream(
+//                  new File("partie.txt"))));
+//            
+//      try {
+//        System.out.println("Affichage des données objets :");
+//        System.out.println("*************************\n");
+//        System.out.println("Joueur 1 :\n" + ((Joueur)ois.readObject()).toString());
+//        System.out.println("Joueur 2 :\n" + ((Joueur)ois.readObject()).toString());
+//        System.out.println("Joueur 3 :\n" + ((Joueur)ois.readObject()).toString());
+//        System.out.println("Joueur 4 :\n" + ((Joueur)ois.readObject()).toString());
+//        for (int i=0;i<joueur1.caseControl.size();++i){
+//            System.out.println("Case contrôlée par le joueur 1\n" + ((Case)ois.readObject()).toString());
+//        }
+//        for (int i=0;i<joueur2.caseControl.size();++i){
+//        	System.out.println("Case contrôlée par le joueur 2\n" + ((Case)ois.readObject()).toString());
+//        }
+//        for (int i=0;i<joueur3.caseControl.size();++i){
+//        	System.out.println("Case contrôlée par le joueur 3\n" + ((Case)ois.readObject()).toString());
+//        }
+//        for (int i=0;i<joueur4.caseControl.size();++i){
+//        	System.out.println("Case contrôlée par le joueur4\n" + ((Case)ois.readObject()).toString());
+//        }
+//        for (int ligneBoucle=1;ligneBoucle<tailleGrille+1;ligneBoucle++){//par défaut 14
+//        	for (int colonneBoucle=1;colonneBoucle<tailleGrille+1;colonneBoucle++){//par défaut 14
+//        		System.out.println("Grille : " + ((String)ois.readObject()).toString());
+//        	}
+//        }
+//        
+//      } catch (ClassNotFoundException e) {
+//        e.printStackTrace();
+//      }
+//	
+//      ois.close();
     } catch (FileNotFoundException e) {
         e.printStackTrace();
       } catch (IOException e) {
         e.printStackTrace();
       }  
     
-    //---------------------------------------------------------
+    //Données de type primitif
     
     
     try {
@@ -109,16 +111,16 @@ public class Sauvegarde {
         dos.close();
         
         //On récupère maintenant les données !
-        dis = new DataInputStream(
-                new BufferedInputStream(
-                  new FileInputStream(
-                    new File("partie.txt"))));
-        System.out.println("Affichage des données de type primitif :");
-        System.out.println("*************************\n");     
-        System.out.println("MUTLIJOUEUR : " + dis.readBoolean());
-        System.out.println("NBJOUEUR : " + dis.readInt());
-        System.out.println("tailleGrille : " + dis.readInt());
-        System.out.println("compteurTour : " + dis.readInt());
+//        dis = new DataInputStream(
+//                new BufferedInputStream(
+//                  new FileInputStream(
+//                    new File("partie.txt"))));
+//        System.out.println("Affichage des données de type primitif :");
+//        System.out.println("*************************\n");     
+//        System.out.println("MUTLIJOUEUR : " + dis.readBoolean());
+//        System.out.println("NBJOUEUR : " + dis.readInt());
+//        System.out.println("tailleGrille : " + dis.readInt());
+//        System.out.println("compteurTour : " + dis.readInt());
           	
       }
     
@@ -129,4 +131,84 @@ public class Sauvegarde {
     }
     
   }
+  
+  //Chargement
+  public static void chargerPartie(){
+	    //Nous déclarons nos objets en dehors du bloc try/catch
+	    ObjectInputStream ois;
+	    DataInputStream dis;
+	    //Données objet
+	    try {
+
+	            
+	        	
+	      //On récupère maintenant les données !
+	      ois = new ObjectInputStream(
+	              new BufferedInputStream(
+	                new FileInputStream(
+	                  new File("partie.txt"))));
+	            
+	      try {
+	        System.out.println("Affichage des données objets :");
+	        System.out.println("*************************\n");
+	        System.out.println("Joueur 1 :\n" + ((Joueur)ois.readObject()).toString());
+	        System.out.println("Joueur 2 :\n" + ((Joueur)ois.readObject()).toString());
+	        System.out.println("Joueur 3 :\n" + ((Joueur)ois.readObject()).toString());
+	        System.out.println("Joueur 4 :\n" + ((Joueur)ois.readObject()).toString());
+//	        for (int i=0;i<joueur1.caseControl.size();++i){
+//	            System.out.println("Case contrôlée par le joueur 1\n" + ((Case)ois.readObject()).toString());
+//	        }
+//	        for (int i=0;i<joueur2.caseControl.size();++i){
+//	        	System.out.println("Case contrôlée par le joueur 2\n" + ((Case)ois.readObject()).toString());
+//	        }
+//	        for (int i=0;i<joueur3.caseControl.size();++i){
+//	        	System.out.println("Case contrôlée par le joueur 3\n" + ((Case)ois.readObject()).toString());
+//	        }
+//	        for (int i=0;i<joueur4.caseControl.size();++i){
+//	        	System.out.println("Case contrôlée par le joueur4\n" + ((Case)ois.readObject()).toString());
+//	        }
+//	        for (int ligneBoucle=1;ligneBoucle<tailleGrille+1;ligneBoucle++){//par défaut 14
+//	        	for (int colonneBoucle=1;colonneBoucle<tailleGrille+1;colonneBoucle++){//par défaut 14
+//	        		System.out.println("Grille : " + ((String)ois.readObject()).toString());
+//	        	}
+//	        }
+//	        
+	      } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	      }
+		
+	      ois.close();
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }  
+	    
+	    //Données de type primitif
+	    
+	    
+	    try {
+	        
+	        //On récupère maintenant les données !
+	        dis = new DataInputStream(
+	                new BufferedInputStream(
+	                  new FileInputStream(
+	                    new File("partie.txt"))));
+	        System.out.println("Affichage des données de type primitif :");
+	        System.out.println("*************************\n");     
+	        System.out.println("MUTLIJOUEUR : " + dis.readBoolean());
+	        System.out.println("NBJOUEUR : " + dis.readInt());
+	        System.out.println("tailleGrille : " + dis.readInt());
+	        System.out.println("compteurTour : " + dis.readInt());
+	          	
+	      }
+	    
+	    catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	    
+	  }
+  //new java.util.Date().getTime()
 }

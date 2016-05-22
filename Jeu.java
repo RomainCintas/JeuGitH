@@ -71,9 +71,12 @@ public class Jeu {
 			Joueur.rotationTourJoueur(joueur1, joueur2, joueur3, joueur4, NBJOUEUR);
 			
 			compteurTour++; //Compteur de tour
-			if (compteurTour == 4){
-				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
-			}
+			
+//			if (compteurTour == 4){
+//				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
+//				Sauvegarde.chargerPartie();
+//			}
+			
 		} //Fin de la boucle du jeu (1 boucle = 1 tour)
 	}
 	
