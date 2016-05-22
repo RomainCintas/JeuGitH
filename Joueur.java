@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class Joueur{
+public class Joueur implements Serializable{
 	
-	String nom;
-	String couleur;
-	int colonne;
-	int ligne;
+	String nom, couleur;
+	int colonne, ligne;
 	boolean tour;
 	int tourInitialisation;
 	ArrayList <Case> caseControl;
@@ -18,19 +17,27 @@ public class Joueur{
 	static Scanner scan2 = new Scanner(System.in);
 	static Scanner scan3 = new Scanner(System.in);
 	static Scanner scan4 = new Scanner(System.in);
-	static String nom1 = null;
-	static String nom2 = null;
-	static String nom3 = null;
-	static String nom4 = null;
+	static String nom1 = "Joueur 1";
+	static String nom2 = "Joueur 2";
+	static String nom3 = "Joueur 3";
+	static String nom4 = "Joueur 4";
 
-	public Joueur (String nom, String couleur, int colonne, int ligne, int tourInitialisation, ArrayList <Case> caseControl, boolean humain){//Nom, couleur et tour
+	public Joueur (String nom, String couleur, int colonne, int ligne, boolean tour, int tourInitialisation, ArrayList <Case> caseControl, boolean humain){//Nom, couleur et tour
 		this.nom = nom;
 		this.couleur = couleur;
 		this.colonne = colonne;
 		this.ligne = ligne;
+		this.tour = tour;
 		this.tourInitialisation = tourInitialisation;
 		this.caseControl = caseControl;
 		this.humain = humain;
+	}
+	
+	public String toString(){
+		return "Nom du joueur : " + this.nom + "\nCouleur : " + this.NBJOUEUR +
+				"\nColonne : " + this.colonne + "\nLigne : " + this.ligne +
+				"\nTour : " + this.tour + "\nTour d'initialisation : " + this.tourInitialisation
+				+ "\nHumain : " + this.humain + "\n";
 	}
 	
 	//Choix du nombre de joueurs en mode console

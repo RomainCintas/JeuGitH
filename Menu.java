@@ -184,14 +184,7 @@ public class Menu {
 			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
-			System.out.println(" xPos : " + xPos + " yPos : " + yPos);
 		}
-		
-		if(StdDraw.mousePressed()){
-			System.out.println("Souris !!!");
-		}
-		
-		System.out.println(" xPos : " + xPos + " yPos : " + yPos);
 		
 		if(yPos == tailleGrille-2){//par défaut 11
 			menu = 1;

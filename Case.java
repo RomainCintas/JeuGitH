@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Case {
+public class Case implements Serializable {
 
 	public int colonne;
 	public int ligne;
@@ -10,6 +11,11 @@ public class Case {
 		this.colonne = colonne;
 		this.ligne = ligne;
 		this.couleur = couleur;
+	}
+	
+	public String toString(){
+		return "Colonne : " + this.colonne + "\nLigne : " + this.ligne +
+				"\nCouleur : " + this.couleur + "\n";
 	}
 	
 	//Choix de la couleur

@@ -15,7 +15,7 @@ public class Jeu {
 		
 		//Création des joueurs
 		Joueur joueur;
-		Joueur joueur1 = new Joueur(Joueur.nom1,Plateau.couleur1,Plateau.colonne1,Plateau.ligne1,0,caseControl,true);
+		Joueur joueur1 = new Joueur(Joueur.nom1,Plateau.couleur1,Plateau.colonne1,Plateau.ligne1,true,0,caseControl,true);
 		
 		boolean humain;
 		
@@ -26,9 +26,9 @@ public class Jeu {
 			humain = false;
 		}
 		
-		Joueur joueur2 = new Joueur(Joueur.nom2,Plateau.couleur2,Plateau.colonne2,Plateau.ligne2,1,caseControl,humain);
-		Joueur joueur3 = new Joueur(Joueur.nom3,Plateau.couleur3,Plateau.colonne3,Plateau.ligne3,2,caseControl,humain);
-		Joueur joueur4 = new Joueur(Joueur.nom4,Plateau.couleur4,Plateau.colonne4,Plateau.ligne4,3,caseControl,humain);
+		Joueur joueur2 = new Joueur(Joueur.nom2,Plateau.couleur2,Plateau.colonne2,Plateau.ligne2,false,1,caseControl,humain);
+		Joueur joueur3 = new Joueur(Joueur.nom3,Plateau.couleur3,Plateau.colonne3,Plateau.ligne3,false,2,caseControl,humain);
+		Joueur joueur4 = new Joueur(Joueur.nom4,Plateau.couleur4,Plateau.colonne4,Plateau.ligne4,false,3,caseControl,humain);
 		
 		//Affiche la position des joueurs
 		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR, tailleGrille);
@@ -71,6 +71,9 @@ public class Jeu {
 			Joueur.rotationTourJoueur(joueur1, joueur2, joueur3, joueur4, NBJOUEUR);
 			
 			compteurTour++; //Compteur de tour
+			if (compteurTour == 4){
+				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
+			}
 		} //Fin de la boucle du jeu (1 boucle = 1 tour)
 	}
 	
