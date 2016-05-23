@@ -112,12 +112,15 @@ public class Menu {
 		else if(yPos == tailleGrille-9){//par défaut 4
 			if (xPos == tailleGrille-7){//par défaut 6
 				tailleGrille = 12;
+				//Plateau.initialisationInterfaceGraphique(tailleGrille);
 			}
 			else if (xPos == tailleGrille-5){//par défaut 8
 				tailleGrille = 13;
+				//Plateau.initialisationInterfaceGraphique(tailleGrille);
 			}
 			else if (xPos == tailleGrille-3){//par défaut 10
 				tailleGrille = 14;
+				//Plateau.initialisationInterfaceGraphique(tailleGrille);
 			}
 			else{
 				System.out.println("Erreur");

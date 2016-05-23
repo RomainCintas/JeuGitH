@@ -11,7 +11,7 @@ public class Jeu {
 		
 		//création de la grille initiale
 		Plateau.creaGrille(NBJOUEUR,tailleGrille);
-		String[][] grillage = Plateau.grillage;
+		char[][] grillage = Plateau.grillage;
 		
 		//Création des joueurs
 		Joueur joueur;

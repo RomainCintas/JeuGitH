@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Joueur implements Serializable{
 	
-	String nom, couleur;
+	String nom;
+	char couleur;
 	int colonne, ligne;
 	boolean tour;
 	int tourInitialisation;
@@ -22,7 +23,7 @@ public class Joueur implements Serializable{
 	static String nom3 = "Joueur 3";
 	static String nom4 = "Joueur 4";
 
-	public Joueur (String nom, String couleur, int colonne, int ligne, boolean tour, int tourInitialisation, ArrayList <Case> caseControl, boolean humain){//Nom, couleur et tour
+	public Joueur (String nom, char couleur, int colonne, int ligne, boolean tour, int tourInitialisation, ArrayList <Case> caseControl, boolean humain){//Nom, couleur et tour
 		this.nom = nom;
 		this.couleur = couleur;
 		this.colonne = colonne;
@@ -60,21 +61,21 @@ public class Joueur implements Serializable{
 		Menu.menuPseudo(tailleGrille, MULTIJOUEUR);
 		
 		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
+		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);//8, 9
 		StdDraw.setPenColor(StdDraw.YELLOW);
-		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
+		StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);//8, 9
 		StdDraw.setPenColor(StdDraw.BLACK);
 		
 		System.out.println("Entrer le pseudo du Joueur 1");
-		StdDraw.text(8, 9, "Entrer le pseudo du Joueur 1");
+		StdDraw.text(tailleGrille-5, tailleGrille-4, "Entrer le pseudo du Joueur 1");
 		
 		nom1 = scan1.nextLine();
 			
 		if (MULTIJOUEUR == true){
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);//8, 9
 			StdDraw.setPenColor(StdDraw.YELLOW);
-			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille-4, 2, 0.01);//8, 9
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
 			System.out.println("Entrer le pseudo du Joueur 2");

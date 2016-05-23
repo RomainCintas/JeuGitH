@@ -5,9 +5,9 @@ public class Case implements Serializable {
 
 	public int colonne;
 	public int ligne;
-	String couleur;
+	char couleur;
 	
-	public Case (int colonne, int ligne, String couleur){//coordonnées et couleur d'une case
+	public Case (int colonne, int ligne, char couleur){//coordonnées et couleur d'une case
 		this.colonne = colonne;
 		this.ligne = ligne;
 		this.couleur = couleur;
@@ -19,8 +19,8 @@ public class Case implements Serializable {
 	}
 	
 	//Choix de la couleur
-	public static String choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
-		String couleurChoisie = "couleur choisie";
+	public static char choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
+		char couleurChoisie = 'c';
 		
 		do{ //boucle de choix de la couleur
 			
@@ -62,7 +62,7 @@ public class Case implements Serializable {
 				couleurChoisie = Plateau.Random_letter();
 			}
 			
-		}while(couleurChoisie.equals(joueur1.couleur) || couleurChoisie.equals(joueur2.couleur) || couleurChoisie.equals(joueur3.couleur) || couleurChoisie.equals(joueur4.couleur));
+		}while(couleurChoisie == joueur1.couleur || couleurChoisie == joueur2.couleur || couleurChoisie == joueur3.couleur || couleurChoisie == joueur4.couleur);
 		joueur.couleur = couleurChoisie; //prise en compte de la couleur choisie
 		
 		StdDraw.setPenColor(StdDraw.WHITE);
@@ -73,8 +73,8 @@ public class Case implements Serializable {
 	}
 	
 	//Sélection de la couleur en mode graphique (avec la souris)
-	public static String selectionCouleurGraphique(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
-		String couleurChoisie = "couleur choisie";
+	public static char selectionCouleurGraphique(char couleur, char couleur1, char couleur2, char couleur3, char couleur4, int NBJOUEUR, int tailleGrille){
+		char couleurChoisie = 'c';
 		double x = 0;
 		double y = 0;
 		int xPos = 0;
@@ -92,44 +92,44 @@ public class Case implements Serializable {
 			yPos = (int) Math.round(y);
 		}
 		if(yPos == tailleGrille-9){//par défaut 4
-			couleurChoisie = "r";
+			couleurChoisie = 'r';
 		}
 		if(yPos == tailleGrille-8){//par défaut 5
-			couleurChoisie = "o";
+			couleurChoisie = 'o';
 		}
 		if(yPos == tailleGrille-7){//par défaut 6
-			couleurChoisie = "j";
+			couleurChoisie = 'j';
 		}
 		if(yPos == tailleGrille-6){//par défaut 7
-			couleurChoisie = "v";
+			couleurChoisie = 'v';
 		}
 		if(yPos == tailleGrille-5){//par défaut 8
-			couleurChoisie = "b";
+			couleurChoisie = 'b';
 		}
 		if(yPos == tailleGrille-4){//par défaut 9
-			couleurChoisie = "i";
+			couleurChoisie = 'i';
 		}
 		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
 	}
 	
 	//Sélection de la couleur en mode console
-	public static String selectionCouleurConsole(String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
+	public static char selectionCouleurConsole(char couleur, char couleur1, char couleur2, char couleur3, char couleur4, int NBJOUEUR, int tailleGrille){
 		Scanner scan = new Scanner(System.in);
-		String couleurChoisie = scan.nextLine().toLowerCase(); //demande de la couleur choisie au joueur
+		char couleurChoisie = Character.toUpperCase(scan.nextLine().charAt(0)); //demande de la couleur choisie au joueur
 		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
 	}
 	
 	//Vérification si la couleur choisie n'est pas déjà prise
-	public static String verifCouleurChoisie(String couleurChoisie, String couleur, String couleur1, String couleur2, String couleur3, String couleur4, int NBJOUEUR, int tailleGrille){
-		if (couleur1.equals(couleurChoisie) || couleur2.equals(couleurChoisie) || couleur3.equals(couleurChoisie) || couleur4.equals(couleurChoisie)){
+	public static char verifCouleurChoisie(char couleurChoisie, char couleur, char couleur1, char couleur2, char couleur3, char couleur4, int NBJOUEUR, int tailleGrille){
+		if (couleur1 == couleurChoisie || couleur2 == couleurChoisie || couleur3 == couleurChoisie || couleur4 == couleurChoisie){
 			
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.rectangle(tailleGrille-6.35, tailleGrille+1, 15, 0.01);//par défaut 6.65, 14
 			StdDraw.setPenColor(StdDraw.BLACK);
 			
-			if (couleurChoisie.equals(couleur)){
+			if (couleurChoisie == couleur){
 				System.out.println("VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");
 				StdDraw.text(tailleGrille-6, tailleGrille+1.2, "VEUILLEZ CHOISIR UNE COULEUR DIFFÉRENTE DE LA VÔTRE");//par défaut 7, 14.2
 			}
@@ -148,44 +148,44 @@ public class Case implements Serializable {
 	}
 	
 	//Coloration des cases déjà contrôlées
-	public static String[][] colorationCaseControl(Joueur joueur, String[][] grillage){
+	public static char[][] colorationCaseControl(Joueur joueur, char[][] grillage){
 		for (int i=0;i<joueur.caseControl.size();++i){
 			int colonne = joueur.caseControl.get(i).colonne;
 			int ligne = joueur.caseControl.get(i).ligne;
-			grillage[ligne][colonne]=joueur.couleur.toUpperCase();
-			i++;
+			grillage[ligne][colonne]=Character.toUpperCase(joueur.couleur);
+			//i++;
 		}
 		return grillage;
 	}
 	
 	//Détection des cases voisines de la même couleur
-	public static void verifCaseVoisine(Joueur joueur, String[][] grillage){
+	public static void verifCaseVoisine(Joueur joueur, char[][] grillage){
 		for (int i=0;i<joueur.caseControl.size();++i){
 			//Boucle pour ajouter à la liste les cases de même couleur et les mettre en majuscule
 			int colonne = joueur.caseControl.get(i).colonne;
 			int ligne = joueur.caseControl.get(i).ligne;
-			if (joueur.couleur.equals(grillage[ligne][colonne+1])){//Vérification à droite
+			if (joueur.couleur == grillage[ligne][colonne+1]){//Vérification à droite
 				//On met en majuscule + changement de couleur
-				grillage[ligne][colonne+1]=joueur.couleur.toUpperCase();
+				grillage[ligne][colonne+1]=Character.toUpperCase(joueur.couleur);
 				joueur.caseControl.add(new Case(colonne+1,ligne,joueur.couleur));
 			}
-			if (joueur.couleur.equals(grillage[ligne+1][colonne])){//Vérification en bas
+			if (joueur.couleur == grillage[ligne+1][colonne]){//Vérification en bas
 				//On met en majuscule + changement de couleur
-				grillage[ligne+1][colonne]=joueur.couleur.toUpperCase();
+				grillage[ligne+1][colonne]=Character.toUpperCase(joueur.couleur);
 				joueur.caseControl.add(new Case(colonne,ligne+1,joueur.couleur));
 			}
-			if (joueur.couleur.equals(grillage[ligne-1][colonne])){//Vérification en haut
+			if (joueur.couleur == grillage[ligne-1][colonne]){//Vérification en haut
 				//On met en majuscule + changement de couleur
-				grillage[ligne-1][colonne]=joueur.couleur.toUpperCase();
+				grillage[ligne-1][colonne]=Character.toUpperCase(joueur.couleur);
 				joueur.caseControl.add(new Case(colonne,ligne-1,joueur.couleur));
 			}
-			if (joueur.couleur.equals(grillage[ligne][colonne-1])){//Vérification à gauche
+			if (joueur.couleur == grillage[ligne][colonne-1]){//Vérification à gauche
 				//On met en majuscule + changement de couleur
-				grillage[ligne][colonne-1]=joueur.couleur.toUpperCase();
+				grillage[ligne][colonne-1]=Character.toUpperCase(joueur.couleur);
 				joueur.caseControl.add(new Case(colonne-1,ligne,joueur.couleur));
 			}
 
-			grillage[ligne][colonne]=joueur.couleur.toUpperCase();
+			grillage[ligne][colonne]=Character.toUpperCase(joueur.couleur);
 			
 		}
 	}
