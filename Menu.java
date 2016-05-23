@@ -71,16 +71,16 @@ public class Menu {
 		StdDraw.text(tailleGrille-7, tailleGrille-7, "2");//par défaut 6, 6
 		StdDraw.text(tailleGrille-5, tailleGrille-7, "3");//par défaut 8, 6
 		StdDraw.text(tailleGrille-3, tailleGrille-7, "4");//par défaut 10, 6
-		StdDraw.text(tailleGrille-7, tailleGrille-9, "12");//par défaut 6, 4
+		StdDraw.text(tailleGrille-7, tailleGrille-9, "10");//par défaut 6, 4
 		StdDraw.text(tailleGrille-5, tailleGrille-9, "13");//par défaut 8, 4
-		StdDraw.text(tailleGrille-3, tailleGrille-9, "14");//par défaut 10, 4
+		StdDraw.text(tailleGrille-3, tailleGrille-9, "20");//par défaut 10, 4
 		
 		//mode graphique
 		double x = 0;
 		double y = 0;
 		int xPos = 0;
 		int yPos = 0;
-		while(!((xPos >= tailleGrille-7 && xPos <= tailleGrille-2) && (yPos == tailleGrille-3 || yPos == tailleGrille-7 || yPos == tailleGrille-9))){//par défaut 6, 11, 10, 6, 4
+		while(true){
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
@@ -91,44 +91,48 @@ public class Menu {
 			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
-		}
 		
-		if (yPos == tailleGrille-7){//par défaut 6
-			if (xPos == tailleGrille-7){//par défaut 6
-				NBJOUEUR = 2;
+			if (yPos == tailleGrille-3){
+				break;
 			}
-			else if (xPos == tailleGrille-5){//par défaut 8
-				NBJOUEUR = 3;
-			}
-			else if (xPos == tailleGrille-3){//par défaut 10
-				NBJOUEUR = 4;
-			}
-			else{
-				System.out.println("Erreur");
-			}
+			
+			else if (yPos == tailleGrille-7){//par défaut 6
+				if (xPos == tailleGrille-7){//par défaut 6
+					NBJOUEUR = 2;
+					break;
+				}
+				else if (xPos == tailleGrille-5){//par défaut 8
+					NBJOUEUR = 3;
+					break;
+				}
+				else if (xPos == tailleGrille-3){//par défaut 10
+					NBJOUEUR = 4;
+					break;
+				}
 
-		}
-		
-		else if(yPos == tailleGrille-9){//par défaut 4
-			if (xPos == tailleGrille-7){//par défaut 6
-				tailleGrille = 12;
-				//Plateau.initialisationInterfaceGraphique(tailleGrille);
 			}
-			else if (xPos == tailleGrille-5){//par défaut 8
-				tailleGrille = 13;
-				//Plateau.initialisationInterfaceGraphique(tailleGrille);
-			}
-			else if (xPos == tailleGrille-3){//par défaut 10
-				tailleGrille = 14;
-				//Plateau.initialisationInterfaceGraphique(tailleGrille);
-			}
-			else{
-				System.out.println("Erreur");
+			
+			else if(yPos == tailleGrille-9){//par défaut 4
+				if (xPos == tailleGrille-7){//par défaut 6
+					tailleGrille = 10;
+					//Plateau.initialisationInterfaceGraphique(tailleGrille);
+					break;
+				}
+				else if (xPos == tailleGrille-5){//par défaut 8
+					tailleGrille = 13;
+					Plateau.initialisationInterfaceGraphique(tailleGrille);
+					break;
+				}
+				else if (xPos == tailleGrille-3){//par défaut 10
+					tailleGrille = 20;
+					Plateau.initialisationInterfaceGraphique(tailleGrille);
+					break;
+				}
 			}
 		}
 		StdDraw.clear();
-		//Plateau.initialisationInterfaceGraphique(tailleGrille);
 		menu(NBJOUEUR, tailleGrille);
+		
 	}
 	
 	//Menu principal
@@ -166,8 +170,6 @@ public class Menu {
 		StdDraw.text(tailleGrille-5, tailleGrille-8, "Options");//par défaut 8, 5
 		StdDraw.text(tailleGrille-5, tailleGrille-10, "Quitter");//par défaut 8, 3
 		
-		int i=0;
-		
 		int menu = 0;
 
 		//mode graphique
@@ -175,8 +177,12 @@ public class Menu {
 		double y = 0;
 		int xPos = 0;
 		int yPos = 0;
-
-		while(!((xPos >= tailleGrille-7 && xPos <= tailleGrille-2) && (yPos == tailleGrille-2 || yPos == tailleGrille-4 || yPos == tailleGrille-6 || yPos == tailleGrille-8 || yPos == tailleGrille-10))){//par défaut 6, 11, 11, 9, 7, 5, 3
+		
+		while (StdDraw.mousePressed()){//si problème d'inversement de la souris
+			//System.out.println("Souris : " + StdDraw.mousePressed());
+		}
+		
+		while (menu == 0 ){
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
@@ -187,29 +193,27 @@ public class Menu {
 			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
+			
+			if(yPos == tailleGrille-2){//par défaut 11
+				menu = 1;
+			}
+			else if(yPos == tailleGrille-4){//par défaut 9
+				menu = 2;
+			}
+			else if(yPos == tailleGrille-6){//par défaut 7
+				menu = 3;
+			}
+			else if(yPos == tailleGrille-8){//par défaut 5
+				menu = 4;
+			}
+			else if(yPos == tailleGrille-10){// par défaut 3
+				menu = 5;
+			}
+			else{
+				System.out.println("Erreur");
+				menu(NBJOUEUR, tailleGrille);
+			}
 		}
-		
-		if(yPos == tailleGrille-2){//par défaut 11
-			menu = 1;
-		}
-		else if(yPos == tailleGrille-4){//par défaut 9
-			menu = 2;
-		}
-		else if(yPos == tailleGrille-6){//par défaut 7
-			menu = 3;
-		}
-		else if(yPos == tailleGrille-8){//par défaut 5
-			menu = 4;
-		}
-		else if(yPos == tailleGrille-10){// par défaut 3
-			menu = 5;
-		}
-		else{
-			System.out.println("Erreur");
-			menu(NBJOUEUR, tailleGrille);
-		}
-		
-		System.out.println(" Menu " + menu);
 	
 		//mode console
 		//Scanner scan = new Scanner(System.in);

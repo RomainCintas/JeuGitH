@@ -10,14 +10,14 @@ public class Plateau{
 	
 	public static int tailleGrille = 13;
 
-	public static int ligne1;
-	public static int colonne1;
-	public static int ligne2;
-	public static int colonne2;
-	public static int ligne3;
-	public static int colonne3;
-	public static int ligne4;
-	public static int colonne4;
+	public static int ligne1 = 1;
+	public static int colonne1 = 1;
+	public static int ligne2 = tailleGrille;
+	public static int colonne2 = tailleGrille;
+	public static int ligne3 = 1;
+	public static int colonne3 = tailleGrille;
+	public static int ligne4 = tailleGrille;
+	public static int colonne4 = 1;
 	
 	static char[][] grillage;
 	public int colonne;
@@ -39,14 +39,11 @@ public class Plateau{
 	
 	//Génération d'un grillage
 	public Plateau(int tailleGrille){
-		ligne1 = 1;
-		colonne1 = 1;
 		ligne2 = tailleGrille;
 		colonne2 = tailleGrille;
-		ligne3 = 1;
 		colonne3 = tailleGrille;
 		ligne4 = tailleGrille;
-		colonne4 = 1;
+
 		grillage = new char [tailleGrille+2][tailleGrille+3];//par défaut [15][16]
 		for (int ligne=1;ligne<tailleGrille+1;ligne++){//par défaut 14
 			for (int colonne=1;colonne<tailleGrille+1;colonne++){//par défaut 14
@@ -58,12 +55,15 @@ public class Plateau{
 				grillage[ligne][colonne]= 'x' ; 
 			}		
 		}
-		grillage[tailleGrille-8][tailleGrille+2]='i';//par défaut [5][15]
-		grillage[tailleGrille-7][tailleGrille+2]='b';//par défaut [6][15]
-		grillage[tailleGrille-6][tailleGrille+2]='v';//par défaut [7][15]
-		grillage[tailleGrille-5][tailleGrille+2]='j';//par défaut [8][15]
-		grillage[tailleGrille-4][tailleGrille+2]='o';//par défaut [9][15]
-		grillage[tailleGrille-3][tailleGrille+2]='r';//par défaut [10][15]
+		
+	
+		grillage[5][tailleGrille+2]='i';//par défaut [5][15]
+		grillage[6][tailleGrille+2]='b';//par défaut [6][15]
+		grillage[7][tailleGrille+2]='v';//par défaut [7][15]
+		grillage[8][tailleGrille+2]='j';//par défaut [8][15]
+		grillage[9][tailleGrille+2]='o';//par défaut [9][15]
+		grillage[10][tailleGrille+2]='r';//par défaut [10][15]
+
 	}
 	
 	//Couleur des joueurs
@@ -73,6 +73,10 @@ public class Plateau{
 		
 	//Création de la grille initiale
 	public static void creaGrille(int NBJOUEUR, int tailleGrille){
+		ligne2 = tailleGrille;
+		colonne2 = tailleGrille;
+		colonne3 = tailleGrille;
+		ligne4 = tailleGrille;
 		Plateau grillage = new Plateau(tailleGrille);
 		do{
 			couleur1 = grillage.getCouleurJoueur(ligne1,colonne1);
@@ -153,9 +157,7 @@ public class Plateau{
 	public static void initialisationInterfaceGraphique(int tailleGrille){
 		StdDraw.setCanvasSize(1000, 1000);//initialisation de la feuille de dessin
 		StdDraw.setPenRadius(0.1);//définition de la taille du pinceau
-		StdDraw.setXscale(0, tailleGrille+4);//redéfinition de la grille sur le graphique
-		StdDraw.setYscale(0, tailleGrille+4);
-		StdDraw.setScale(0, tailleGrille+4);
+		StdDraw.setScale(0, tailleGrille+4);//redéfinition de la grille sur le graphique
 	}
 }
 

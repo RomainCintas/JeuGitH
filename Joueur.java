@@ -34,12 +34,12 @@ public class Joueur implements Serializable{
 		this.humain = humain;
 	}
 	
-	public String toString(){
-		return "Nom du joueur : " + this.nom + "\nCouleur : " + this.NBJOUEUR +
-				"\nColonne : " + this.colonne + "\nLigne : " + this.ligne +
-				"\nTour : " + this.tour + "\nTour d'initialisation : " + this.tourInitialisation
-				+ "\nHumain : " + this.humain + "\n";
-	}
+//	public String toString(){
+//		return "Nom du joueur : " + this.nom + "\nCouleur : " + this.NBJOUEUR +
+//				"\nColonne : " + this.colonne + "\nLigne : " + this.ligne +
+//				"\nTour : " + this.tour + "\nTour d'initialisation : " + this.tourInitialisation
+//				+ "\nHumain : " + this.humain + "\n";
+//	}
 	
 	//Choix du nombre de joueurs en mode console
 	public static int choixNbJoueur(){
@@ -126,13 +126,13 @@ public class Joueur implements Serializable{
 		System.out.println(nom1 + " est en haut à gauche");
 		StdDraw.text(tailleGrille-6, tailleGrille+3.8, nom1 + " est en haut à gauche");//par défaut 7, 16.8
 		System.out.println(nom2 + " est en bas à droite");
-		StdDraw.text(7, tailleGrille+3.4, nom2 + " est en bas à droite");//par défaut 7, 16.4
+		StdDraw.text(tailleGrille-6, tailleGrille+3.4, nom2 + " est en bas à droite");//par défaut 7, 16.4
 		if (NBJOUEUR == 3 || NBJOUEUR == 4){
 			System.out.println(nom3 + " est en haut à droite");
-			StdDraw.text(7, tailleGrille+3, nom3 + " est en haut à droite");//par défaut 7, 16
+			StdDraw.text(tailleGrille-6, tailleGrille+3, nom3 + " est en haut à droite");//par défaut 7, 16
 			if (NBJOUEUR == 4){
 				System.out.println(nom4 + " est en bas à gauche");
-				StdDraw.text(7, tailleGrille+2.6, nom4 + " est en bas à gauche");//par défaut 7, 15.6
+				StdDraw.text(tailleGrille-6, tailleGrille+2.6, nom4 + " est en bas à gauche");//par défaut 7, 15.6
 				
 			}
 		}

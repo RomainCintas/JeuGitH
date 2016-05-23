@@ -79,7 +79,7 @@ public class Case implements Serializable {
 		double y = 0;
 		int xPos = 0;
 		int yPos = 0;
-		while(!(xPos == tailleGrille+2 && (yPos >= tailleGrille-9 && yPos <= tailleGrille-4))){//par défaut 15, 4, 9
+		while(couleurChoisie == 'c'){
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
@@ -90,24 +90,27 @@ public class Case implements Serializable {
 			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
-		}
-		if(yPos == tailleGrille-9){//par défaut 4
-			couleurChoisie = 'r';
-		}
-		if(yPos == tailleGrille-8){//par défaut 5
-			couleurChoisie = 'o';
-		}
-		if(yPos == tailleGrille-7){//par défaut 6
-			couleurChoisie = 'j';
-		}
-		if(yPos == tailleGrille-6){//par défaut 7
-			couleurChoisie = 'v';
-		}
-		if(yPos == tailleGrille-5){//par défaut 8
-			couleurChoisie = 'b';
-		}
-		if(yPos == tailleGrille-4){//par défaut 9
-			couleurChoisie = 'i';
+			
+			if (xPos == tailleGrille+2){//par défaut 15
+				if(yPos == tailleGrille-9){//par défaut 4
+					couleurChoisie = 'r';
+				}
+				if(yPos == tailleGrille-8){//par défaut 5
+					couleurChoisie = 'o';
+				}
+				if(yPos == tailleGrille-7){//par défaut 6
+					couleurChoisie = 'j';
+				}
+				if(yPos == tailleGrille-6){//par défaut 7
+					couleurChoisie = 'v';
+				}
+				if(yPos == tailleGrille-5){//par défaut 8
+					couleurChoisie = 'b';
+				}
+				if(yPos == tailleGrille-4){//par défaut 9
+					couleurChoisie = 'i';
+				}
+			}
 		}
 		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
