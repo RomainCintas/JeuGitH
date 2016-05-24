@@ -45,16 +45,17 @@ public class Plateau{
 		ligne4 = tailleGrille;
 
 		grillage = new char [tailleGrille+2][tailleGrille+3];//par défaut [15][16]
+		for (int ligne=0;ligne<tailleGrille+2;ligne++){ 
+			for (int colonne=0;colonne<tailleGrille+3;colonne++){//par défaut 14 16
+				grillage[ligne][colonne]= 'x' ; 
+			}		
+		}
 		for (int ligne=1;ligne<tailleGrille+1;ligne++){//par défaut 14
 			for (int colonne=1;colonne<tailleGrille+1;colonne++){//par défaut 14
 				grillage[ligne][colonne]= Random_letter() ; 
 			}		
 		}
-		for (int ligne=1;ligne<tailleGrille+1;ligne++){ 
-			for (int colonne=tailleGrille+1;colonne<tailleGrille+3;colonne++){//par défaut 14 16
-				grillage[ligne][colonne]= 'x' ; 
-			}		
-		}
+
 		
 	
 		grillage[5][tailleGrille+2]='i';//par défaut [5][15]
@@ -116,8 +117,10 @@ public class Plateau{
 			for (int colonneBoucle=1;colonneBoucle<tailleGrille+1;colonneBoucle++){//par défaut 14
 				System.out.print("	|	" + grillage[ligneBoucle][colonneBoucle]);
 			}
-		System.out.print("\n");
+			System.out.print("\n");
+		
 		}
+		
 	}
 	
 	//Affichage graphique du plateau
