@@ -13,11 +13,6 @@ public class Case implements Serializable {
 		this.couleur = couleur;
 	}
 	
-//	public String toString(){
-//		return "Colonne : " + this.colonne + "\nLigne : " + this.ligne +
-//				"\nCouleur : " + this.couleur + "\n";
-//	}
-	
 	//Choix de la couleur
 	public static char choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
 		char couleurChoisie = 'c';

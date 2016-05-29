@@ -3,9 +3,9 @@ public class Main {
 	static int tailleGrille = Plateau.tailleGrille;
 	
 	public static void main(String[] args) {
-		
-		Plateau.initialisationInterfaceGraphique(tailleGrille);
 
+		Plateau.initialisationInterfaceGraphique(tailleGrille);
 		Menu.menu(NBJOUEUR,tailleGrille);
+		
 	}
 }

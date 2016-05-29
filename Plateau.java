@@ -82,7 +82,6 @@ public class Plateau{
 		do{
 			couleur1 = grillage.getCouleurJoueur(ligne1,colonne1);
 			couleur2 = grillage.getCouleurJoueur(ligne2,colonne2);
-			System.out.print(" Couleur 1 : " + couleur1 + " Couleur 2 : " + couleur2);
 			couleur3 = '3';
 			couleur4 = '4';
 			if (NBJOUEUR == 3 || NBJOUEUR == 4){

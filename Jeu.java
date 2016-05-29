@@ -41,9 +41,10 @@ public class Jeu {
 		
 		//pour compter le nombre de tour
 		int compteurTour = 0;
+		boolean jeu = true;
 		
 		//Début de la boucle du jeu (1 boucle = 1 tour)
-		while (true){
+		while (jeu == true){
 			
 			//Attribution des variables spécifiques au tour au joueur concerné
 			joueur = Joueur.debutTourJoueur(joueur1, joueur2, joueur3, joueur4, compteurTour);
@@ -67,6 +68,10 @@ public class Jeu {
 			//Récupération des variables spécifiques au tour par le joueur concerné
 			Joueur.finTourJoueur(joueur, joueur1, joueur2, joueur3, joueur4);
 			
+			//Vérification des conditions de victoire
+			conditionVictoire(compteurTour, joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
+			jeu = conditionVictoire(compteurTour, joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
+			
 			//Rotation du tour des joueurs
 			Joueur.rotationTourJoueur(joueur1, joueur2, joueur3, joueur4, NBJOUEUR);
 			
@@ -89,7 +94,7 @@ public class Jeu {
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	
-	//conditions de victoire (ne semble pas fonctionner)
+	//conditions de victoire
 	
 	
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -100,39 +105,74 @@ public class Jeu {
 	
 	
 	
-	//conditions de victoire (ne semble pas fonctionner)
-	public static void conditionVictoire(int compteurTour, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR){
+	//conditions de victoire
+	public static boolean conditionVictoire(int compteurTour, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
 		
 		//Conditions de victoire pour une partie à 2 joueurs
-		if (compteurTour != 0 && compteurTour != 1 && NBJOUEUR == 2 && (joueur1.caseControl.size()>84 || joueur2.caseControl.size()>84)){ // Conditions de victoire pour une partie à 2 joueurs
+		if (compteurTour > 1 && NBJOUEUR == 2 && (joueur1.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur2.caseControl.size()>Math.pow(tailleGrille, 2)/2
+		|| joueur1.caseControl.size()+joueur2.caseControl.size() == Math.pow(tailleGrille, 2))){ // Conditions de victoire pour une partie à 2 joueurs
+		
+
+			StdDraw.clear();
+			
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille+2, 5, 0.01);//par défaut 8, 15
+			
+			System.out.println("Le jeu des Six couleurs");
+			StdDraw.setPenColor(StdDraw.RED);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille+2, 5, 0.01);//par défaut 8, 15
+			
+			StdDraw.setPenColor(StdDraw.BLACK);
+			StdDraw.text(tailleGrille-5, tailleGrille+2, "Le jeu des Six couleurs");//par défaut 8, 15
+			
 			if (joueur1.caseControl.size()>joueur2.caseControl.size()){
 				System.out.println("Victoire de " + joueur1.nom + " !!!");
+				StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur1.nom + " !!!");//par défaut 8, 13
 			}
 			else
 			{	
 				if (joueur1.caseControl.size() == joueur2.caseControl.size()){
 					System.out.println("Dans le doute, on va dire que Timothée a gagné");
+					StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 				}
 				else {
 					System.out.println("Victoire de " + joueur2.nom + " !!!");
+					StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur2.nom + " !!!");//par défaut 8, 13
 				}
 			}
 			System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-1, "Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());//par défaut 8, 12
 			System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-2, "Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());//par défaut 8, 11
+			return false;
 		}
 		
 		//Conditions de victoire pour une partie à 3 joueurs
-		if (compteurTour != 0 && compteurTour != 1 && compteurTour != 2 && NBJOUEUR == 3 && (joueur1.caseControl.size()>84 || joueur2.caseControl.size()>84 || joueur3.caseControl.size()>84)){ // Conditions de victoire pour une partie à 3 joueurs
+		if (compteurTour > 2 && NBJOUEUR == 3 && (joueur1.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur2.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur3.caseControl.size()>Math.pow(tailleGrille, 2)/2
+		|| joueur1.caseControl.size()+joueur2.caseControl.size()+joueur3.caseControl.size() == Math.pow(tailleGrille, 2))){ // Conditions de victoire pour une partie à 3 joueurs
+
+			StdDraw.clear();
+			
+			System.out.println("Le jeu des Six couleurs");
+			StdDraw.setPenColor(StdDraw.RED);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille+2, 5, 0.01);//par défaut 8, 15
+			
+			StdDraw.setPenColor(StdDraw.BLACK);
+			StdDraw.text(tailleGrille-5, tailleGrille+2, "Le jeu des Six couleurs");//par défaut 8, 15
+			
 			if (joueur1.caseControl.size()>joueur2.caseControl.size()){
 				if(joueur1.caseControl.size()>joueur3.caseControl.size()){
 					System.out.println("Victoire de " + joueur1.nom + " !!!");
+					StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur1.nom + " !!!");//par défaut 8, 13
 				}
 				else{
 					if(joueur1.caseControl.size()==joueur3.caseControl.size()){
 						System.out.println("Dans le doute, on va dire que Timothée a gagné");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 					}
 					else{
 						System.out.println("Victoire de " + joueur3.nom + " !!!");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur3.nom + " !!!");//par défaut 8, 13
 					}
 				}
 			}
@@ -141,51 +181,76 @@ public class Jeu {
 				if(joueur2.caseControl.size()>joueur3.caseControl.size()){
 					if(joueur1.caseControl.size()==joueur2.caseControl.size()){
 						System.out.println("Dans le doute, on va dire que Timothée a gagné");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 					}
 					else {
 						System.out.println("Victoire de " + joueur2.nom + " !!!");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur2.nom + " !!!");//par défaut 8, 13
 					}
 				}
 				else{
 					if (joueur2.caseControl.size() == joueur3.caseControl.size()){
 						System.out.println("Dans le doute, on va dire que Timothée a gagné");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 					}
 					else{
 						System.out.println("Victoire de " + joueur3.nom + " !!!");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur3.nom + " !!!");//par défaut 8, 13
 					}
 				}
 			}
 			System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-1, "Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());//par défaut 8, 12
 			System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-2, "Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());//par défaut 8, 11
 			System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-3, "Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());//par défaut 8, 10
+			return false;
 		}
 		
 		//Conditions de victoire pour une partie à 4 joueurs
-		if (compteurTour != 0 && compteurTour != 1 && compteurTour != 2 && compteurTour != 3 && NBJOUEUR == 4 && (joueur1.caseControl.size()>84 ||joueur2.caseControl.size()>84 || joueur3.caseControl.size()>84 || joueur4.caseControl.size()>84)){ 
+		if (compteurTour >3 && NBJOUEUR == 4 && (joueur1.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur2.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur3.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur4.caseControl.size()>Math.pow(tailleGrille, 2)/2
+			|| joueur1.caseControl.size()+joueur2.caseControl.size()+joueur3.caseControl.size()+joueur4.caseControl.size() == Math.pow(tailleGrille, 2))){ 
+
+			StdDraw.clear();
+			
+			System.out.println("Le jeu des Six couleurs");
+			StdDraw.setPenColor(StdDraw.RED);
+			StdDraw.rectangle(tailleGrille-5, tailleGrille+2, 5, 0.01);//par défaut 8, 15
+			
+			StdDraw.setPenColor(StdDraw.BLACK);
+			StdDraw.text(tailleGrille-5, tailleGrille+2, "Le jeu des Six couleurs");//par défaut 8, 15
+			
 			if (joueur1.caseControl.size()>joueur2.caseControl.size()){
 				if(joueur1.caseControl.size()>joueur3.caseControl.size()){
 					if(joueur1.caseControl.size()>joueur4.caseControl.size()){
 						System.out.println("Victoire de " + joueur1.nom + " !!!");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur1.nom + " !!!");//par défaut 8, 13
 					}
 					else{
 						if (joueur1.caseControl.size()==joueur4.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 						}
 						else{
 							System.out.println("Victoire de " + joueur4.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur4.nom + " !!!");//par défaut 8, 13
 						}
 					}
 				}
 				else{
 					if (joueur3.caseControl.size()>joueur4.caseControl.size()){
 						System.out.println("Victoire de " + joueur3.nom + " !!!");
+						StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur3.nom + " !!!");//par défaut 8, 13
 					}
 					else{
 						if(joueur3.caseControl.size()==joueur4.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 						}
 						else{
 							System.out.println("Victoire de " + joueur4.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur4.nom + " !!!");//par défaut 8, 13
 						}
 					}
 					
@@ -196,16 +261,22 @@ public class Jeu {
 				if(joueur2.caseControl.size()>joueur3.caseControl.size()){
 					if(joueur2.caseControl.size()>joueur4.caseControl.size()){
 						if (joueur1.caseControl.size()==joueur2.caseControl.size()){
-							System.out.println("Dans le doute, on va dire que Timothée a gagné");							}
+							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
+						}
 						else{
 							System.out.println("Victoire de " + joueur2.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur2.nom + " !!!");//par défaut 8, 13
 						}
 					}
 					else{ // si 4=<2
 						if (joueur2.caseControl.size()==joueur4.caseControl.size()){
-							System.out.println("Dans le doute, on va dire que Timothée a gagné");							}
+							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
+						}
 						else{
 							System.out.println("Victoire de " + joueur2.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur2.nom + " !!!");//par défaut 8, 13
 						}
 					}
 				}
@@ -214,26 +285,35 @@ public class Jeu {
 					if (joueur3.caseControl.size() > joueur4.caseControl.size()){
 						if(joueur2.caseControl.size() == joueur3.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 						}
 						else{
 							System.out.println("Victoire de " + joueur3.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur3.nom + " !!!");//par défaut 8, 13
 						}
 					}
 					else{ //si 4>=3
 						if(joueur1.caseControl.size() == joueur2.caseControl.size()){
 							System.out.println("Dans le doute, on va dire que Timothée a gagné");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Dans le doute, on va dire que Timothée a gagné");//par défaut 8, 13
 						}
 						else{
 							System.out.println("Victoire de " + joueur4.nom + " !!!");
+							StdDraw.text(tailleGrille-5, tailleGrille, "Victoire de " + joueur4.nom + " !!!");//par défaut 8, 13
 						}
 					}
 				}
 			}
 			System.out.println("Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-1, "Nombre de cases possédées par " + joueur1.nom + " : " + joueur1.caseControl.size());//par défaut 8, 12
 			System.out.println("Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-2, "Nombre de cases possédées par " + joueur2.nom + " : " + joueur2.caseControl.size());//par défaut 8, 11
 			System.out.println("Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-3, "Nombre de cases possédées par " + joueur3.nom + " : " + joueur3.caseControl.size());//par défaut 8, 10
 			System.out.println("Nombre de cases possédées par " + joueur4.nom + " : " + joueur4.caseControl.size());
+			StdDraw.text(tailleGrille-5, tailleGrille-4, "Nombre de cases possédées par " + joueur4.nom + " : " + joueur4.caseControl.size());//par défaut 8, 9
+			return false;
 		}
-		// ^ conditions de victoire
+		return true;
 	}
 }

@@ -34,13 +34,6 @@ public class Joueur implements Serializable{
 		this.humain = humain;
 	}
 	
-//	public String toString(){
-//		return "Nom du joueur : " + this.nom + "\nCouleur : " + this.NBJOUEUR +
-//				"\nColonne : " + this.colonne + "\nLigne : " + this.ligne +
-//				"\nTour : " + this.tour + "\nTour d'initialisation : " + this.tourInitialisation
-//				+ "\nHumain : " + this.humain + "\n";
-//	}
-	
 	//Choix du nombre de joueurs en mode console
 	public static int choixNbJoueur(){
 		do{
