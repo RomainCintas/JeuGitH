@@ -57,13 +57,13 @@ public class Plateau{
 		}
 
 		
-	
-		grillage[5][tailleGrille+2]='i';//par défaut [5][15]
-		grillage[6][tailleGrille+2]='b';//par défaut [6][15]
-		grillage[7][tailleGrille+2]='v';//par défaut [7][15]
-		grillage[8][tailleGrille+2]='j';//par défaut [8][15]
-		grillage[9][tailleGrille+2]='o';//par défaut [9][15]
-		grillage[10][tailleGrille+2]='r';//par défaut [10][15]
+		grillage[tailleGrille-9][tailleGrille+2]='s';//par défaut [4][15]
+		grillage[tailleGrille-8][tailleGrille+2]='i';//par défaut [5][15]
+		grillage[tailleGrille-7][tailleGrille+2]='b';//par défaut [6][15]
+		grillage[tailleGrille-6][tailleGrille+2]='v';//par défaut [7][15]
+		grillage[tailleGrille-5][tailleGrille+2]='j';//par défaut [8][15]
+		grillage[tailleGrille-4][tailleGrille+2]='o';//par défaut [9][15]
+		grillage[tailleGrille-3][tailleGrille+2]='r';//par défaut [10][15]
 
 	}
 	
@@ -131,25 +131,32 @@ public class Plateau{
 				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'r'){
 					StdDraw.setPenColor(StdDraw.RED);
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'o'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'o'){
 					StdDraw.setPenColor(new Color(255, 127, 0));//Orange
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'j'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'j'){
 					StdDraw.setPenColor(StdDraw.YELLOW);
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'v'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'v'){
 					StdDraw.setPenColor(StdDraw.GREEN);
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'b'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'b'){
 					StdDraw.setPenColor(StdDraw.BLUE);
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'i'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'i'){
 					StdDraw.setPenColor(StdDraw.MAGENTA);//Violet
 				}
-				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'x'){
+				else if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 'x'){
 					StdDraw.setPenColor(StdDraw.WHITE);
 				}
 				StdDraw.filledSquare(colonneBoucle, tailleGrille+1-ligneBoucle, 0.4);//par défaut 14
+				
+				if (Character.toLowerCase(grillage[ligneBoucle][colonneBoucle]) == 's'){
+					StdDraw.setPenColor(StdDraw.RED);//rouge
+					StdDraw.rectangle(colonneBoucle, tailleGrille+1-ligneBoucle, 0.1, 0.1);//par défaut 14
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.text(colonneBoucle, tailleGrille+1-ligneBoucle, "S");
+				}
 			}
 		}
 		StdDraw.setPenColor(StdDraw.BLACK);

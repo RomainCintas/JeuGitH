@@ -14,7 +14,7 @@ public class Case implements Serializable {
 	}
 	
 	//Choix de la couleur
-	public static char choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
+	public static char choixCouleur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille, char[][] grillage, int compteurTour){
 		char couleurChoisie = 'c';
 		
 		do{ //boucle de choix de la couleur
@@ -48,7 +48,7 @@ public class Case implements Serializable {
 			
 			if (joueur.humain == true){
 				//(1) sélection de la couleur en mode graphique (avec la souris)
-				couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR, tailleGrille);
+				couleurChoisie = selectionCouleurGraphique(joueur.couleur, joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille, grillage, compteurTour);
 
 				//(2) sélection de la couleur en mode console
 				//couleurChoisie = selectionCouleurConsole(joueur.couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR, tailleGrille);
@@ -68,7 +68,7 @@ public class Case implements Serializable {
 	}
 	
 	//Sélection de la couleur en mode graphique (avec la souris)
-	public static char selectionCouleurGraphique(char couleur, char couleur1, char couleur2, char couleur3, char couleur4, int NBJOUEUR, int tailleGrille){
+	public static char selectionCouleurGraphique(char couleur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille, char[][] grillage, int compteurTour){
 		char couleurChoisie = 'c';
 		double x = 0;
 		double y = 0;
@@ -105,9 +105,12 @@ public class Case implements Serializable {
 				if(yPos == tailleGrille-4){//par défaut 9
 					couleurChoisie = 'i';
 				}
+				if(yPos == tailleGrille-3){//par défaut 10
+					Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, compteurTour);
+				}
 			}
 		}
-		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, couleur1, couleur2, couleur3, couleur4, NBJOUEUR, tailleGrille);
+		couleurChoisie = verifCouleurChoisie(couleurChoisie, couleur, joueur1.couleur, joueur2.couleur, joueur3.couleur, joueur4.couleur, NBJOUEUR, tailleGrille);
 		return couleurChoisie;
 	}
 	

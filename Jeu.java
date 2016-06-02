@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Jeu {
 	
-	//jeu
-	public static void jeu(int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR){
+	//lancementJeu
+	public static void lancementJeu(int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR){
 		ArrayList <Case> caseControl = null;
 		
 		//choix du pseudos du joueur
@@ -14,7 +14,6 @@ public class Jeu {
 		char[][] grillage = Plateau.grillage;
 		
 		//Création des joueurs
-		Joueur joueur;
 		Joueur joueur1 = new Joueur(Joueur.nom1,Plateau.couleur1,Plateau.colonne1,Plateau.ligne1,true,0,caseControl,true);
 		
 		boolean humain;
@@ -30,9 +29,6 @@ public class Jeu {
 		Joueur joueur3 = new Joueur(Joueur.nom3,Plateau.couleur3,Plateau.colonne3,Plateau.ligne3,false,2,caseControl,humain);
 		Joueur joueur4 = new Joueur(Joueur.nom4,Plateau.couleur4,Plateau.colonne4,Plateau.ligne4,false,3,caseControl,humain);
 		
-		//Affiche la position des joueurs
-		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR, tailleGrille);
-		
 		//Attribution des tours initiaux
 		joueur1.tour = true;
 		joueur2.tour = false;
@@ -41,9 +37,21 @@ public class Jeu {
 		
 		//pour compter le nombre de tour
 		int compteurTour = 0;
-		boolean jeu = true;
 		
+		jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, compteurTour);
+		
+	}
+	
+	public static void jeu(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage, int NBJOUEUR, int tailleGrille, int compteurTour){
+		
+		//initialisation du joueur
+		Joueur joueur;
+		
+		//Affiche la position des joueurs
+		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR, tailleGrille);
+			
 		//Début de la boucle du jeu (1 boucle = 1 tour)
+		boolean jeu = true;
 		while (jeu == true){
 			
 			//Attribution des variables spécifiques au tour au joueur concerné
@@ -53,7 +61,7 @@ public class Jeu {
 			if ((compteurTour>1 && NBJOUEUR == 2) || (compteurTour>2 && NBJOUEUR == 3) || (compteurTour>3 && NBJOUEUR == 4)){
 				
 				//Choix de la couleur
-				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
+				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille, grillage, compteurTour);
 				
 				//Coloration des cases déjà contrôlées
 				grillage = Case.colorationCaseControl(joueur, grillage); 
