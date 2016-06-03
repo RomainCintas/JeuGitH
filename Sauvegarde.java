@@ -23,11 +23,12 @@ public class Sauvegarde {
 	static int minute = cal.get(Calendar.MINUTE);
 	static int heure = cal.get(Calendar.HOUR);
 	static int jour = cal.get(Calendar.DATE);
-	static int mois = cal.get(Calendar.MONTH);
+	static int mois = cal.get(Calendar.MONTH)+1;
 	static int annee = cal.get(Calendar.YEAR);
 	
+	
 	public static void sauvegardePartie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage, int NBJOUEUR, int tailleGrille, int compteurTour){
-    
+
 	  String nomdufichier = "partie-" + jour + "." + mois + "." + annee + "-" + heure + "." + minute + "." + seconde + ".txt";
 	  //Nous déclarons nos objets en dehors du bloc try/catch
 	  ObjectOutputStream oos;
@@ -38,9 +39,9 @@ public class Sauvegarde {
 		  oos = new ObjectOutputStream(
               new BufferedOutputStream(
                 new FileOutputStream(
-                  new File(nomdufichier))));
+                  new File("Sauvegardes" + File.separator + nomdufichier))));
             
-		  //Nous allons écrire chaque objet Game dans le fichier
+		  //Nous allons écrire chaque objet string dans le fichier
 		  oos.writeObject(new String(joueur1.nom));
 		  oos.writeObject(new String(joueur2.nom));
 		  oos.writeObject(new String(joueur3.nom));
@@ -57,12 +58,11 @@ public class Sauvegarde {
     
 	  //Données de type primitif
     
-    
 	  try {
 		  dos = new DataOutputStream(
 				  new BufferedOutputStream(
 						  new FileOutputStream(
-								  new File(nomdufichier))));
+								  new File("Sauvegardes" + File.separator + nomdufichier))));
 
         	//Nous allons écrire chaque type primitif
         	dos.writeInt(NBJOUEUR);
@@ -107,13 +107,13 @@ public class Sauvegarde {
         	dos.writeBoolean(joueur3.humain);
         	dos.writeBoolean(joueur4.humain);
     	
-    		System.out.print("\n");
-    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
-				for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 14
-					System.out.print("	|	" + grillage[ligneBoucle][colonneBoucle]);
-				}
-			System.out.print("\n");
-			}
+//    		System.out.print("\n");
+//    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
+//				for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 14
+//					System.out.print("	|	" + grillage[ligneBoucle][colonneBoucle]);
+//				}
+//			System.out.print("\n");
+//			}
     	
     		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
     			for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 14
@@ -121,7 +121,6 @@ public class Sauvegarde {
     			}
           	}
         	dos.close();
-          	
       	}
     
     	catch (FileNotFoundException e) {
@@ -147,7 +146,7 @@ public class Sauvegarde {
 		for(int i=0;i<listefichiers.length;i++){ 
 			if(listefichiers[i].endsWith(".txt")){ 
 				System.out.println(listefichiers[i].substring(0,listefichiers[i].length()));// on choisit la sous chaine ".txt" 
-				StdDraw.text(tailleGrille-5-i, tailleGrille-6-i, "Nombre de joueurs");//par défaut 8-i, 7-i
+				StdDraw.text(tailleGrille-5, tailleGrille-6-i, listefichiers[i].substring(0,listefichiers[i].length()));//par défaut 8-i, 7-i
 			} 
 		} 
 	
@@ -221,14 +220,47 @@ public class Sauvegarde {
     	boolean humain2 = true;
     	boolean humain3 = true;
     	boolean humain4 = true;
-        
+        int caca = 0;
+	    
+      //Données objet
+	    String pseudo1 = "Joueur 1";
+	    String pseudo2= "Joueur 2";
+	    String pseudo3= "Joueur 3";
+	    String pseudo4 = "Joueur 4";
+
 	    try {
+ 	
+	      //On récupère maintenant les objets String
+	      ois = new ObjectInputStream(
+	              new BufferedInputStream(
+	                new FileInputStream(
+	                  new File("Sauvegardes" + File.separator + nomdufichier))));
+	            
+	      try {
+	        System.out.println("Affichage des données objets :");
+	        System.out.println("*************************\n");
+	        pseudo1 = ((String)ois.readObject()).toString();
+	        pseudo2 = ((String)ois.readObject()).toString();
+	        pseudo3 = ((String)ois.readObject()).toString();
+	        pseudo4 = ((String)ois.readObject()).toString();
+	      } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	      }
+		
+	      ois.close();
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }
+        
+        try {
 	        
 	        //On récupère maintenant les données !
 	        dis = new DataInputStream(
 	                new BufferedInputStream(
 	                  new FileInputStream(
-	                    new File(nomdufichier))));
+	                    new File("Sauvegardes" + File.separator + nomdufichier))));
 	        System.out.println("Affichage des données de type primitif :");
 	        System.out.println("*************************\n");     
 	        NBJOUEUR = dis.readInt();
@@ -276,12 +308,14 @@ public class Sauvegarde {
 	    	humain3 = dis.readBoolean();
 	    	humain4 = dis.readBoolean();
 
-	    	
+    		System.out.print("\n");
 	        for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
 	        	for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
 	        		//grillage[ligneBoucle][colonneBoucle] =  
-	        				System.out.println("Coordonnées : " + ligneBoucle + colonneBoucle + " Couleur : " + dis.readChar());
+	        		//System.out.println("Coordonnées : " + ligneBoucle + colonneBoucle + " Couleur : " + dis.readChar());
+	        		System.out.print("	|	" + dis.readChar());
 	        	}
+	        	System.out.print("\n");
 	        }
 	         	
 	      }
@@ -292,37 +326,7 @@ public class Sauvegarde {
 	      e.printStackTrace();
 	    }
 	    
-	    //Données objet
-	    String pseudo1 = "Joueur 1";
-	    String pseudo2= "Joueur 2";
-	    String pseudo3= "Joueur 3";
-	    String pseudo4 = "Joueur 4";
-
-	    try {
- 	
-	      //On récupère maintenant les données !
-	      ois = new ObjectInputStream(
-	              new BufferedInputStream(
-	                new FileInputStream(
-	                  new File(nomdufichier))));
-	            
-	      try {
-	        System.out.println("Affichage des données objets :");
-	        System.out.println("*************************\n");
-	        pseudo1 = ((String)ois.readObject()).toString();
-	        pseudo2 = ((String)ois.readObject()).toString();
-	        pseudo3 = ((String)ois.readObject()).toString();
-	        pseudo4 = ((String)ois.readObject()).toString();
-	      } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	      }
-		
-	      ois.close();
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	      } catch (IOException e) {
-	        e.printStackTrace();
-	      }
+	    
 	    
 	    Joueur joueur1 = new Joueur(pseudo1,couleur1,1,1,tour1,0,caseControl1,humain1);
 	    Joueur joueur2 = new Joueur(pseudo2,couleur2,tailleGrille,tailleGrille,tour2,1,caseControl2,humain2);
@@ -330,5 +334,7 @@ public class Sauvegarde {
 	    Joueur joueur4 = new Joueur(pseudo4,couleur4,1,tailleGrille,tour4,3,caseControl4,humain4);
 	    
 	  //  jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
-	  }
+	  caca++;
+	  System.out.println("Caca" + caca);
+  	}
 }

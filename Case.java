@@ -1,7 +1,6 @@
-import java.io.Serializable;
 import java.util.Scanner;
 
-public class Case implements Serializable {
+public class Case{
 
 	public int colonne;
 	public int ligne;

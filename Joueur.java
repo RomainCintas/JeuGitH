@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.Serializable;
 
-public class Joueur implements Serializable{
+public class Joueur{
 	
 	String nom;
 	char couleur;
