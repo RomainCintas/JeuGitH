@@ -26,7 +26,6 @@ public class Sauvegarde {
 	static int mois = cal.get(Calendar.MONTH)+1;
 	static int annee = cal.get(Calendar.YEAR);
 	
-	
 	public static void sauvegardePartie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage, int NBJOUEUR, int tailleGrille, int compteurTour){
 
 	  String nomdufichier = "partie-" + jour + "." + mois + "." + annee + "-" + heure + "." + minute + "." + seconde + ".txt";
@@ -35,26 +34,26 @@ public class Sauvegarde {
 	  DataOutputStream dos;
     
 	  //Données objet
-	  try {
-		  oos = new ObjectOutputStream(
-              new BufferedOutputStream(
-                new FileOutputStream(
-                  new File("Sauvegardes" + File.separator + nomdufichier))));
-            
-		  //Nous allons écrire chaque objet string dans le fichier
-		  oos.writeObject(new String(joueur1.nom));
-		  oos.writeObject(new String(joueur2.nom));
-		  oos.writeObject(new String(joueur3.nom));
-		  oos.writeObject(new String(joueur4.nom));
-      
-		  //Ne pas oublier de fermer le flux !
-		  oos.close();
-
-	  } catch (FileNotFoundException e) {
-        e.printStackTrace();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }  
+//	  try {
+//		  oos = new ObjectOutputStream(
+//              new BufferedOutputStream(
+//                new FileOutputStream(
+//                  new File("Sauvegardes" + File.separator + nomdufichier))));
+//            
+//		  //Nous allons écrire chaque objet string dans le fichier
+//		  oos.writeObject(new String(joueur1.nom));
+//		  oos.writeObject(new String(joueur2.nom));
+//		  oos.writeObject(new String(joueur3.nom));
+//		  oos.writeObject(new String(joueur4.nom));
+//      
+//		  //Ne pas oublier de fermer le flux !
+//		  oos.close();
+//
+//	  } catch (FileNotFoundException e) {
+//        e.printStackTrace();
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }  
     
 	  //Données de type primitif
     
@@ -106,6 +105,25 @@ public class Sauvegarde {
     		dos.writeBoolean(joueur2.humain);
         	dos.writeBoolean(joueur3.humain);
         	dos.writeBoolean(joueur4.humain);
+        	
+    		dos.writeInt(joueur1.nom.length());
+    		dos.writeInt(joueur2.nom.length());
+    		dos.writeInt(joueur3.nom.length());
+    		dos.writeInt(joueur4.nom.length());
+
+        	
+        	for (int i = 0; i<joueur1.nom.length()-1;i++){
+        		dos.writeChar(joueur1.nom.charAt(i));
+        	}
+        	for (int i = 0; i<joueur2.nom.length()-1;i++){
+        		dos.writeChar(joueur2.nom.charAt(i));
+        	}
+        	for (int i = 0; i<joueur3.nom.length()-1;i++){
+        		dos.writeChar(joueur3.nom.charAt(i));
+        	}
+        	for (int i = 0; i<joueur4.nom.length()-1;i++){
+        		dos.writeChar(joueur4.nom.charAt(i));
+        	}
     	
 //    		System.out.print("\n");
 //    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
@@ -115,8 +133,8 @@ public class Sauvegarde {
 //			System.out.print("\n");
 //			}
     	
-    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
-    			for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 14
+    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
+    			for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
     				dos.writeChar(grillage[ligneBoucle][colonneBoucle]);
     			}
           	}
@@ -220,44 +238,51 @@ public class Sauvegarde {
     	boolean humain2 = true;
     	boolean humain3 = true;
     	boolean humain4 = true;
-        int caca = 0;
+    	int longueurPseudo1;
+    	int longueurPseudo2;
+    	int longueurPseudo3;
+    	int longueurPseudo4;
 	    
       //Données objet
-	    String pseudo1 = "Joueur 1";
-	    String pseudo2= "Joueur 2";
-	    String pseudo3= "Joueur 3";
+    	char[] tPseudo1;
+	    char[] tPseudo2;
+	    char[] tPseudo3;
+	    char[] tPseudo4;
+    	String pseudo1 = "Joueur 1";
+	    String pseudo2 = "Joueur 2";
+	    String pseudo3 = "Joueur 3";
 	    String pseudo4 = "Joueur 4";
-
-	    try {
- 	
-	      //On récupère maintenant les objets String
-	      ois = new ObjectInputStream(
-	              new BufferedInputStream(
-	                new FileInputStream(
-	                  new File("Sauvegardes" + File.separator + nomdufichier))));
-	            
-	      try {
-	        System.out.println("Affichage des données objets :");
-	        System.out.println("*************************\n");
-	        pseudo1 = ((String)ois.readObject()).toString();
-	        pseudo2 = ((String)ois.readObject()).toString();
-	        pseudo3 = ((String)ois.readObject()).toString();
-	        pseudo4 = ((String)ois.readObject()).toString();
-	      } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	      }
-		
-	      ois.close();
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	      } catch (IOException e) {
-	        e.printStackTrace();
-	      }
+//
+//	    try {
+//	    	
+//	      //On récupère maintenant les objets String
+//	      ois = new ObjectInputStream(
+//	              new BufferedInputStream(
+//	                new FileInputStream(
+//	                  new File("Sauvegardes" + File.separator + nomdufichier))));
+//	            
+//	      try {
+//	        System.out.println("Affichage des données objets :");
+//	        System.out.println("*************************\n");
+//	        pseudo1 = ((String)ois.readObject()).toString();
+//	        pseudo2 = ((String)ois.readObject()).toString();
+//	        pseudo3 = ((String)ois.readObject()).toString();
+//	        pseudo4 = ((String)ois.readObject()).toString();
+//	      } catch (ClassNotFoundException e) {
+//	        e.printStackTrace();
+//	      }
+//		
+//	      ois.close();
+//	    } catch (FileNotFoundException e) {
+//	        e.printStackTrace();
+//	      } catch (IOException e) {
+//	        e.printStackTrace();
+//	      }
         
         try {
 	        
 	        //On récupère maintenant les données !
-	        dis = new DataInputStream(
+        	dis = new DataInputStream(
 	                new BufferedInputStream(
 	                  new FileInputStream(
 	                    new File("Sauvegardes" + File.separator + nomdufichier))));
@@ -307,17 +332,46 @@ public class Sauvegarde {
 	    	humain2 = dis.readBoolean();
 	    	humain3 = dis.readBoolean();
 	    	humain4 = dis.readBoolean();
-
+	    	
+    		longueurPseudo1 = dis.readInt();
+    		longueurPseudo2 = dis.readInt();
+    		longueurPseudo3 = dis.readInt();
+    		longueurPseudo4 = dis.readInt();
+    		tPseudo1 = new char[longueurPseudo1];
+    		tPseudo2 = new char[longueurPseudo2];
+    		tPseudo3 = new char[longueurPseudo3];
+    		tPseudo4 = new char[longueurPseudo4];
+        	
+        	for (int i = 0; i<longueurPseudo1-1;i++){
+        		tPseudo1[i] = dis.readChar();
+        		pseudo1 = new String(tPseudo1);
+        	}
+        	for (int i = 0; i<longueurPseudo2-1;i++){
+        		tPseudo2[i] = dis.readChar();
+        		pseudo1 = new String(tPseudo2);
+        	}
+        	for (int i = 0; i<longueurPseudo3-1;i++){
+        		tPseudo3[i] = dis.readChar();
+        		pseudo3 = new String(tPseudo3);
+        	}
+        	for (int i = 0; i<longueurPseudo4-1;i++){
+        		tPseudo4[i] = dis.readChar();
+        		pseudo4 = new String(tPseudo4);
+        	}
+	    	
+	    	for(int i=0;i<(tailleGrille+2)*(tailleGrille+3);i++){
+	    		System.out.print(dis.readChar());
+	    	}
     		System.out.print("\n");
-	        for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
-	        	for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
-	        		//grillage[ligneBoucle][colonneBoucle] =  
-	        		//System.out.println("Coordonnées : " + ligneBoucle + colonneBoucle + " Couleur : " + dis.readChar());
-	        		System.out.print("	|	" + dis.readChar());
-	        	}
-	        	System.out.print("\n");
-	        }
-	         	
+//	        for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
+//	        	for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
+//	        		//grillage[ligneBoucle][colonneBoucle] =  
+//	        		//System.out.println("Coordonnées : " + ligneBoucle + colonneBoucle + " Couleur : " + dis.readChar());
+//	        		System.out.print("	|	" + dis.readChar());
+//	        	}
+//	        	System.out.print("\n");
+//	        }
+    		dis.close();	
 	      }
 	    
 	    catch (FileNotFoundException e) {
@@ -334,7 +388,5 @@ public class Sauvegarde {
 	    Joueur joueur4 = new Joueur(pseudo4,couleur4,1,tailleGrille,tour4,3,caseControl4,humain4);
 	    
 	  //  jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
-	  caca++;
-	  System.out.println("Caca" + caca);
   	}
 }
