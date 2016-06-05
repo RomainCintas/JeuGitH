@@ -2,15 +2,28 @@ import java.util.ArrayList;
 
 public class Jeu {
 	
+	public static int NBJOUEUR = 2;
+	public static boolean MULTIJOUEUR = true;
+	public static int compteurTour = 0; //pour compter le nombre de tour
+	public static int tailleGrille = 13;
+	
 	//lancementJeu
-	public static void lancementJeu(int NBJOUEUR, int tailleGrille, boolean MULTIJOUEUR){
+	public static void lancementJeu(){
 		ArrayList <Case> caseControl = null;
 		
-		//choix du pseudos du joueur
-		Joueur.choixPseudoJoueur(NBJOUEUR, tailleGrille, MULTIJOUEUR);
-		
+		System.out.println("Choix du pseudo : " + Menu.choixPseudo);
+		//choix du pseudos du joueur (si demandé
+		if(Menu.choixPseudo == true){
+			Joueur.choixPseudoJoueur();
+		}
+		else{
+			if (Jeu.MULTIJOUEUR == false){
+				Joueur.pseudoIA();
+			}
+		}
+
 		//création de la grille initiale
-		Plateau.creaGrille(NBJOUEUR,tailleGrille);
+		Plateau.creaGrille();
 		char[][] grillage = Plateau.grillage;
 		
 		//Création des joueurs
@@ -18,7 +31,7 @@ public class Jeu {
 		
 		boolean humain;
 		
-		if (MULTIJOUEUR == true){
+		if (Jeu.MULTIJOUEUR == true){
 			humain = true;
 		}
 		else{
@@ -35,33 +48,30 @@ public class Jeu {
 		joueur3.tour = false;
 		joueur4.tour = false;
 		
-		//pour compter le nombre de tour
-		int compteurTour = 0;
-		
-		jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, compteurTour);
+		jeu(joueur1, joueur2, joueur3, joueur4, grillage);
 		
 	}
 	
-	public static void jeu(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage, int NBJOUEUR, int tailleGrille, int compteurTour){
+	public static void jeu(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage){
 		
 		//initialisation du joueur
 		Joueur joueur;
 		
 		//Affiche la position des joueurs
-		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom, NBJOUEUR, tailleGrille);
+		Joueur.positionJoueur(joueur1.nom, joueur2.nom, joueur3.nom, joueur4.nom);
 			
 		//Début de la boucle du jeu (1 boucle = 1 tour)
 		boolean jeu = true;
 		while (jeu == true){
 			
 			//Attribution des variables spécifiques au tour au joueur concerné
-			joueur = Joueur.debutTourJoueur(joueur1, joueur2, joueur3, joueur4, compteurTour);
+			joueur = Joueur.debutTourJoueur(joueur1, joueur2, joueur3, joueur4);
 			
 			// Début de la boucle pour les tours joués (après l'initialisation)
 			if ((compteurTour>1 && NBJOUEUR == 2) || (compteurTour>2 && NBJOUEUR == 3) || (compteurTour>3 && NBJOUEUR == 4)){
 				
 				//Choix de la couleur
-				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille, grillage, compteurTour);
+				joueur.couleur = Case.choixCouleur(joueur,joueur1, joueur2, joueur3, joueur4, grillage);
 				
 				//Coloration des cases déjà contrôlées
 				grillage = Case.colorationCaseControl(joueur, grillage); 
@@ -71,22 +81,22 @@ public class Jeu {
 			Case.verifCaseVoisine(joueur, grillage);
 			
 			//Affichage du plateau
-			Plateau.affichagePlateau(grillage, compteurTour, NBJOUEUR, tailleGrille);
+			Plateau.affichagePlateau(grillage);
 			
 			//Récupération des variables spécifiques au tour par le joueur concerné
 			Joueur.finTourJoueur(joueur, joueur1, joueur2, joueur3, joueur4);
 			
 			//Vérification des conditions de victoire
-			conditionVictoire(compteurTour, joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
-			jeu = conditionVictoire(compteurTour, joueur1, joueur2, joueur3, joueur4, NBJOUEUR, tailleGrille);
+			conditionVictoire(joueur1, joueur2, joueur3, joueur4);
+			jeu = conditionVictoire(joueur1, joueur2, joueur3, joueur4);
 			
 			//Rotation du tour des joueurs
-			Joueur.rotationTourJoueur(joueur1, joueur2, joueur3, joueur4, NBJOUEUR);
+			Joueur.rotationTourJoueur(joueur1, joueur2, joueur3, joueur4);
 			
 			compteurTour++; //Compteur de tour
 			
 //			if (compteurTour == 4){
-//				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
+//				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage);
 //				Sauvegarde.chargerPartie();
 //			}
 			
@@ -114,7 +124,7 @@ public class Jeu {
 	
 	
 	//conditions de victoire
-	public static boolean conditionVictoire(int compteurTour, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, int NBJOUEUR, int tailleGrille){
+	public static boolean conditionVictoire(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4){
 		
 		//Conditions de victoire pour une partie à 2 joueurs
 		if (compteurTour > 1 && NBJOUEUR == 2 && (joueur1.caseControl.size()>Math.pow(tailleGrille, 2)/2 || joueur2.caseControl.size()>Math.pow(tailleGrille, 2)/2

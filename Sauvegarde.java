@@ -26,7 +26,7 @@ public class Sauvegarde {
 	static int mois = cal.get(Calendar.MONTH)+1;
 	static int annee = cal.get(Calendar.YEAR);
 	
-	public static void sauvegardePartie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage, int NBJOUEUR, int tailleGrille, int compteurTour){
+	public static void sauvegardePartie(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage){
 
 	  String nomdufichier = "partie-" + jour + "." + mois + "." + annee + "-" + heure + "." + minute + "." + seconde + ".txt";
 	  //Nous déclarons nos objets en dehors du bloc try/catch
@@ -64,9 +64,10 @@ public class Sauvegarde {
 								  new File("Sauvegardes" + File.separator + nomdufichier))));
 
         	//Nous allons écrire chaque type primitif
-        	dos.writeInt(NBJOUEUR);
-        	dos.writeInt(tailleGrille);
-        	dos.writeInt(compteurTour);
+        	dos.writeInt(Jeu.NBJOUEUR);
+        	dos.writeInt(Jeu.tailleGrille);
+        	dos.writeInt(Jeu.compteurTour);
+        	dos.writeBoolean(Jeu.MULTIJOUEUR);
         	dos.writeChar(joueur1.couleur);
         	dos.writeChar(joueur2.couleur);
         	dos.writeChar(joueur3.couleur);
@@ -86,13 +87,13 @@ public class Sauvegarde {
     			dos.writeInt(joueur2.caseControl.get(i).ligne);
     		}
 
-        	if (NBJOUEUR>2){
+        	if (Jeu.NBJOUEUR>2){
         		dos.writeInt(joueur3.caseControl.size());
         		for (int i=0;i<joueur3.caseControl.size();++i){
         			dos.writeInt(joueur3.caseControl.get(i).colonne);
         			dos.writeInt(joueur3.caseControl.get(i).ligne);
         		}
-        		if (NBJOUEUR>3){
+        		if (Jeu.NBJOUEUR>3){
         			dos.writeInt(joueur4.caseControl.size());
             		for (int i=0;i<joueur4.caseControl.size();++i){
             			dos.writeInt(joueur4.caseControl.get(i).colonne);
@@ -133,8 +134,8 @@ public class Sauvegarde {
 //			System.out.print("\n");
 //			}
     	
-    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
-    			for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
+    		for (int ligneBoucle=0;ligneBoucle<Jeu.tailleGrille+2;ligneBoucle++){//par défaut 15
+    			for (int colonneBoucle=0;colonneBoucle<Jeu.tailleGrille+3;colonneBoucle++){//par défaut 16
     				dos.writeChar(grillage[ligneBoucle][colonneBoucle]);
     			}
           	}
@@ -156,7 +157,7 @@ public class Sauvegarde {
 	
 	
 	
-	public static void listerRepertoire(File repertoire, int tailleGrille){ 
+	public static void listerRepertoire(File repertoire){ 
 
 		String [] listefichiers; 
 		listefichiers=repertoire.list();
@@ -164,7 +165,7 @@ public class Sauvegarde {
 		for(int i=0;i<listefichiers.length;i++){ 
 			if(listefichiers[i].endsWith(".txt")){ 
 				System.out.println(listefichiers[i].substring(0,listefichiers[i].length()));// on choisit la sous chaine ".txt" 
-				StdDraw.text(tailleGrille-5, tailleGrille-6-i, listefichiers[i].substring(0,listefichiers[i].length()));//par défaut 8-i, 7-i
+				StdDraw.text(Jeu.tailleGrille-5, Jeu.tailleGrille-6-i, listefichiers[i].substring(0,listefichiers[i].length()));//par défaut 8-i, 7-i
 			} 
 		} 
 	
@@ -185,12 +186,12 @@ public class Sauvegarde {
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
 			
-			if (yPos == tailleGrille-3){
+			if (yPos == Jeu.tailleGrille-3){
 				break;
 			}
 			
 			for(int i=0;i<listefichiers.length;i++){
-				if (yPos == tailleGrille-6-i){
+				if (yPos == Jeu.tailleGrille-6-i){
 					if(listefichiers[i].endsWith(".txt")){
 						chargerPartie(listefichiers[i].substring(0,listefichiers[i].length()));
 						//jeu()
@@ -215,9 +216,6 @@ public class Sauvegarde {
 	    ObjectInputStream ois;
 	    DataInputStream dis;
 	    //Données de type primitif
-        int NBJOUEUR;
-        int tailleGrille = 0;
-        int compteurTour;
     	char couleur1 = '1';
     	char couleur2 = '2';
     	char couleur3 = '3';
@@ -288,9 +286,10 @@ public class Sauvegarde {
 	                    new File("Sauvegardes" + File.separator + nomdufichier))));
 	        System.out.println("Affichage des données de type primitif :");
 	        System.out.println("*************************\n");     
-	        NBJOUEUR = dis.readInt();
-	        tailleGrille = dis.readInt();
-	        compteurTour = dis.readInt();
+	        Jeu.NBJOUEUR = dis.readInt();
+	        Jeu.tailleGrille = dis.readInt();
+	        Jeu.compteurTour = dis.readInt();
+	        Jeu.MULTIJOUEUR = dis.readBoolean();
 	        couleur1 = dis.readChar();
 	        couleur2 = dis.readChar();
 	        couleur3 = dis.readChar();
@@ -302,7 +301,7 @@ public class Sauvegarde {
 	        caseControl1Size = dis.readInt();
 	        caseControl2Size = dis.readInt();
 	      
-	        char[][] grillage = new char[tailleGrille+2][tailleGrille+3];
+	        char[][] grillage = new char[Jeu.tailleGrille+2][Jeu.tailleGrille+3];
 	        
 	    	for (int i=0;i<caseControl1Size;++i){
 	    		caseControl1.add(new Case(dis.readInt(),dis.readInt(),couleur1));
@@ -313,13 +312,13 @@ public class Sauvegarde {
 	    		caseControl2.add(new Case(dis.readInt(),dis.readInt(),couleur2));
 	    	}
 	    	
-	    	if (NBJOUEUR > 2){
+	    	if (Jeu.NBJOUEUR > 2){
 		        caseControl3Size = dis.readInt();
 	    		for (int i=0;i<caseControl3Size;++i){
 		    		caseControl3.add(new Case(dis.readInt(),dis.readInt(),couleur3));
 		    		caseControl3.add(new Case(dis.readInt(),dis.readInt(),couleur3));
 		    	}
-	    		if (NBJOUEUR >3){
+	    		if (Jeu.NBJOUEUR >3){
 	    			caseControl4Size = dis.readInt();
 	    			for (int i=0;i<caseControl4Size;++i){
 	    	    		caseControl4.add(new Case(dis.readInt(),dis.readInt(),couleur4));
@@ -359,7 +358,7 @@ public class Sauvegarde {
         		pseudo4 = new String(tPseudo4);
         	}
 	    	
-	    	for(int i=0;i<(tailleGrille+2)*(tailleGrille+3);i++){
+	    	for(int i=0;i<(Jeu.tailleGrille+2)*(Jeu.tailleGrille+3);i++){
 	    		System.out.print(dis.readChar());
 	    	}
     		System.out.print("\n");
@@ -383,9 +382,9 @@ public class Sauvegarde {
 	    
 	    
 	    Joueur joueur1 = new Joueur(pseudo1,couleur1,1,1,tour1,0,caseControl1,humain1);
-	    Joueur joueur2 = new Joueur(pseudo2,couleur2,tailleGrille,tailleGrille,tour2,1,caseControl2,humain2);
-	    Joueur joueur3 = new Joueur(pseudo3,couleur3,tailleGrille,1,tour3,2,caseControl3,humain3);
-	    Joueur joueur4 = new Joueur(pseudo4,couleur4,1,tailleGrille,tour4,3,caseControl4,humain4);
+	    Joueur joueur2 = new Joueur(pseudo2,couleur2,Jeu.tailleGrille,Jeu.tailleGrille,tour2,1,caseControl2,humain2);
+	    Joueur joueur3 = new Joueur(pseudo3,couleur3,Jeu.tailleGrille,1,tour3,2,caseControl3,humain3);
+	    Joueur joueur4 = new Joueur(pseudo4,couleur4,1,Jeu.tailleGrille,tour4,3,caseControl4,humain4);
 	    
 	  //  jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
   	}
