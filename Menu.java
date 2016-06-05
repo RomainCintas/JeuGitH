@@ -50,7 +50,7 @@ public class Menu {
 		int yPos = 0;
 		
 		while (StdDraw.mousePressed()){//si problème d'inversement de la souris
-			//System.out.println("Souris : " + StdDraw.mousePressed());
+//			System.out.println("Souris : " + StdDraw.mousePressed());
 		}
 		
 		while (menu == 0 ){

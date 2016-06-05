@@ -106,33 +106,14 @@ public class Sauvegarde {
     		dos.writeBoolean(joueur2.humain);
         	dos.writeBoolean(joueur3.humain);
         	dos.writeBoolean(joueur4.humain);
-        	
-    		dos.writeInt(joueur1.nom.length());
-    		dos.writeInt(joueur2.nom.length());
-    		dos.writeInt(joueur3.nom.length());
-    		dos.writeInt(joueur4.nom.length());
-
-        	
-        	for (int i = 0; i<joueur1.nom.length()-1;i++){
-        		dos.writeChar(joueur1.nom.charAt(i));
-        	}
-        	for (int i = 0; i<joueur2.nom.length()-1;i++){
-        		dos.writeChar(joueur2.nom.charAt(i));
-        	}
-        	for (int i = 0; i<joueur3.nom.length()-1;i++){
-        		dos.writeChar(joueur3.nom.charAt(i));
-        	}
-        	for (int i = 0; i<joueur4.nom.length()-1;i++){
-        		dos.writeChar(joueur4.nom.charAt(i));
-        	}
     	
-//    		System.out.print("\n");
-//    		for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 14
-//				for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 14
-//					System.out.print("	|	" + grillage[ligneBoucle][colonneBoucle]);
-//				}
-//			System.out.print("\n");
-//			}
+    		System.out.print("\n");
+    		for (int ligneBoucle=0;ligneBoucle<Jeu.tailleGrille+2;ligneBoucle++){//par défaut 14
+				for (int colonneBoucle=0;colonneBoucle<Jeu.tailleGrille+3;colonneBoucle++){//par défaut 14
+					System.out.print("	|	" + grillage[ligneBoucle][colonneBoucle]);
+				}
+			System.out.print("\n");
+			}
     	
     		for (int ligneBoucle=0;ligneBoucle<Jeu.tailleGrille+2;ligneBoucle++){//par défaut 15
     			for (int colonneBoucle=0;colonneBoucle<Jeu.tailleGrille+3;colonneBoucle++){//par défaut 16
@@ -174,6 +155,11 @@ public class Sauvegarde {
 		double y = 0;
 		int xPos = 0;
 		int yPos = 0;
+		
+		while (StdDraw.mousePressed()){//si problème d'inversement de la souris
+			//System.out.println("Souris : " + StdDraw.mousePressed());
+		}
+		
 		while(true){
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
@@ -236,16 +222,9 @@ public class Sauvegarde {
     	boolean humain2 = true;
     	boolean humain3 = true;
     	boolean humain4 = true;
-    	int longueurPseudo1;
-    	int longueurPseudo2;
-    	int longueurPseudo3;
-    	int longueurPseudo4;
-	    
+    	char[][] grillage = null;
+    			
       //Données objet
-    	char[] tPseudo1;
-	    char[] tPseudo2;
-	    char[] tPseudo3;
-	    char[] tPseudo4;
     	String pseudo1 = "Joueur 1";
 	    String pseudo2 = "Joueur 2";
 	    String pseudo3 = "Joueur 3";
@@ -284,8 +263,8 @@ public class Sauvegarde {
 	                new BufferedInputStream(
 	                  new FileInputStream(
 	                    new File("Sauvegardes" + File.separator + nomdufichier))));
-	        System.out.println("Affichage des données de type primitif :");
-	        System.out.println("*************************\n");     
+	        System.out.println("Affichage des variables :");
+	        System.out.println("***************************************************************************\n");     
 	        Jeu.NBJOUEUR = dis.readInt();
 	        Jeu.tailleGrille = dis.readInt();
 	        Jeu.compteurTour = dis.readInt();
@@ -301,14 +280,12 @@ public class Sauvegarde {
 	        caseControl1Size = dis.readInt();
 	        caseControl2Size = dis.readInt();
 	      
-	        char[][] grillage = new char[Jeu.tailleGrille+2][Jeu.tailleGrille+3];
+	        grillage = new char[Jeu.tailleGrille+2][Jeu.tailleGrille+3];
 	        
 	    	for (int i=0;i<caseControl1Size;++i){
 	    		caseControl1.add(new Case(dis.readInt(),dis.readInt(),couleur1));
-	    		caseControl1.add(new Case(dis.readInt(),dis.readInt(),couleur1));
 	    	}
 	    	for (int i=0;i<caseControl2Size;++i){
-	    		caseControl2.add(new Case(dis.readInt(),dis.readInt(),couleur2));
 	    		caseControl2.add(new Case(dis.readInt(),dis.readInt(),couleur2));
 	    	}
 	    	
@@ -316,12 +293,10 @@ public class Sauvegarde {
 		        caseControl3Size = dis.readInt();
 	    		for (int i=0;i<caseControl3Size;++i){
 		    		caseControl3.add(new Case(dis.readInt(),dis.readInt(),couleur3));
-		    		caseControl3.add(new Case(dis.readInt(),dis.readInt(),couleur3));
 		    	}
 	    		if (Jeu.NBJOUEUR >3){
 	    			caseControl4Size = dis.readInt();
 	    			for (int i=0;i<caseControl4Size;++i){
-	    	    		caseControl4.add(new Case(dis.readInt(),dis.readInt(),couleur4));
 	    	    		caseControl4.add(new Case(dis.readInt(),dis.readInt(),couleur4));
 	    	    	}
 	    		}
@@ -332,44 +307,18 @@ public class Sauvegarde {
 	    	humain3 = dis.readBoolean();
 	    	humain4 = dis.readBoolean();
 	    	
-    		longueurPseudo1 = dis.readInt();
-    		longueurPseudo2 = dis.readInt();
-    		longueurPseudo3 = dis.readInt();
-    		longueurPseudo4 = dis.readInt();
-    		tPseudo1 = new char[longueurPseudo1];
-    		tPseudo2 = new char[longueurPseudo2];
-    		tPseudo3 = new char[longueurPseudo3];
-    		tPseudo4 = new char[longueurPseudo4];
-        	
-        	for (int i = 0; i<longueurPseudo1-1;i++){
-        		tPseudo1[i] = dis.readChar();
-        		pseudo1 = new String(tPseudo1);
-        	}
-        	for (int i = 0; i<longueurPseudo2-1;i++){
-        		tPseudo2[i] = dis.readChar();
-        		pseudo1 = new String(tPseudo2);
-        	}
-        	for (int i = 0; i<longueurPseudo3-1;i++){
-        		tPseudo3[i] = dis.readChar();
-        		pseudo3 = new String(tPseudo3);
-        	}
-        	for (int i = 0; i<longueurPseudo4-1;i++){
-        		tPseudo4[i] = dis.readChar();
-        		pseudo4 = new String(tPseudo4);
-        	}
-	    	
 	    	for(int i=0;i<(Jeu.tailleGrille+2)*(Jeu.tailleGrille+3);i++){
-	    		System.out.print(dis.readChar());
+	    		//System.out.print(dis.readChar());
 	    	}
     		System.out.print("\n");
-//	        for (int ligneBoucle=0;ligneBoucle<tailleGrille+2;ligneBoucle++){//par défaut 15
-//	        	for (int colonneBoucle=0;colonneBoucle<tailleGrille+3;colonneBoucle++){//par défaut 16
-//	        		//grillage[ligneBoucle][colonneBoucle] =  
-//	        		//System.out.println("Coordonnées : " + ligneBoucle + colonneBoucle + " Couleur : " + dis.readChar());
-//	        		System.out.print("	|	" + dis.readChar());
-//	        	}
-//	        	System.out.print("\n");
-//	        }
+	        for (int ligneBoucle=0;ligneBoucle<Jeu.tailleGrille+2;ligneBoucle++){//par défaut 15
+	        	for (int colonneBoucle=0;colonneBoucle<Jeu.tailleGrille+3;colonneBoucle++){//par défaut 16
+	        		grillage[ligneBoucle][colonneBoucle] =  dis.readChar();
+	        		//System.out.println("Coordonnées : " + "L : " + ligneBoucle + " C : " + colonneBoucle + " Couleur : " + dis.readChar());
+	        		//System.out.print("	|	" + dis.readChar());
+	        	}
+	        	System.out.print("\n");
+	        }
     		dis.close();	
 	      }
 	    
@@ -379,13 +328,15 @@ public class Sauvegarde {
 	      e.printStackTrace();
 	    }
 	    
-	    
-	    
 	    Joueur joueur1 = new Joueur(pseudo1,couleur1,1,1,tour1,0,caseControl1,humain1);
 	    Joueur joueur2 = new Joueur(pseudo2,couleur2,Jeu.tailleGrille,Jeu.tailleGrille,tour2,1,caseControl2,humain2);
 	    Joueur joueur3 = new Joueur(pseudo3,couleur3,Jeu.tailleGrille,1,tour3,2,caseControl3,humain3);
 	    Joueur joueur4 = new Joueur(pseudo4,couleur4,1,Jeu.tailleGrille,tour4,3,caseControl4,humain4);
 	    
-	  //  jeu(joueur1, joueur2, joueur3, joueur4, grillage, NBJOUEUR, tailleGrille, MULTIJOUEUR, compteurTour);
+	    StdDraw.clear();
+	    
+		//Affichage du plateau
+		Plateau.affichagePlateau(grillage);
+	    Jeu.jeu(joueur1, joueur2, joueur3, joueur4, grillage);
   	}
 }
