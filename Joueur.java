@@ -136,7 +136,7 @@ public class Joueur{
 		}
 	}
 	
-	//Attribution des variables spécifiques au tour au joueur concerné en début de tour
+	//Récupère les variables spécifiques du joueur au début de son tour
 	public static Joueur debutTourJoueur(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4){
 		Joueur joueur = null;
 		if (joueur1.tour == true){
@@ -158,7 +158,7 @@ public class Joueur{
 		return joueur;
 	}
 	
-	//Récupération des variables spécifiques au tour par le joueur concerné en fin de tour
+	//Enregistrement les variables spécifiques du joueur à la fin de son tour
 	public static void finTourJoueur(Joueur joueur, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4){
 		if (joueur1.tour == true){
 			joueur1 = joueur;

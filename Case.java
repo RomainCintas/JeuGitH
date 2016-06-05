@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Case{
 
-	public int colonne;
-	public int ligne;
+	public int colonne, ligne;
 	char couleur;
 	
 	public Case (int colonne, int ligne, char couleur){//coordonnées et couleur d'une case
@@ -121,7 +120,7 @@ public class Case{
 		return couleurChoisie;
 	}
 	
-	//Vérification si la couleur choisie n'est pas déjà prise
+	//Vérification si la couleur choisie n'est pas déjà prise et affiche un message d’erreur si elle l’est
 	public static char verifCouleurChoisie(char couleurChoisie, char couleur, char couleur1, char couleur2, char couleur3, char couleur4){
 		if (couleur1 == couleurChoisie || couleur2 == couleurChoisie || couleur3 == couleurChoisie || couleur4 == couleurChoisie){
 			

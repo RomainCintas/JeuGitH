@@ -126,11 +126,8 @@ public class Sauvegarde {
 	
 	
 	
-	
-	
-	
-	
-	
+
+	//Affiche les fichiers dans le dossier (de sauvegarde)
 	public static void listerRepertoire(File repertoire){ 
 
 		String [] listefichiers; 
@@ -181,10 +178,7 @@ public class Sauvegarde {
 	}
   
   
-  
-  
-  
-  //------------------------------------------------------------------------------------------------------------
+
   
   
   

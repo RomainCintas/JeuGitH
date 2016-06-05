@@ -7,7 +7,7 @@ public class Jeu {
 	public static int compteurTour = 0; //pour compter le nombre de tour
 	public static int tailleGrille = 13;
 	
-	//lancementJeu
+	//lance le jeu
 	public static void lancementJeu(){
 		ArrayList <Case> caseControl = null;
 		
@@ -52,6 +52,9 @@ public class Jeu {
 		
 	}
 	
+	
+	
+	//coeur du jeu
 	public static void jeu(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, char[][] grillage){
 		
 		//initialisation du joueur
@@ -95,10 +98,6 @@ public class Jeu {
 			
 			compteurTour++; //Compteur de tour
 			
-//			if (compteurTour == 4){
-//				Sauvegarde.sauvegardePartie(joueur1, joueur2, joueur3, joueur4, grillage);
-//				Sauvegarde.chargerPartie();
-//			}
 			
 		} //Fin de la boucle du jeu (1 boucle = 1 tour)
 	}
@@ -106,24 +105,7 @@ public class Jeu {
 	
 	
 	
-	
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	
-	//conditions de victoire
-	
-	
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	
-	
-	
-	
-	
-	//conditions de victoire
+	//Arrête le jeu si les conditions de victoire sont atteintes
 	public static boolean conditionVictoire(Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4){
 		
 		//Conditions de victoire pour une partie à 2 joueurs
