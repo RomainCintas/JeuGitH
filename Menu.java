@@ -57,32 +57,30 @@ public class Menu {
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
-				xPos = (int) Math.round(x);
-				yPos = (int) Math.round(y);
 			}
-			x = StdDraw.mouseX();
-			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
-			
-			if(yPos == Jeu.tailleGrille-2){//par défaut 11
-				menu = 1;
-			}
-			else if(yPos == Jeu.tailleGrille-4){//par défaut 9
-				menu = 2;
-			}
-			else if(yPos == Jeu.tailleGrille-6){//par défaut 7
-				menu = 3;
-			}
-			else if(yPos == Jeu.tailleGrille-8){//par défaut 5
-				menu = 4;
-			}
-			else if(yPos == Jeu.tailleGrille-10){// par défaut 3
-				menu = 5;
-			}
-			else{
-				System.out.println("Erreur");
-				menu();
+
+			if (xPos > 5 && xPos <11){
+				if(yPos == Jeu.tailleGrille-2){//par défaut 11
+					menu = 1;
+				}
+				else if(yPos == Jeu.tailleGrille-4){//par défaut 9
+					menu = 2;
+				}
+				else if(yPos == Jeu.tailleGrille-6){//par défaut 7
+					menu = 3;
+				}
+				else if(yPos == Jeu.tailleGrille-8){//par défaut 5
+					menu = 4;
+				}
+				else if(yPos == Jeu.tailleGrille-10){// par défaut 3
+					menu = 5;
+				}
+				else{
+					System.out.println("Erreur");
+					menu();
+				}
 			}
 		}
 	
@@ -190,16 +188,11 @@ public class Menu {
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
-				xPos = (int) Math.round(x);
-				yPos = (int) Math.round(y);
 			}
-			x = StdDraw.mouseX();
-			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
-			
 			//Retour
-			if (yPos == Jeu.tailleGrille-3){
+			if (xPos > 5 && xPos <11 && yPos == Jeu.tailleGrille-3){
 				break;
 			}
 			

@@ -154,23 +154,18 @@ public class Sauvegarde {
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
-				xPos = (int) Math.round(x);
-				yPos = (int) Math.round(y);
 			}
-			x = StdDraw.mouseX();
-			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
 			
-			if (yPos == Jeu.tailleGrille-3){
+			if (xPos > 5 && xPos <11 && yPos == Jeu.tailleGrille-3){
 				break;
 			}
 			
 			for(int i=0;i<listefichiers.length;i++){
-				if (yPos == Jeu.tailleGrille-6-i){
+				if (xPos > 5 && xPos <11 && yPos == Jeu.tailleGrille-6-i){
 					if(listefichiers[i].endsWith(".txt")){
 						chargerPartie(listefichiers[i].substring(0,listefichiers[i].length()));
-						//jeu()
 					}
 				}
 			}
