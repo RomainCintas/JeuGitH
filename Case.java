@@ -76,11 +76,7 @@ public class Case{
 			while(!StdDraw.mousePressed()) {
 				x = StdDraw.mouseX();
 				y = StdDraw.mouseY();
-				xPos = (int) Math.round(x);
-				yPos = (int) Math.round(y);
 			}
-			x = StdDraw.mouseX();
-			y = StdDraw.mouseY();
 			xPos = (int) Math.round(x);
 			yPos = (int) Math.round(y);
 			
