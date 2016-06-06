@@ -172,8 +172,8 @@ public class Menu {
 		StdDraw.text(Jeu.tailleGrille-3, Jeu.tailleGrille-7, "4");//par défaut 10, 6
 		
 		StdDraw.text(Jeu.tailleGrille-5, Jeu.tailleGrille-8, "Taille de la grille");//par défaut 8, 5
-		StdDraw.text(Jeu.tailleGrille-7, Jeu.tailleGrille-9, "10");//par défaut 6, 4
-		StdDraw.text(Jeu.tailleGrille-5, Jeu.tailleGrille-9, "13");//par défaut 8, 4
+		StdDraw.text(Jeu.tailleGrille-7, Jeu.tailleGrille-9, "13");//par défaut 6, 4
+		StdDraw.text(Jeu.tailleGrille-5, Jeu.tailleGrille-9, "15");//par défaut 8, 4
 		StdDraw.text(Jeu.tailleGrille-3, Jeu.tailleGrille-9, "20");//par défaut 10, 4
 		
 		StdDraw.text(Jeu.tailleGrille-5, Jeu.tailleGrille-10, "Choisir les pseudos");//par défaut 8, 5
@@ -223,12 +223,12 @@ public class Menu {
 			//Sélection de la taille de la grille
 			else if(yPos == Jeu.tailleGrille-9){//par défaut 4
 				if (xPos == Jeu.tailleGrille-7){//par défaut 6
-					Jeu.tailleGrille = 10;
+					Jeu.tailleGrille = 13;
 					Plateau.initialisationInterfaceGraphique();
 					break;
 				}
 				else if (xPos == Jeu.tailleGrille-5){//par défaut 8
-					Jeu.tailleGrille = 13;
+					Jeu.tailleGrille = 15;
 					Plateau.initialisationInterfaceGraphique();
 					break;
 				}
